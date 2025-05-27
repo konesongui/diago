@@ -20,6 +20,7 @@ class Itemcategory_model extends MY_Model
      */
     public function get($id = null)
     {
+        $this->db->where('item_category.deleted', 1);
         $this->db->select()->from('item_category');
         if ($id != null) {
             $this->db->where('id', $id);
@@ -62,8 +63,10 @@ class Itemcategory_model extends MY_Model
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('item_category');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('item_category');
+
         $message   = DELETE_RECORD_CONSTANT . " On item category id " . $id;
         $action    = "Delete";
         $record_id = $id;
@@ -199,6 +202,45 @@ class Itemcategory_model extends MY_Model
             }
         }
     }
+
+    public function valid_item_category() {
+
+        $item_category = $this->input->post('itemcategory');
+        $id = $this->input->post('id');
+        if (!isset($id)) {
+            $id = 0;
+        }
+        if ($this->check_itemcategory_exists($item_category, $id)) {
+            $this->form_validation->set_message('check_exists', 'Record already exists');
+            return FALSE;
+        } else {
+            return TRUE;
+        }
+    }
+
+
+    function check_itemcategory_exists($name, $id) {
+
+        if ($id != 0) {
+            $data = array('id != ' => $id, 'item_category' => $name);
+            $query = $this->db->where($data)->get('item_category');
+            if ($query->num_rows() > 0) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        } else {
+
+            $this->db->where('item_category', $name);
+            $query = $this->db->get('item_category');
+            if ($query->num_rows() > 0) {
+                return TRUE;
+            } else {
+                return FALSE;
+            }
+        }
+    }
+
 
 
 }

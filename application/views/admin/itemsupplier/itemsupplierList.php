@@ -23,13 +23,13 @@
                                 <?php } ?>
                                 <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"> <?php echo $this->lang->line('name'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Fournisseur</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="" type="text" class="form-control"  value="<?php echo set_value('name'); ?>" />
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Prénom</label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Compte contribuable/CNI</label><small class="req"> *</small>
                                     <input autofocus="" id="lastname" name="lastname" placeholder="" type="text" class="form-control"  value="<?php echo set_value('lastname'); ?>" />
                                     <span class="text-danger"><?php echo form_error('lastname'); ?></span>
                                 </div>
@@ -68,7 +68,7 @@
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1">Status</label><small class="req"> *</small>
 
                                     <select  id="status" name="status" class="form-control" >
@@ -107,12 +107,12 @@
                                 <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prénom</th>
+                                        <th>Compte contribuable/CNI</th>
                                         <th>Téléphone</th>
                                         <th>Email</th>
 
                                         <th><?php echo $this->lang->line('address'); ?></th>
-                                        <th>Statut</th>
+
                                         <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
                                 </thead>
@@ -176,23 +176,14 @@
                                                     <?php
                                                     if ($supplier['address'] != "") {
                                                         ?>
-                                                        <i class="fa fa-building"></i> <?php echo $supplier['address'] ?>
+                                                        <i class=""></i> <?php echo $supplier['address'] ?>
                                                         <?php
                                                     }
                                                     ?>
 
                                                 </td>
 
-                                                <td class="mailbox-name">
 
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['status'] ?>
-                                                        <br>
-                                                    </a>
-
-
-
-                                                </td>
 
                                                 <td class="mailbox-date pull-right no-print">
                                                     <?php if ($this->rbac->hasPrivilege('supplier', 'can_edit')) { ?>

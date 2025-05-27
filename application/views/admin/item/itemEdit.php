@@ -56,10 +56,36 @@
                                     </select>
                                     <span class="text-danger"><?php echo form_error('item_category_id'); ?></span>
                                 </div>
-                                <div class="form-group" hidden>
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('unit'); ?></label><small class="req"> *</small>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Prix</label><small class="req"> *</small>
                                     <input autofocus="" id="unit" name="unit" placeholder="" type="text" class="form-control"  value="<?php echo set_value('unit', $item['unit']); ?>" />
                                     <span class="text-danger"><?php echo form_error('unit'); ?></span>
+                                </div>
+                                <div class="form-group" hidden>
+                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('supplier'); ?></label>
+
+                                    <select  id="supplier" name="supplier" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($itemsupplier as $itemsup) {
+                                            ?>
+                                            <option value="<?php echo $itemsup['item_supplier'] ?> <?php echo $itemsup['lastname'] ?>"<?php
+                                            if (set_value('supplier', $item['supplier']) == $itemsup['item_supplier']) {
+                                                echo "selected = selected";
+                                            }
+                                            ?>><?php echo $itemsup['item_supplier'] ?> <?php echo $itemsup['lastname'] ?></option>
+
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('supplier_id'); ?></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Fournisseurs</label><small class="req"> *</small>
+                                    <input autofocus="" id="supplier" name="supplier" placeholder="" type="text" class="form-control"  value="<?php echo set_value('supplier', $item['supplier']); ?>" />
+                                    <span class="text-danger"><?php echo form_error('supplier'); ?></span>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
@@ -97,13 +123,15 @@
                             <table class="table table-hover table-striped table-bordered example">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $this->lang->line('item'); ?></th>                                 
+                                        <th><?php echo $this->lang->line('item'); ?></th>
+                                        <th>Prix
+                                        </th>
                                         <th><?php echo $this->lang->line('category'); ?>
                                         </th>
-                                        <!--<th><?php echo $this->lang->line('unit'); ?>
-                                        </th>-->
-                                        <th><?php echo $this->lang->line('available_quantity'); ?>
+                                        <th>Fournisseurs
                                         </th>
+                                        <!--<th><?php echo $this->lang->line('available_quantity'); ?>
+                                        </th>-->
                                         <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
                                 </thead>
@@ -135,22 +163,29 @@
                                                     </div>
                                                 </td>
 
+                                               <td class="mailbox-name">
+                                                    <?php echo $items['unit']; ?>
+
+                                                </td>
+
 
                                                 <td class="mailbox-name">
                                                     <?php echo $items['item_category']; ?>
 
                                                 </td>
-                                              <!--  <td class="mailbox-name">
-                                                    <?php echo $items['unit']; ?>
 
-                                                </td>-->
                                                 <td class="mailbox-name">
+                                                    <?php echo $items['supplier']; ?>
+
+                                                </td>
+
+                                               <!-- <td class="mailbox-name">
                                                     <?php
                                                     echo $items['added_stock'] - $items['issued'];
                                                     ;
                                                     ?>
 
-                                                </td>
+                                                </td>-->
 
 
 

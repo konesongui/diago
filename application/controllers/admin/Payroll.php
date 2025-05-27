@@ -20,6 +20,9 @@ class Payroll extends Admin_Controller
         $this->sch_setting_detail = $this->setting_model->getSetting();
     }
 
+
+
+
     public function index()
     {
 
@@ -164,13 +167,16 @@ class Payroll extends Admin_Controller
         $basic           = $this->input->post("basic");
         $sursalaire           = $this->input->post("sursalaire");
         $part_igr           = $this->input->post("part_igr");
+        $its           = $this->input->post("its");
         $categorie_salaire           = $this->input->post("categorie_salaire");
         $prime_anc           = $this->input->post("prime_anc");
         $prime_trans           = $this->input->post("prime_trans");
+        $primet           = $this->input->post("primet");
         $forfait_hs           = $this->input->post("forfait_hs");
         $prime_resp           = $this->input->post("prime_resp");
         $prime_rend          = $this->input->post("prime_rend");
         $prime_risque           = $this->input->post("prime_risque");
+        $total_revenu           = $this->input->post("total_revenu");
         $prime_assi           = $this->input->post("prime_assi");
         $prime_grati           = $this->input->post("prime_grati");
         $imp_sal           = $this->input->post("imp_sal");
@@ -189,6 +195,8 @@ class Payroll extends Admin_Controller
         $total_allowance = $this->input->post("total_allowance");
         $total_deduction = $this->input->post("total_deduction");
         $net_salary      = $this->input->post("net_salary");
+        $gross_salary      = $this->input->post("gross_salary");
+        $gross_social      = $this->input->post("gross_social");
         $status          = $this->input->post("status");
         $staff_id        = $this->input->post("staff_id");
         $month           = $this->input->post("month");
@@ -197,6 +205,7 @@ class Payroll extends Admin_Controller
         $name            = $this->input->post("name");
         $year            = $this->input->post("year");
         $tax             = $this->input->post("tax");
+        $taxes             = $this->input->post("taxes");
         $leave_deduction = $this->input->post("leave_deduction");
         $this->form_validation->set_rules('net_salary', 'Net Salary', 'trim|required|xss_clean');
         if ($this->form_validation->run() == false) {
@@ -208,6 +217,9 @@ class Payroll extends Admin_Controller
                 'basic'                  => $basic,
                 'prime_anc'                  => $prime_anc,
                 'prime_trans'                  => $prime_trans,
+                'primet'                  => $primet,
+                'its'                  => $its,
+                'total_revenu'                  => $total_revenu,
                 'sursalaire'                  => $sursalaire,
                 'part_igr'                  => $part_igr,
                 'categorie_salaire'           => $categorie_salaire,
@@ -233,6 +245,8 @@ class Payroll extends Admin_Controller
                 'total_allowance'        => $total_allowance,
                 'total_deduction'        => $total_deduction,
                 'net_salary'             => $net_salary,
+                'gross_salary'             => $gross_salary,
+                'gross_social'             => $gross_social,
                 'payment_date'           => date("Y-m-d"),
                 'date_from'             => $date_from,
                 'date_to'               => $date_to,
@@ -240,6 +254,7 @@ class Payroll extends Admin_Controller
                 'month'                  => $month,
                 'year'                   => $year,
                 'tax'                    => $tax,
+                'taxes'                    => $taxes,
                 'leave_deduction'        => '0',
             );
 

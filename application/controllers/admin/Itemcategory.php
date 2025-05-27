@@ -40,7 +40,12 @@ class Itemcategory extends Admin_Controller {
         $data['title'] = 'Add Item category';
         $category_result = $this->itemcategory_model->get();
         $data['categorylist'] = $category_result;
-        $this->form_validation->set_rules('itemcategory', $this->lang->line('item_category'), 'trim|required|xss_clean');
+        $this->form_validation->set_rules(
+            'itemcategory', $this->lang->line('name'), array('required',
+                array('check_exists', array($this->itemcategory_model, 'valid_item_category'))
+            )
+        );
+        /*$this->form_validation->set_rules('itemcategory', $this->lang->line('item_category'), 'trim|required|xss_clean');*/
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('layout/header', $data);
             $this->load->view('admin/itemcategory/itemcategoryList', $data);

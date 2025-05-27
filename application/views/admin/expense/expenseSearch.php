@@ -10,6 +10,15 @@
 <?php
 $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 ?>
+
+<?php
+$conn = new mysqli("localhost","root","","diago_test");
+$sql="SELECT MONTHNAME(date) as mname, sum(amount) as total FROM expenses GROUP BY MONTH(date)";
+$result=$conn->query($sql);
+
+
+
+?>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
@@ -26,12 +35,13 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-search"></i> <?php echo $this->lang->line('select_criteria'); ?></h3>
                     </div>
+               <!--
                 <div class="box-body">
                      <form role="form"  action="<?php echo site_url('admin/expense/search') ?>" method="post" class="" id="expenseform" >
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="row">
-                                   
+
                                         <?php echo $this->customlib->getCSRF(); ?>
                                         <div class="col-sm-6 col-md-6">
                                             <div class="form-group">
@@ -39,12 +49,12 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 <select class="form-control" name="search_type"  id="search_type" onchange="showdate(this.value)">
 
                                                     <?php foreach ($searchlist as $key => $search) {
-                                                        ?>
+                   ?>
                                                         <option value="<?php echo $key ?>" <?php
-                                                        if ((isset($search_type)) && ($search_type == $key)) {
-                                                            echo "selected";
-                                                        }
-                                                        ?>><?php echo $search ?></option>
+                   if ((isset($search_type)) && ($search_type == $key)) {
+                       echo "selected";
+                   }
+                   ?>><?php echo $search ?></option>
                                                             <?php } ?>
                                                 </select>
                                                 <span class="text-danger" id="error_search_type"></span>
@@ -59,18 +69,18 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 <button type="submit" name="search" value="search_filter" class="btn btn-primary btn-sm checkbox-toggle pull-right"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
                                             </div>
                                         </div>
-                                    
+
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                   
+
                                         <?php echo $this->customlib->getCSRF(); ?>
                                         <div class="col-sm-12">
                                             <div class="form-group">
                                                 <label><?php echo $this->lang->line('search'); ?></label><small class="req"> *</small>
                                                 <input autofocus="" type="text" value="<?php echo set_value('search_text', ""); ?>" name="search_text" id="search_text" class="form-control" placeholder="Search by Expense">
-                                                
+
                                                 <span class="text-danger" id="error_search_text"></span>
                                             </div>
                                         </div>
@@ -79,13 +89,13 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 <button type="submit" name="search" value="search_full" class="btn btn-primary btn-sm checkbox-toggle pull-right"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
                                             </div>
                                         </div>
-                                    
+
                                 </div>
                             </div>
 
                         </div>
                         </form>
-                    </div>
+                    </div>-->
                 <div class="" id="exp">
                             <div class="box-header ptbnull"></div>
                             <div class="box-header ptbnull">
@@ -93,17 +103,41 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             </div>
                             <div class="box-body table-responsive">
                                 <div class="download_label"><?php echo $this->lang->line('expense_result'); ?></div>
-                                 <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense_list'); ?>">
+                                <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead>
-                                        <tr>
-                                            <th><?php echo $this->lang->line('name'); ?></th>
-                                            <th><?php echo $this->lang->line('invoice_no'); ?></th>
-                                            <th><?php echo $this->lang->line('income_head'); ?></th>
-                                            <th><?php echo $this->lang->line('date'); ?></th>
-                                            <th class="text-right"><?php echo $this->lang->line('amount'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                        </tr>
+                                    <tr>
+                                        <!--<th>Références</th>-->
+                                        <th>Mois</th>
+                                        <th>Montant </th>
+
+                                    </tr>
                                     </thead>
-                                    <tbody> </tbody>
+                                    <!-- <tfoot>
+                                        <tr>
+                                            <th>Assets</th>
+                                            <th>Assign User </th>
+                                            <th>Task Name</th>
+                                            <th>Qty</th>
+                                            <th>End Date</th>
+                                            <th>Back Date</th>
+                                            <th>Back Qty</th>
+                                            <th>Action </th>
+                                        </tr>
+                                    </tfoot> -->
+                                    <tbody>
+                                    <?php
+
+                                    while ($row = $result->fetch_object()):  ?>
+                                        <tr>
+                                            <td><?php echo $row->mname; ?></td>
+                                            <td><?php echo $row->total; ?> FCFA</td>
+                                        </tr>
+
+                                    <?php
+                                    endwhile;
+                                    ?>
+                                    </tbody>
+
                                 </table>
 
                             </div>

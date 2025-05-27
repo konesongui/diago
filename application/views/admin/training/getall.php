@@ -53,9 +53,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         <th>Entreprise</th>
                                         <th>Nom du formateur</th>
                                         <th>Téléphone</th>
-                                        <!--<th>Adresse</th>
-                                        <th>Email</th>
-                                        <th>Détails</th>-->
+
 
                                         <th class="no-print text text-right noExport "><?php echo $this->lang->line('action'); ?></th>
                                     </tr>

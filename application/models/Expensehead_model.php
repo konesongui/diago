@@ -13,7 +13,7 @@ class Expensehead_model extends MY_Model {
      public function getDatatableExpenseHead()
     {
 
-        $sql="SELECT * FROM `expense_head`  ";
+        $sql="SELECT * FROM `expense_head` where deleted =1  ";
         $this->datatables->query($sql)
         ->searchable('expense_head.exp_category')
         ->orderable('`expense_head`.`id`,`expense_head`.`exp_category`')
@@ -22,6 +22,7 @@ class Expensehead_model extends MY_Model {
     }
 
     public function get($id = null) {
+      
         $this->db->select()->from('expense_head');
         if ($id != null) {
             $this->db->where('id', $id);
@@ -44,8 +45,10 @@ class Expensehead_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('expense_head');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('expense_head');
+
         $message = DELETE_RECORD_CONSTANT . " On  expense head id " . $id;
         $action = "Delete";
         $record_id = $id;

@@ -79,10 +79,10 @@
                             <?php echo $this->customlib->getCSRF(); ?>  
 
                             <input type="hidden" name="id" value="<?php echo $result['id'] ?>"/>
-                            <div class="form-group">
+                          <!--  <div class="form-group">
                                 <span><a href="<?php echo site_url() . $result['url']; ?>" target="_blank"><i class="fa fa-globe" aria-hidden="true"></i> <?php echo site_url() . $result['url']; ?></a></span>
 
-                            </div>
+                            </div>-->
                             <div class="form-group">
                                 <label for="exampleInputEmail1"><?php echo $this->lang->line('title'); ?></label><small class="req"> *</small>
                                 <input id="title" name="title" placeholder="" type="text" class="form-control"  value="<?php echo set_value('title', $result['title']); ?>" />

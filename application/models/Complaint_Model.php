@@ -45,6 +45,8 @@ class complaint_Model extends MY_Model {
     }
 
     public function complaint_list($id = null) {
+
+        $this->db->where('complaint.deleted', 1);
         $this->db->select()->from('complaint');
         if ($id != null) {
             $this->db->where('complaint.id', $id);
@@ -95,8 +97,10 @@ class complaint_Model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('complaint');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('complaint');
+
         $message = DELETE_RECORD_CONSTANT . " On Complaint id " . $id;
         $action = "Delete";
         $record_id = $id;

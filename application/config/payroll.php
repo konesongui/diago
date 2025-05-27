@@ -9,8 +9,11 @@ $config['staffattendance'] = array(
 );
 
 $config['contracttype'] = array(
-    'permanent' => lang('permanent'),
-    'probation' => lang('probation'),
+    'CDD' => lang('cdd'),
+    'CDI' => lang('cdi'),
+    'STAGE' => lang('stage'),
+    /*'probation' => lang('probation'),
+    'permanent' => lang('permanent'),*/
 );
 
 $config['status'] = array(

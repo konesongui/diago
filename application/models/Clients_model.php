@@ -16,6 +16,7 @@ class Clients_model extends MY_Model {
      * @return mixed
      */
     public function get($id = null) {
+        $this->db->where('clients.deleted', 1);
         $this->db->select()->from('clients');
         if ($id != null) {
             $this->db->where('id', $id);
@@ -94,8 +95,10 @@ class Clients_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('clients');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('clients');
+
         $message = DELETE_RECORD_CONSTANT . " On item supplier id " . $id;
         $action = "Delete";
         $record_id = $id;

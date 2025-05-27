@@ -20,6 +20,7 @@ $route['/qr-form'] = 'BarcodeController/index';
 $route['/generate-qr'] = 'BarcodeController/generateQr';
 
 
+$route['/pdf/generate'] = 'payroll/generate';
 
 
 //======= front url rewriting==========

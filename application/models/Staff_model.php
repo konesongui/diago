@@ -301,8 +301,10 @@ class Staff_model extends MY_Model
         $sql   = "DELETE FROM custom_field_values WHERE id IN (select * from (SELECT t2.id as `id` FROM `custom_fields` INNER JOIN custom_field_values as t2 on t2.custom_field_id=custom_fields.id WHERE custom_fields.belong_to='staff' and t2.belong_table_id IN (" . $id . ")) as m2)";
         $query = $this->db->query($sql);
 
-        $this->db->where('id', $id);
-        $this->db->delete('staff');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('staff');
+
 
         $this->db->trans_complete();
 

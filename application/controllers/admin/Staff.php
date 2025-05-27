@@ -1151,6 +1151,7 @@ class Staff extends Admin_Controller
             $prime_risque     = $this->input->post('prime_risque');
             $prime_assi      = $this->input->post('prime_assi');
             $prime_grati      = $this->input->post('prime_grati');
+            $conge      = $this->input->post('conge');
             $imp_sal      = $this->input->post('imp_sal');
             $contra_nat      = $this->input->post('contra_nat');
             $imp_revenu      = $this->input->post('imp_revenu');
@@ -1163,6 +1164,7 @@ class Staff extends Admin_Controller
             $fdfp_form     = $this->input->post('fdfp_form');
             $avan_acom     = $this->input->post('avan_acom');
             $autre_reve     = $this->input->post('autre_reve');
+            $taxes     = $this->input->post('taxes');
             $tax     = $this->input->post('tax');
 
             $account_title     = $this->input->post("account_title");
@@ -1241,6 +1243,7 @@ class Staff extends Admin_Controller
                 'prime_risque'         => $prime_risque,
                 'prime_assi'         => $prime_assi,
                 'prime_grati'         => $prime_grati,
+                'conge'         => $conge,
                 'imp_sal'         => $imp_sal,
                 'contra_nat'         => $contra_nat,
                 'imp_revenu'         => $imp_revenu,
@@ -1253,6 +1256,7 @@ class Staff extends Admin_Controller
                 'fdfp_form'         => $fdfp_form,
                 'avan_acom'         => $avan_acom,
                 'autre_reve'         => $autre_reve,
+                'taxes'                  => $taxes,
                 'tax'                  => $tax,
                 'epf_no'               => $epf_no,
                 'contract_type'        => $contract_type,

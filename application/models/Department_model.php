@@ -45,7 +45,9 @@ class Department_model extends MY_model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where("id", $id)->delete("department");
+        $this->db->where("id", $id)
+            ->set('department.deleted', '0')
+            ->update("department");
         $message = DELETE_RECORD_CONSTANT . " On department id " . $id;
         $action = "Delete";
         $record_id = $id;
@@ -69,8 +71,7 @@ class Department_model extends MY_model {
             $query = $this->db->where("id", $id)->get('department');
             return $query->row_array();
         } else {
-
-            $query = $this->db->get("department");
+            $query = $this->db->where("deleted", 1)->get("department");
             return $query->result_array();
         }
     }

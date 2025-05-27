@@ -148,6 +148,7 @@ class enquiry_model extends MY_Model
         $query = $this->db->select('projects.*,classes.class as classname')->
         join("classes", "projects.class = classes.id", "left")->
         where('projects.status', $status)->order_by("projects.id", "desc")->
+
         get("projects");
 
         if (!empty($id) and !empty($status)) {
@@ -338,8 +339,10 @@ class enquiry_model extends MY_Model
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('projects');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('projects');
+
         $message   = DELETE_RECORD_CONSTANT . " On  projects id " . $id;
         $action    = "Delete";
         $record_id = $id;

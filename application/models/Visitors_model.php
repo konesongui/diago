@@ -157,6 +157,7 @@ class visitors_model extends MY_Model {
     }
 
     public function visitors_list($id = null) {
+        $this->db->where('visitors_book.deleted', 1);
         $this->db->select()->from('visitors_book');
         if ($id != null) {
             $this->db->where('visitors_book.id', $id);
@@ -216,6 +217,7 @@ class visitors_model extends MY_Model {
     }
 
     public function categorie_listes($id = null) {
+        $this->db->where('categorie_salaire.deleted', 1);
         $this->db->select()->from('categorie_salaire');
         if ($id != null) {
             $this->db->where('categorie_salaire.id', $id);
@@ -258,8 +260,10 @@ class visitors_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('categorie_salarie');
+        $this->db->where('id', $id)
+        ->set('categorie_salaire.deleted', '0');
+        $this->db->update('categorie_salaire');
+
         $message = DELETE_RECORD_CONSTANT . " On  categorie  id " . $id;
         $action = "Delete";
         $record_id = $id;
@@ -275,7 +279,33 @@ class visitors_model extends MY_Model {
             //return $return_value;
         }
         $this->session->set_flashdata('msg', '<div class="alert alert-success">' . $this->lang->line('delete_message') . '</div>');
-        redirect('admin/files');
+        redirect('admin/categorie');
+    }
+
+    public function deleteincrease($id) {
+        $this->db->trans_start(); # Starting Transaction
+        $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
+        //=======================Code Start===========================
+        $this->db->where('id', $id)
+            ->set('income_processing.deleted', '0');
+        $this->db->update('income_processing');
+
+        $message = DELETE_RECORD_CONSTANT . " On  categorie  id " . $id;
+        $action = "Delete";
+        $record_id = $id;
+        $this->log($message, $record_id, $action);
+        //======================Code End==============================
+        $this->db->trans_complete(); # Completing transaction
+        /* Optional */
+        if ($this->db->trans_status() === false) {
+            # Something went wrong.
+            $this->db->trans_rollback();
+            return false;
+        } else {
+            //return $return_value;
+        }
+        $this->session->set_flashdata('msg', '<div class="alert alert-success">' . $this->lang->line('delete_message') . '</div>');
+        redirect('admin/categorie');
     }
 
     public function deleted($id) {
@@ -306,8 +336,10 @@ class visitors_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('visitors_book');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('visitors_book');
+
         $message = DELETE_RECORD_CONSTANT . " On  visitors  id " . $id;
         $action = "Delete";
         $record_id = $id;
@@ -532,8 +564,10 @@ class visitors_model extends MY_Model {
     public function images_deletecat($id, $img_name) {
         $file = "./uploads/front_office/categorie_salaire/" . $img_name;
         unlink($file);
-        $this->db->where('id', $id);
-        $this->db->delete('categorie_salaire');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('categorie_salaire');
+
         $controller_name = $this->uri->segment(2);
         $this->session->set_flashdata('msg', '<div class="alert alert-success"> ' . ucfirst($controller_name) . '' . $this->lang->line('success_message') . '</div>');
         redirect('admin/' . $controller_name);

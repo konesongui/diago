@@ -156,6 +156,7 @@ class Site extends Public_Controller
         if ($admin_session) {
             redirect('site/login');
         } else if ($student_session) {
+           // redirect('site/userlogin');
             redirect('site/userlogin');
         } else {
             redirect('site/userlogin');

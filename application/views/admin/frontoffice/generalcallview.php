@@ -12,7 +12,7 @@
                     <!-- Horizontal Form -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><?php echo $this->lang->line('add'); ?> <?php echo $this->lang->line('phone_call_log'); ?></h3>
+                            <h3 class="box-title">Information</h3>
                         </div><!-- /.box-header -->
 
                         <form id="form1" action="<?php echo site_url('admin/generalcall') ?>"   method="post" accept-charset="utf-8" enctype="multipart/form-data" >
@@ -23,7 +23,7 @@
 
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('name'); ?></label>
+                                    <label for="exampleInputEmail1">Nom et Prénom</label>
                                     <input type="text" class="form-control" value="<?php echo set_value('name'); ?>" name="name">
 
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
@@ -40,11 +40,7 @@
                                     <input id="date" name="date" placeholder="" type="text" class="form-control date"  value="<?php echo set_value('date', date($this->customlib->getSchoolDateFormat())); ?>" readonly="readonly" />
                                     <span class="text-danger"><?php echo form_error('date'); ?></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="email"><?php echo $this->lang->line('description'); ?></label> 
-                                    <textarea class="form-control" id="description" name="description"  rows="3"><?php echo set_value('description'); ?></textarea>
 
-                                </div>
                                 <div class="form-group">
                                     <div class="form-group">
                                         <label for="pwd"><?php echo $this->lang->line('next_follow_up_date'); ?></label>     <input id="follow_up_date" name="follow_up_date" placeholder="" type="text" class="form-control date"  value="<?php echo set_value('follow_up_date'); ?>" readonly="readonly" />
@@ -57,6 +53,11 @@
                                     <span class="text-danger"><?php echo form_error('call_dureation'); ?></span>
                                 </div>
                                 <div class="form-group">
+                                    <label for="email"><?php echo $this->lang->line('description'); ?></label>
+                                    <textarea class="form-control" id="description" name="description"  rows="3"><?php echo set_value('description'); ?></textarea>
+
+                                </div>
+                                <div class="form-group" hidden>
                                     <label for="pwd"><?php echo $this->lang->line('note'); ?></label>
                                     <textarea class="form-control" id="description" name="note" name="note" rows="3"><?php echo set_value('note'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('note'); ?></span>
@@ -98,13 +99,13 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header ptbnull">
-                        <h3 class="box-title titlefix"><?php echo $this->lang->line('phone_call_log'); ?> <?php echo $this->lang->line('list'); ?></h3>
+                        <h3 class="box-title titlefix"><?php echo $this->lang->line('phone_call_log'); ?></h3>
                         <div class="box-tools pull-right">
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="mailbox-messages table-responsive">
-                            <table class="table table-striped table-bordered table-hover call-list" data-export-title="<?php echo $this->lang->line('phone_call_log'); ?>  <?php echo $this->lang->line('list'); ?>">
+                            <table class="table table-striped table-bordered table-hover call-list" data-export-title="<?php echo $this->lang->line('phone_call_log'); ?>">
                                 <thead>
                                     <tr>
                                         <th><?php echo $this->lang->line('name'); ?>
@@ -114,6 +115,8 @@
                                         <th><?php echo $this->lang->line('date'); ?>
                                         </th>
                                         <th><?php echo $this->lang->line('next_follow_up_date'); ?></th>
+                                        <th>Remarque
+                                        </th>
                                         <th><?php echo $this->lang->line('call_type'); ?>
                                         </th>
                                         <th class="text-right noExport "><?php echo $this->lang->line('action'); ?></th>

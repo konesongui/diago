@@ -1,6 +1,7 @@
 <?php
-$conn = new mysqli("localhost","root","","diago_test");
-$sql = "SELECT SUM(amount) AS total_amount  FROM expenses Where amount >0 ";
+$conn = new mysqli("localhost","root","","diago");
+$sql = "SELECT SUM(amount) AS total_amount  FROM expenses Where deleted =1 ";
+
 
 $result = $conn->query($sql);
 
@@ -143,11 +144,21 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             <?php endwhile; ?>
                         </div>
                         <div class="box-body table-responsive">
-                            <div class="download_label"><?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
+                            <div class="download_label">
+                                <div class="col-md-4 col-xs-2 col-sm-6">
+                                    <img style="width: 150px; height: 70px !important;" src="<?= base_url() . "/uploads/school_content/admin_logo/" . $sch_setting->admin_logo ?>" alt="Image banniere" />
+
+                                </div>
+
+
+                                <?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
                                                 $this->customlib->get_postmessage();
                                                 ?></div>
+
+
+
                             
-                                <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
+                                <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo  $this->lang->line('expense') . " " . $this->lang->line('report');
                                                 $this->customlib->get_postmessage();   ?>">
                                 <thead>
                                     <tr>
@@ -156,8 +167,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                         <th>Designations</th>
 
 
+
                                         <th>Users</th>
-                                        <th><?php echo $this->lang->line('expense_head'); ?></th>
+                                       <!-- <th><?php echo $this->lang->line('expense_head'); ?></th>-->
 
 
                                         <th class="text text-right"><?php echo $this->lang->line('amount'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>

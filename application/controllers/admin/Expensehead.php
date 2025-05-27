@@ -63,6 +63,7 @@ class Expensehead extends Admin_Controller
                 $title = "<a href='#' data-toggle='popover' class='detail_popover'>" . $exhead_value->exp_category . "</a>";
 
                 $row[]     = $title . $popover_title;
+                $row[]     = $status;
                 $row[]     = $action;
                 $dt_data[] = $row;
             }

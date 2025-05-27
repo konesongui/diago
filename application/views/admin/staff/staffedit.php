@@ -479,7 +479,7 @@
 
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">Imp. sur Trait. et Sal. (IS) </label>
+                                                        <label for="exampleInputEmail1">Imp. sur Trait. et Sal. (IS) Employée % </label>
                                                         <input type="text" value="<?php echo $staff["imp_sal"] ?>" class="form-control" name="imp_sal" >
                                                     </div>
                                                 </div>
@@ -507,9 +507,9 @@
                                                         <input type="text" value="<?php echo $staff["cmu"] ?>" class="form-control" name="cmu" >
                                                     </div>
                                                 </div>
-                                                <div class="col-md-4" hidden>
+                                                <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <label for="exampleInputEmail1">CNPS, Régime de Retraite</label>
+                                                        <label for="exampleInputEmail1">ITS Employée</label>
                                                         <input type="text" value="<?php echo $staff["cnps_regim"] ?>" class="form-control" name="cnps_regim" >
                                                     </div>
                                                 </div>
@@ -552,7 +552,7 @@
                                                 <div class="col-md-4">
                                                     <div class="form-group">
                                                         <label for="exampleInputEmail1">Les indémmités</label>
-                                                        <input type="text" value="<?php echo $staff["tax"] ?>" class="form-control" name="tax" >
+                                                        <input type="text" value="<?php echo $staff["taxes"] ?>" class="form-control" name="taxes" >
                                                     </div>
                                                 </div>
 

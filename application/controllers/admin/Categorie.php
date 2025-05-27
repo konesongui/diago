@@ -9,6 +9,7 @@ class Categorie extends Admin_Controller {
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model("Visitors_model");
+        $this->load->model("income_processing_model");
     }
 
     function index() {
@@ -62,6 +63,8 @@ class Categorie extends Admin_Controller {
 
         $this->Visitors_model->deletecate($id);
     }
+
+
 
     public function edit($id) {
         if (!$this->rbac->hasPrivilege('categorie_salaire', 'can_edit')) {

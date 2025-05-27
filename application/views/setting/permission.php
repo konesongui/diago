@@ -11,8 +11,8 @@
                 <div class="nav-tabs-custom theme-shadow">
                     <ul class="nav nav-tabs pull-right">
 
-                        <li><a href="#tab_parent" data-toggle="tab"><?php echo $this->lang->line('parent') ?></a></li>
-                        <li><a href="#tab_students" data-toggle="tab"><?php echo $this->lang->line('student') ?></a></li>
+                       <!-- <li><a href="#tab_parent" data-toggle="tab"><?php echo $this->lang->line('parent') ?></a></li>
+                        <li><a href="#tab_students" data-toggle="tab"><?php echo $this->lang->line('student') ?></a></li>-->
                         <li class="active"><a href="#tab_system" data-toggle="tab"><?php echo $this->lang->line('system') ?></a></li>
 
                         <li class="pull-left header"> <?php echo $this->lang->line('modules'); ?></li>

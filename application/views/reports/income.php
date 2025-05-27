@@ -1,6 +1,6 @@
 <?php
-$conn = new mysqli("localhost","root","","diago_test");
-$sql1 = "SELECT SUM(amount) AS total_amount  FROM income Where amount >0 ";
+$conn = new mysqli("localhost","root","","diago");
+$sql1 = "SELECT SUM(amount) AS total_amount  FROM income Where deleted = 1 ";
 
 
 
@@ -12,8 +12,8 @@ $result1 = $conn->query($sql1);
 
 
 <?php
-$conn = new mysqli("localhost","root","","diago_test");
-$sql = "SELECT SUM(amount) AS total_amount_r  FROM income_processing Where amount >0 ";
+$conn = new mysqli("localhost","root","","diago");
+$sql = "SELECT SUM(amount) AS total_amount_r  FROM income_processing Where amount >0 and deleted >1 ";
 
 $result = $conn->query($sql);
 

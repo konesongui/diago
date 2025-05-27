@@ -120,7 +120,7 @@
                             <table class="table table-hover table-striped table-bordered example">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $this->lang->line('complain'); ?> # </th>
+                                        <!--<th><?php echo $this->lang->line('complain'); ?> # </th>-->
                                         <th><?php echo $this->lang->line('complain_type'); ?></th>
                                         <th><?php echo $this->lang->line('name'); ?></th>
                                         <th><?php echo $this->lang->line('phone'); ?></th>
@@ -138,7 +138,7 @@
                                         foreach ($complaint_list as $key => $value) {
                                             ?>
                                             <tr>
-                                                <td class="mailbox-name"><?php echo $value['id']; ?></td>
+                                                <!--<td class="mailbox-name"><?php echo $value['id']; ?></td>-->
                                                 <td class="mailbox-name"><?php echo $value['complaint_type']; ?></td>
                                                 <td class="mailbox-name"><?php echo $value['name']; ?><?php if(!empty($value['email'])){ ?>
 												<br><a href="mailto:<?php echo $value['email']; ?>">(<?php echo $value['email']; ?>)</a>

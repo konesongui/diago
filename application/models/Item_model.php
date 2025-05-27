@@ -66,28 +66,27 @@ class Item_model extends MY_Model
         }
     }
 
+    public function gets($id = null) {
+        $this->db->where('item.deleted', 1);
+        $this->db->select()->from('item');
+        if ($id != null) {
+            $this->db->where('id', $id);
+        } else {
+            $this->db->order_by('id');
+        }
+        $query = $this->db->get();
+        if ($id != null) {
+            return $query->row_array();
+        } else {
+            return $query->result_array();
+        }
+    }
+
     public function get($id = null)
     {
         // $where = "";
 
-        $query = "SELECT item.*,item_category.item_category,item_store.item_store,item_store.code,item_supplier.item_supplier,item_supplier.phone,item_supplier.email,item_supplier.address,IFNULL(item_issues.issued,0) as `issued`,IFNULL(item_issues.returned,0) as `returned`,IFNULL(item_stock.item_stock_quantity,0) added_stock FROM `item` left JOIN item_category on item.item_category_id=item_category.id left JOIN item_store on item.item_store_id=item_store.id left JOIN item_supplier on item.item_supplier_id=item_supplier.id left JOIN (SELECT item_stock.item_id,sum(quantity) item_stock_quantity FROM `item_stock` group by item_stock.item_id) as item_stock on item_stock.item_id=item.id left JOIN (SELECT m.item_id as `issue_item_id`, IFNULL((SELECT SUM(quantity) FROM item_issue WHERE item_issue.item_id = m.item_id and item_issue.is_returned =1),0) as `issued` ,IFNULL((SELECT SUM(quantity) FROM item_issue WHERE item_issue.item_id = m.item_id and item_issue.is_returned =0),0) as `returned` FROM item_issue m GROUP BY item_id) as item_issues on item_issues.issue_item_id=item.id";
-
-        if ($id != null) {
-            $query = $query . " where item.id =" . $id;
-        }
-
-        $query = $this->db->query($query);
-        if ($id != null) {
-            return $query->row_array();
-        }
-        return $query->result_array();
-    }
-
-    public function gets($id = null)
-    {
-        // $where = "";
-
-        $query = "SELECT caisse.*,caisse_category.item_category,caisse_store.item_store,item_store.code,caisse_supplier.item_supplier,caisse_supplier.phone,caisse_supplier.email,caisse_supplier.address,IFNULL(caisse_issues.issued,0) as `issued`,IFNULL(caisse_issues.returned,0) as `returned`,IFNULL(caisse_stock.caisse_stock_quantity,0) added_stock FROM `caisse` left JOIN caisse_category on caisse.item_category_id=item_category.id left JOIN caisse_store on caisse.item_store_id=item_store.id left JOIN caisse_supplier on caisse.item_supplier_id=item_supplier.id left JOIN (SELECT caisse_stock.item_id,sum(quantity) item_stock_quantity FROM `caisse_stock` group by caisse_stock.item_id) as caisse_stock on caisse_stock.item_id=item.id left JOIN (SELECT m.item_id as `issue_item_id`, IFNULL((SELECT SUM(quantity) FROM caisse_issue WHERE item_issue.item_id = m.item_id and caisse_issue.is_returned =1),0) as `issued` ,IFNULL((SELECT SUM(quantity) FROM caisse_issue WHERE caisse_issue.item_id = m.item_id and caisse_issue.is_returned =0),0) as `returned` FROM caisse_issue m GROUP BY item_id) as caisse_issues on caisse_issues.issue_item_id=item.id";
+        $query = "SELECT item.*,item_category.item_category,item_store.item_store,item_store.code,item_supplier.item_supplier,item_supplier.phone,supplier,item_supplier.email,item_supplier.address,IFNULL(item_issues.issued,0) as `issued`,IFNULL(item_issues.returned,0) as `returned`,IFNULL(item_stock.item_stock_quantity,0) added_stock  FROM `item`  left JOIN item_category on item.item_category_id=item_category.id left JOIN item_store on item.item_store_id=item_store.id left JOIN item_supplier on item.item_supplier_id=item_supplier.id left JOIN (SELECT item_stock.item_id,sum(quantity) item_stock_quantity FROM `item_stock` group by item_stock.item_id) as item_stock on item_stock.item_id=item.id left JOIN (SELECT m.item_id as `issue_item_id`, IFNULL((SELECT SUM(quantity) FROM item_issue WHERE item_issue.item_id = m.item_id and item_issue.is_returned =1),0) as `issued` ,IFNULL((SELECT SUM(quantity) FROM item_issue WHERE item_issue.item_id = m.item_id and item_issue.is_returned =0),0) as `returned` FROM item_issue m GROUP BY item_id) as item_issues on item_issues.issue_item_id=item.id";
 
         if ($id != null) {
             $query = $query . " where item.id =" . $id;
@@ -122,8 +121,10 @@ class Item_model extends MY_Model
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('item');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('item');
+
         $message   = DELETE_RECORD_CONSTANT . " On item id " . $id;
         $action    = "Delete";
         $record_id = $id;

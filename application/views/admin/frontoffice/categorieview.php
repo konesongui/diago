@@ -176,7 +176,7 @@
 
                                                 <?php if ($this->rbac->hasPrivilege('categorie_salaire', 'can_delete')) {
                                                     ?>
-                                                    <?php if ($value['image'] !== "") {?><a data-placement="left" href="<?php echo base_url(); ?>admin/categorie/imagesdelete/<?php echo $value['id']; ?>/<?php echo $value['image']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
+                                                    <?php if ($value['image'] !== "") {?><a data-placement="left" href="<?php echo base_url(); ?>admin/categorie/delete/<?php echo $value['id']; ?>/<?php echo $value['image']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
                                                             <i class="fa fa-remove"></i>
                                                         </a>
                                                     <?php } else {?>

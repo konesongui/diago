@@ -81,7 +81,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title" id="modal-title" >Ajouter un projet/évènement</h4>
+                <h4 class="modal-title" id="modal-title" >Ajouter un programme</h4>
             </div>
             <div class="modal-body pb0">
 
@@ -118,14 +118,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><?php echo $this->lang->line('add') . " " . $this->lang->line('new') . " " ; ?>Projet/Evenement</h4>
+                <h4 class="modal-title"><?php echo $this->lang->line('add') . " " . $this->lang->line('new') . " " ; ?>Programme</h4>
             </div>
             <div class="modal-body pb0"> 
 
                 <div class="row"> 
                     <form role="form" id="addevent_form" method="post" enctype="multipart/form-data" action="">
                         <div class="form-group col-md-12">
-                            <label for="exampleInputEmail1">Projets/Evenements <small class="req"> *</small></label>
+                            <label for="exampleInputEmail1">Programme <small class="req"> *</small></label>
                             <input class="form-control" name="title" id="input-field"> 
                             <span class="text-danger"><?php echo form_error('title'); ?></span>
 

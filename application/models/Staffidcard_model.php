@@ -6,6 +6,7 @@ class Staffidcard_model extends MY_model {
 
     public function staffidcardlist() {
         $this->db->select('*');
+        $this->db->where('staff_id_card.deleted', 1);
         $this->db->from('staff_id_card');
         $query = $this->db->get();
         return $query->result();
@@ -110,8 +111,10 @@ class Staffidcard_model extends MY_model {
 		$this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('staff_id_card');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('staff_id_card');
+
 		$message      = DELETE_RECORD_CONSTANT." On id card id ".$id;
         $action       = "Delete";
         $record_id    = $id;

@@ -16,6 +16,7 @@ class Itemsupplier_model extends MY_Model {
      * @return mixed
      */
     public function get($id = null) {
+        $this->db->where('item_supplier.deleted', 1);
         $this->db->select()->from('item_supplier');
         if ($id != null) {
             $this->db->where('id', $id);
@@ -153,8 +154,10 @@ class Itemsupplier_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('item_supplier');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('item_supplier');
+
         $message = DELETE_RECORD_CONSTANT . " On item supplier id " . $id;
         $action = "Delete";
         $record_id = $id;

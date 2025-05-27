@@ -30,12 +30,12 @@
                                 <?php echo $this->customlib->getCSRF(); ?>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Produit</label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Nom</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="" type="text" class="form-control"  value="<?php echo set_value('name'); ?>" />
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Catégorie de produit</label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Catégorie</label><small class="req"> *</small>
 
                                     <select  id="item_category_id" name="item_category_id" class="form-control" >
                                         <option value=""><?php echo $this->lang->line('select'); ?></option>
@@ -55,14 +55,35 @@
                                     </select>
                                     <span class="text-danger"><?php echo form_error('item_category_id'); ?></span>
                                 </div>
-                                <div class="form-group" hidden>
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('unit') ?></label><small class="req"> *</small>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('supplier'); ?></label>
+
+                                    <select  id="supplier" name="supplier" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <?php
+                                        foreach ($itemsupplier as $itemsup) {
+                                            ?>
+                                            <option value="<?php echo $itemsup['item_supplier'] ?> <?php echo $itemsup['lastname'] ?>"<?php
+                                            if (set_value('supplier_id') == $itemsup['item_supplier']) {
+                                                echo "selected = selected";
+                                            }
+                                            ?>><?php echo $itemsup['item_supplier'] ?> <?php echo $itemsup['lastname'] ?></option>
+
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('supplier'); ?></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Prix</label><small class="req"> *</small>
                                     <input autofocus="" id="unit" name="unit" placeholder="" type="text" class="form-control"  value="<?php echo set_value('unit'); ?>" />
                                     <span class="text-danger"><?php echo form_error('unit'); ?></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
+                                    <label for="exampleInputEmail1">Détails</label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"></span>
                                 </div>
@@ -91,12 +112,21 @@
                                     <thead>
                                         <tr>
                                             <th>Produit</th>
-                                            <th><?php echo $this->lang->line('category'); ?> de produit
+                                            <th>Prix
                                             </th>
-                                            <!--<th><?php echo $this->lang->line('unit'); ?>
+                                            <!--<th><?php echo $this->lang->line('category'); ?> de produit
                                             </th>-->
-                                            <th>Quantité disponible
+
+                                            <th>Fournisseurs
                                             </th>
+
+
+
+                                            <!--<th>Description
+                                            </th>-->
+
+                                           <!-- <th>Quantité disponible
+                                            </th>-->
 
                                             <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
                                         </tr>
@@ -129,22 +159,32 @@
                                                         </div>
                                                     </td>
 
-
                                                     <td class="mailbox-name">
-                                                        <?php echo $items['item_category']; ?>
+                                                        <?php echo $items['unit']; ?> FCFA
 
                                                     </td>
-                                                    <!--<td class="mailbox-name">
-                                                        <?php echo $items['unit']; ?>
+                                                   <!-- <td class="mailbox-name">
+                                                        <?php echo $items['item_category']; ?>
 
                                                     </td>-->
+
                                                     <td class="mailbox-name">
+                                                        <?php echo $items['supplier']; ?>
+
+                                                    </td>
+
+                                                    <!--<td class="mailbox-name">
+                                                        <?php echo $items['description']; ?>
+
+                                                    </td>-->
+
+                                                   <!-- <td class="mailbox-name">
                                                         <?php
                                                         echo $items['added_stock'] - $items['issued'];
                                                         ;
                                                         ?>
 
-                                                    </td>
+                                                    </td>-->
 
 
 

@@ -37,10 +37,22 @@
                                     <input autofocus="" id="expensehead" name="expensehead" placeholder="" type="text" class="form-control"  value="<?php echo set_value('expensehead'); ?>" />
                                     <span class="text-danger"><?php echo form_error('expensehead'); ?></span>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Status</label><small class="req"> *</small>
+
+                                    <select autofocus="" id="status" name="status" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <option value="Ouvert">Ouvert</option>
+                                        <option value="Fermer">Fermer</option>
+
+                                    </select><span class="text-danger"><?php echo form_error('status'); ?></span>
+
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer">
@@ -71,6 +83,7 @@
                                 <thead>
                                     <tr>
                                         <th><?php echo $this->lang->line('expense_head'); ?></th>
+                                        <th>Statut</th>
                                         <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
                                 </thead>

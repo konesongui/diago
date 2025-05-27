@@ -23,18 +23,18 @@
                                 <?php } ?>
                                 <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"> <?php echo $this->lang->line('name'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Client</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="" type="text" class="form-control"  value="<?php echo set_value('name'); ?>" />
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1">Prénom</label><small class="req"> *</small>
                                     <input autofocus="" id="lastname" name="lastname" placeholder="" type="text" class="form-control"  value="<?php echo set_value('lastname'); ?>" />
                                     <span class="text-danger"><?php echo form_error('lastname'); ?></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"> <?php echo $this->lang->line('phone'); ?></label>
-                                    <input id="phone" name="phone" placeholder="" type="text" class="form-control"  value="<?php echo set_value('phone'); ?>" />
+                                    <label for="exampleInputEmail1"> <?php echo $this->lang->line('phone'); ?></label><small class="req"> *</small>
+                                    <input id="phone" name="phone" placeholder="" type="text" class="form-control" required  value="<?php echo set_value('phone'); ?>" />
                                     <span class="text-danger"><?php echo form_error('phone'); ?></span>
                                 </div>
                                 <div class="form-group">
@@ -62,7 +62,7 @@
                                     <input id="contact_person_email" name="contact_person_email" placeholder="" type="email" class="form-control"  value="<?php echo set_value('contact_person_email'); ?>" />
                                     <span class="text-danger"><?php echo form_error('contact_person_email'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1">Détails</label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
@@ -95,12 +95,12 @@
                                 <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prénom</th>
+
                                         <th>Téléphone</th>
                                         <th>Email</th>
                                         <th><?php echo $this->lang->line('address'); ?></th>
                                         <th>Compte contribuable</th>
-                                        <th>Détails</th>
+
 
                                         <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
@@ -155,12 +155,12 @@
                                                     </div>
                                                 </td>-->
                                                 <td class="mailbox-name"><?php echo $supplier['item_supplier'] ?></td>
-                                                <td class="mailbox-name"><?php echo $supplier['lastname'] ?></td>
+
                                                 <td class="mailbox-name"><?php echo $supplier['phone'] ?></td>
                                                 <td class="mailbox-name"><?php echo $supplier['email'] ?></td>
                                                 <td class="mailbox-name"><?php echo $supplier['address'] ?></td>
                                                 <td class="mailbox-name"><?php echo $supplier['comptec'] ?></td>
-                                                <td class="mailbox-name"><?php echo $supplier['description'] ?></td>
+
 
                                                 <td class="mailbox-date pull-right no-print">
                                                     <?php if ($this->rbac->hasPrivilege('clients', 'can_edit')) { ?>

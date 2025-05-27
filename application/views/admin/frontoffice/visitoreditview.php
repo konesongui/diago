@@ -56,7 +56,7 @@
                                     <div class="bootstrap-timepicker">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" name="time" class="form-control timepicker" id="stime_" value="<?php echo set_value('time', $visitor_data['in_time']); ?>">
+                                                <input type="text" name="time" class="form-control" id="stime_" value="<?php echo set_value('time', $visitor_data['in_time']); ?>">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -70,7 +70,7 @@
                                     <div class="bootstrap-timepicker">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" name="out_time" class="form-control timepicker" id="stime_" value="<?php echo set_value('out_time', $visitor_data['out_time']); ?>">
+                                                <input type="text" name="out_time" class="form-control" id="stime_" value="<?php echo set_value('out_time', $visitor_data['out_time']); ?>">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -156,7 +156,7 @@
                                                 <td class="mailbox-name"> <?php echo $value['in_time']; ?></td>
                                                 <td class="mailbox-name"> <?php echo $value['out_time']; ?></td>
                                                 <td class="mailbox-date pull-right">
-                                                    <a  data-placement="left" onclick="getRecord(<?php echo $value['id']; ?>)" class="btn btn-default btn-xs" data-target="#visitordetails" data-toggle="modal"  title="<?php echo $this->lang->line('view') ?>"><i class="fa fa-reorder"></i></a> 
+                                                    <!--<a  data-placement="left" onclick="getRecord(<?php echo $value['id']; ?>)" class="btn btn-default btn-xs" data-target="#visitordetails" data-toggle="modal"  title="<?php echo $this->lang->line('view') ?>"><i class="fa fa-reorder"></i></a> -->
                                                     <?php if ($value['image'] !== "") { ?>
                                                         <a data-placement="left" href="<?php echo base_url(); ?>admin/visitors/download/<?php echo $value['image']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('download'); ?>">
                                                             <i class="fa fa-download"></i>

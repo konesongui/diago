@@ -37,19 +37,23 @@ class Item extends Admin_Controller {
                 'name' => $this->input->post('name'),
                 'unit' => $this->input->post('unit'),
                 'description' => $this->input->post('description'),
+                'supplier'    => $this->input->post('supplier'),
             );
             $insert_id = $this->item_model->add($data);
 
             $this->session->set_flashdata('msg', '<div class="alert alert-success text-left">' . $this->lang->line('success_message') . '</div>');
             redirect('admin/item/index');
         }
-        $item_result = $this->item_model->get();
 
+
+        $item_result = $this->item_model->gets();
         $data['itemlist'] = $item_result;
 
 
         $itemcategory = $this->itemcategory_model->get();
         $data['itemcatlist'] = $itemcategory;
+        $itemsupplier         = $this->itemsupplier_model->get();
+        $data['itemsupplier'] = $itemsupplier;
 
         $this->load->view('layout/header', $data);
         $this->load->view('admin/item/itemList', $data);
@@ -131,6 +135,8 @@ class Item extends Admin_Controller {
 
         $itemcategory = $this->itemcategory_model->get();
         $data['itemcatlist'] = $itemcategory;
+        $itemsupplier         = $this->itemsupplier_model->get();
+        $data['itemsupplier'] = $itemsupplier;
 
         $this->form_validation->set_rules('name', $this->lang->line('name'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('unit', $this->lang->line('unit'), 'trim|xss_clean');
@@ -152,6 +158,7 @@ class Item extends Admin_Controller {
                 'name' => $this->input->post('name'),
                 'unit' => $this->input->post('unit'),
                 'description' => $this->input->post('description'),
+                'supplier'    => $this->input->post('supplier'),
             );
             $insert_id = $this->item_model->add($data);
             $insert_id = $this->item_model->add($data);

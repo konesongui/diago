@@ -62,8 +62,8 @@ License: For each use you must have a valid license purchased only from above li
                 <span style="color: white">Votre application de gestion d'entreprise</span>-->
                 <!--end::Title-->
                 <!--begin::Text-->
-                <!--<div class="col-lg-8 col-md-8 col-sm-12">
-                    <h3 class="h3" style="color: white"><?php echo $this->lang->line('what_is_new_in'); ?> <?php echo $school['name']; ?></h3>
+                <div class="col-lg-8 col-md-8 col-sm-12">
+                    <!--<h3 class="h3" style="color: white"><?php echo $this->lang->line('what_is_new_in'); ?> <?php echo $school['name']; ?></h3>-->
                     <div class="loginright mCustomScrollbar">
                         <div class="messages">
                             <?php
@@ -74,16 +74,7 @@ License: For each use you must have a valid license purchased only from above li
                             <?php
                     $string = ($notice_value['description']);
                     $string = strip_tags($string);
-                    if (strlen($string) > 100) {
 
-                        // truncate string
-                        $stringCut = substr($string, 0, 100);
-                        $endPoint = strrpos($stringCut, ' ');
-
-                        //if the string doesn't contain any space then it will cut without word basis.
-                        $string = $endPoint ? substr($stringCut, 0, $endPoint) : substr($stringCut, 0);
-                        $string .= '... <a class=more href="' . site_url('read/' . $notice_value['slug']) . '" target="_blank">' . $this->lang->line('read') . ' ' . $this->lang->line('more') . '  </a>';
-                    }
                     echo '<p style="color: white">' . $string . '</p>';
                     ?>
 
@@ -95,8 +86,8 @@ License: For each use you must have a valid license purchased only from above li
 
             </div>
         </div>
-        <img src="<?php echo base_url(); ?>backend/usertemplate/assets/img/backgrounds/bg3.jpg" class="img-responsive" style="border-radius:4px;" />
-    </div>-->
+        <!--<img src="<?php echo base_url(); ?>backend/usertemplate/assets/img/backgrounds/bg3.jpg" class="img-responsive" style="border-radius:4px;" />-->
+    </div>
                 <!--./col-lg-6-->
                         </div>
             <!--end::Content-->

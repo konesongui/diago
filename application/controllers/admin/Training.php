@@ -371,14 +371,6 @@ class Training extends Admin_Controller
                 $row[]     = $value->rack_no;
                 $row[]     = $value->respo;
                 $row[]     = $value->contact;
-                /*$row[]     = $value->adresse;
-                $row[]     = $value->email;
-                $row[] = $value->description;*/
-
-
-                /*$row[]     = $value->qty - $value->total_issue;
-                $row[]     = $currency_symbol . $value->perunitcost;
-                $row[]     = $this->customlib->dateformat($value->postdate);*/
                 $row[]     = $editbtn . ' ' . $deletebtn;
                 $dt_data[] = $row;
             }

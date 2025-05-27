@@ -10,13 +10,13 @@
                     <!-- Horizontal Form -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><?php echo $this->lang->line('add'); ?> <?php echo $this->lang->line('visitor'); ?></h3>
+                            <h3 class="box-title"><?php echo $this->lang->line('add'); ?> un <?php echo $this->lang->line('visitor'); ?></h3>
                         </div><!-- /.box-header -->
                         <form id="form1" action="<?php echo site_url('admin/visitors') ?>"   method="post" accept-charset="utf-8" enctype="multipart/form-data" >
                             <div class="box-body">
                                 <?php echo $this->session->flashdata('msg') ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('purpose'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Motif</label><small class="req"> *</small>
 
                                     <select name="purpose" class="form-control">
                                         <option value=""><?php echo $this->lang->line('select'); ?> </option>
@@ -30,7 +30,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="pwd"><?php echo $this->lang->line('name'); ?></label>  <small class="req"> *</small>
+                                    <label for="pwd">Nom et Prénom</label>  <small class="req"> *</small>
                                     <input type="text" class="form-control" value="<?php echo set_value('name'); ?>" name="name">
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                                 </div>
@@ -41,13 +41,13 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="pwd"><?php echo $this->lang->line('icard'); ?></label><small class="req"> *</small>
+                                    <label for="pwd">Numéro de la pièce</label><small class="req"> *</small>
                                     <input type="text" class="form-control" required value="<?php echo set_value('id_proof'); ?>" name="id_proof">
 
                                 </div>
                                 <div class="form-group">
                                     <label for="email"><?php echo $this->lang->line('number_of_person'); ?></label>
-                                    <input type="text" class="form-control" value="<?php echo set_value('pepples'); ?>" name="pepples">
+                                    <input type="number" class="form-control" value="<?php echo set_value('pepples'); ?>" name="pepples">
                                 </div>
                                 <div class="form-group">
                                     <div class="form-group">
@@ -60,7 +60,7 @@
                                     <div class="bootstrap-timepicker">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" name="time" class="form-control timepicker" id="stime_" value="<?php echo set_value('time'); ?>">
+                                                <input type="text" name="time" class="form-control" id="stime_" value="<?php echo set_value('time'); ?>">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -74,7 +74,7 @@
                                     <div class="bootstrap-timepicker">
                                         <div class="form-group">
                                             <div class="input-group">
-                                                <input type="text" name="out_time" class="form-control timepicker" id="stime_" value="<?php echo set_value('out_time'); ?>">
+                                                <input type="text" name="out_time" class="form-control" id="stime_" value="<?php echo set_value('out_time'); ?>">
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-clock-o"></i>
                                                 </div>
@@ -88,7 +88,7 @@
                                     <textarea class="form-control" id="description" name="note" name="note" rows="3"><?php echo set_value('note'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('date'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputFile"><?php echo $this->lang->line('attach_document'); ?></label>
                                     <div><input class="filestyle form-control" type='file' name='file'  />
                                     </div>
@@ -115,7 +115,7 @@ if ($this->rbac->hasPrivilege('visiteurs', 'can_add')) {
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header ptbnull">
-                        <h3 class="box-title titlefix"><?php echo $this->lang->line('visitor'); ?> <?php echo $this->lang->line('list'); ?></h3>
+                        <h3 class="box-title titlefix"> <?php echo $this->lang->line('list'); ?> des <?php echo $this->lang->line('visitor'); ?>s</h3>
                         <div class="box-tools pull-right">
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
@@ -125,8 +125,8 @@ if ($this->rbac->hasPrivilege('visiteurs', 'can_add')) {
                             <table class="table table-hover table-striped table-bordered example">
                                 <thead>
                                     <tr>
-                                        <th><?php echo $this->lang->line('purpose'); ?></th>
-                                        <th><?php echo $this->lang->line('name'); ?></th>
+                                        <th>Motif</th>
+                                        <th>Nom et Prénom</th>
                                         <th><?php echo $this->lang->line('phone'); ?></th>
                                         <th><?php echo $this->lang->line('date'); ?></th>
                                         <th><?php echo $this->lang->line('in_time'); ?></th>
@@ -152,7 +152,7 @@ if (empty($visitor_list)) {
                                                 <td class="mailbox-name"> <?php echo $value['in_time']; ?></td>
                                                 <td class="mailbox-name"> <?php echo $value['out_time']; ?></td>
                                                 <td class="mailbox-date pull-right white-space-nowrap">
-                                                    <a data-placement="left"  onclick="getRecord(<?php echo $value['id']; ?>)" class="btn btn-default btn-xs" data-target="#visitordetails" data-toggle="modal"  title="<?php echo $this->lang->line('view'); ?>"><i class="fa fa-reorder"></i></a>
+                                                    <!--<a data-placement="left"  onclick="getRecord(<?php echo $value['id']; ?>)" class="btn btn-default btn-xs" data-target="#visitordetails" data-toggle="modal"  title="<?php echo $this->lang->line('view'); ?>"><i class="fa fa-reorder"></i></a>-->
                                                     <?php if ($value['image'] !== "") {?>
                                                         <a data-placement="left" href="<?php echo base_url(); ?>admin/visitors/download/<?php echo $value['image']; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('download'); ?>">
                                                             <i class="fa fa-download"></i>

@@ -35,6 +35,7 @@ class general_call_model extends MY_Model {
     }
 
     public function call_list($id = null) {
+
         $this->db->select()->from('general_calls');
         if ($id != null) {
             $this->db->where('general_calls.id', $id);
@@ -60,7 +61,8 @@ class general_call_model extends MY_Model {
          $this->datatables
             ->select('general_calls.id,general_calls.name,general_calls.contact,general_calls.call_type,general_calls.follow_up_date,general_calls.date')
             ->searchable('general_calls.name,general_calls.contact,general_calls.date,general_calls.follow_up_date,general_calls.call_type')
-            ->orderable('general_calls.name,general_calls.contact,general_calls.date,general_calls.follow_up_date,general_calls.call_type')
+            ->orderable('general_calls.name,general_calls.contact,general_calls.date,general_calls.follow_up_date,general_calls.call_type');
+          $this->db->where('general_calls.deleted', 1)
             ->from('general_calls');
             return $this->datatables->generate('json');
     }
@@ -69,8 +71,10 @@ class general_call_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('general_calls');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('general_calls');
+
         $message = DELETE_RECORD_CONSTANT . " On Phone Call Log id " . $id;
         $action = "Delete";
         $record_id = $id;

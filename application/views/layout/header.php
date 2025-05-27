@@ -122,7 +122,7 @@ if (!$this->config->item('SSLK') == "") {
                     </a>
                     <div class="col-lg-5 col-md-3 col-sm-2 col-xs-5">
                         <span href="#"  class="sidebar-session" style="color: white">
-                           <?php echo $this->setting_model->getCurrentSchoolName(); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
+                           <?php echo $this->setting_model->getCurrentSchoolName(); ?>&nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
                             <?php date_default_timezone_get('Africa');
                             echo  date('H:i')?>
                         </span>

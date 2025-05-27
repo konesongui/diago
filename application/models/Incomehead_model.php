@@ -16,6 +16,7 @@ class Incomehead_model extends My_Model {
      * @return mixed
      */
     public function get($id = null) {
+        $this->db->where('income_head.deleted', 1);
         $this->db->select()->from('income_head');
         if ($id != null) {
             $this->db->where('id', $id);
@@ -39,8 +40,10 @@ class Incomehead_model extends My_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('income_head');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('income_head');
+
 
         //$return_value = $this->db->insert_id();
         $message = DELETE_RECORD_CONSTANT . " On  income head   id " . $id;

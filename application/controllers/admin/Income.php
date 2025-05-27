@@ -253,7 +253,7 @@ class Income extends Admin_Controller
         }
         $data['title']       = 'Edit Fees Master';
         $data['id']          = $id;
-        $income              = $this->income_model->get($id);
+        $income              = $this->income_model->got($id);
         $data['income']      = $income;
         $data['title_list']  = 'Fees Master List';
         $expnseHead          = $this->incomehead_model->get();
@@ -275,6 +275,7 @@ class Income extends Admin_Controller
                 'user'        => $this->input->post('user'),
                 'date'        => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('date'))),
                 'amount'      => $this->input->post('amount'),
+                'amount_re'      => $this->input->post('amount_re'),
                 'invoice_no'  => $this->input->post('invoice_no'),
                 'note'        => $this->input->post('description'),
                 'status'        => $this->input->post('status'),
@@ -308,6 +309,7 @@ class Income extends Admin_Controller
         $this->load->view('layout/footer', $data);
 
     }
+
 
     public function getincomelist()
     {
@@ -360,10 +362,18 @@ class Income extends Admin_Controller
                 /* $row[]     = $value->invoice_no;*/
                 $row[]     = date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date));
                 $row[]     = $value->income_category;
-                $row[]     = $currency_symbol . $value->amount;
-                $row[]     = $currency_symbol . $value->amount_re;
+                $row[]     = $value->amount .$currency_symbol;
+                $row[]     = $value->amount_re .$currency_symbol;
                 /*$row[]     = $value->user;*/
-                $row[]     = $value->status;
+
+                if ($value->status=="Ouvert") {
+                    $row[]     =  "<b style='background-color: #66aa18;color: white; border-radius: 2px'>Caisse ouvert<b/>";
+                    }
+                else{
+                    $row[]     = "<b style='background-color: #ff9801;color: white; border-radius: 2px'>Caisse fermer<b/>";
+                }
+
+                //$row[]     = $value->status;
 
                 $row[]     = $documents . ' ' . $editbtn . ' '. $increase.' '. $viewIncrease .' '. $deletebtn;
                 $dt_data[] = $row;
@@ -521,6 +531,16 @@ class Income extends Admin_Controller
 
 
     }
+
+    public function delete_increase($id){
+
+
+
+        $this->Income_processing_model->delete_increase($id);
+        redirect('admin/income/index');
+
+    }
+
     public function EditIncrease()
     {
         // Try to get any row's id sent

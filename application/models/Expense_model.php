@@ -6,6 +6,7 @@ if (!defined('BASEPATH')) {
 
 class Expense_model extends MY_Model
 {
+    protected $ma_table = 'expenses';
 
     public function __construct()
     {
@@ -25,7 +26,7 @@ class Expense_model extends MY_Model
         if (!empty($text)) {
            
              $this->datatables
-            ->select('expenses.id,expenses.date,expenses.invoice_no,expenses.name,expenses.user, income.name as income_name, expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
+            ->select('expenses.id,expenses.date,expenses.invoice_no,expenses.name,expenses.user, income.name as income_name,income.amount_re as income_amount_re,income.amount as income_amount expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
              ->searchable('expenses.name,expenses.user,expenses.invoice_no,exp_category,date,expenses.amount')
             ->orderable('expenses.name,expenses.user,expenses.invoice_no,exp_category,date,expenses.amount')
             ->join('expense_head', 'expenses.exp_head_id = expense_head.id')
@@ -36,7 +37,7 @@ class Expense_model extends MY_Model
         } else {
             
             $this->datatables
-            ->select('expenses.id,expenses.date,expenses.invoice_no,expenses.name,expenses.user, income.name as income_name, expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
+            ->select('expenses.id,expenses.date,expenses.invoice_no,expenses.name,expenses.user, income.name as income_name, income.amount_re as income_amount_re,income.amount as income_amount, expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
             ->searchable('expenses.name,expenses.user,expenses.invoice_no,exp_category,date,expenses.amount')
             ->orderable('expenses.name,expenses.user,expenses.invoice_no,exp_category,date,expenses.amount')
             ->join('expense_head', 'expenses.exp_head_id = expense_head.id')
@@ -59,6 +60,7 @@ class Expense_model extends MY_Model
             $this->db->order_by('expenses.id', 'DESC');
         }
 
+
         $query = $this->db->get();
         if ($id != null) {
             return $query->row_array();
@@ -67,18 +69,23 @@ class Expense_model extends MY_Model
         }
     }
 
+
     public function getexpenselist($id = null)
     {
         $this->datatables
-            ->select('expenses.id,expenses.date,expenses.name,expenses.user, income.name as income_name, expenses.invoice_no,expenses.user,expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
+            ->select('expenses.id,expenses.date,expenses.name,expenses.user, income.name as income_name,income.amount as income_amount, income.amount_re as income_amount_re, expenses.invoice_no,expenses.user,expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
             ->searchable('expenses.id,expenses.date,expenses.name,expenses.user,expenses.invoice_no,expenses.amount,expenses.documents,expenses.note,expense_head.exp_category,expenses.exp_head_id')
             ->orderable('expenses.name,expenses.user,expenses.note,expenses.invoice_no,expenses.date,expense_head.exp_category,expenses.amount')
             ->join("expense_head", "expenses.exp_head_id = expense_head.id")
             ->join("income", "expenses.inc_head_id = income.id")
-            ->sort('expenses.id', 'desc')
-            ->from('expenses');
+            ->sort('expenses.id', 'desc');
+             $this->db->where('expenses.deleted', 1)
+
+             ->from('expenses');
         return $this->datatables->generate('json');
     }
+
+
 
 
     /**
@@ -91,8 +98,10 @@ class Expense_model extends MY_Model
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('expenses');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('expenses');
+       /* $this->db->delete('expenses');*/
        
         $message   = DELETE_RECORD_CONSTANT . " On  expenses   id " . $id;
         $action    = "Delete";

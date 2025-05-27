@@ -10,18 +10,18 @@
                     <!-- Horizontal Form -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><?php echo $this->lang->line('add'); ?> <?php echo $this->lang->line('postal_dispatch'); ?></h3>
+                            <h3 class="box-title"><?php echo $this->lang->line('add'); ?> un courier</h3>
                         </div><!-- /.box-header -->
                         <form id="form1" action="<?php echo site_url('admin/dispatch') ?>"   method="post" accept-charset="utf-8" enctype="multipart/form-data" >
                             <div class="box-body">                        
                                 <?php echo $this->session->flashdata('msg') ?>
                                 <div class="form-group">
-                                    <label for="pwd"><?php echo $this->lang->line('to_title'); ?></label>  <small class="req"> *</small>  
+                                    <label for="pwd">Nom du courier</label>  <small class="req"> *</small>
                                     <input type="text" class="form-control" value="<?php echo set_value('to_title'); ?>" name="to_title">
                                     <span class="text-danger"><?php echo form_error('to_title'); ?></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('reference_no'); ?></label>
+                                    <label for="exampleInputEmail1">Référence</label>
 
                                     <input type="text" class="form-control" value="<?php echo set_value('ref_no'); ?>" name="ref_no">
 
@@ -35,7 +35,7 @@
                                     <label for="email"><?php echo $this->lang->line('note'); ?></label> 
                                     <textarea class="form-control" id="description" name="note" name="note" rows="3"><?php echo set_value('note'); ?></textarea>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <div class="form-group">
                                         <label for="pwd"><?php echo $this->lang->line('from_title'); ?></label>     <input type="text" class="form-control" value="<?php echo set_value('from'); ?>"  name="from">
                                         <span class="text-danger"><?php echo form_error('from'); ?></span>
@@ -50,9 +50,25 @@
                                     <label for="exampleInputFile"><?php echo $this->lang->line('attach_document'); ?></label>
                                     <div><input class="filestyle form-control" type='file' name='file'  />
                                     </div>
-                                    <span class="text-danger"><?php echo form_error('file'); ?></span></div>
+                                    <span class="text-danger"><?php echo form_error('file'); ?></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Statut</label> <small class="req">*</small>
+
+
+                                    <select autofocus="" id="type" name="type" class="form-control" >
+                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
+                                        <option value="Envoi">Envoi</option>
+                                        <option value="reçu">Reçu</option>
+
+                                    </select>
+                                    <span class="text-danger"><?php echo form_error('type'); ?></span>
+                                </div>
+
 
                             </div><!-- /.box-body -->
+
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
                                 <button type="reset" class="btn btn-secondary bg-red">Annuler</button>
@@ -72,7 +88,7 @@
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header ptbnull">
-                        <h3 class="box-title titlefix"><?php echo $this->lang->line('postal_dispatch'); ?> <?php echo $this->lang->line('list'); ?></h3>
+                        <h3 class="box-title titlefix"><?php echo $this->lang->line('list'); ?> des couriers</h3>
                         <div class="box-tools pull-right">
                         </div><!-- /.box-tools -->
                     </div><!-- /.box-header -->
@@ -82,10 +98,12 @@
                             <table class="table table-hover table-striped table-bordered example">
                                 <thead>
                                     <tr>                                    
-                                        <th><?php echo $this->lang->line('to_title'); ?></th>
-                                        <th><?php echo $this->lang->line('reference_no'); ?></th>
-                                        <th><?php echo $this->lang->line('from_title'); ?></th>
+                                        <th>Nom du courier</th>
+                                        <th>Référence</th>
+                                        <!--<th><?php echo $this->lang->line('from_title'); ?></th>-->
                                         <th><?php echo $this->lang->line('date'); ?></th>
+                                        <th>Remarque</th>
+                                        <th>statut</th>
                                         <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
                                     </tr>
                                 </thead>
@@ -102,12 +120,22 @@
 
                                                 <td class="mailbox-name"><?php echo $value->to_title; ?></td>
                                                 <td class="mailbox-name"><?php echo $value->reference_no; ?></td>
-                                                <td class="mailbox-name"> <?php echo $value->from_title; ?></td>
+                                                <!--<td class="mailbox-name"> <?php echo $value->from_title; ?></td>-->
                                                 <td class="mailbox-name"> <?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date)); ?></td>
+                                                <td class="mailbox-name"><?php echo $value->note; ?></td>
+                                                <td class="mailbox-name"><?php
+                                                    if ($value->type =="Envoi")
+                                                    {
+                                                        echo "<b style='background-color: #66aa18;color: white; border-radius: 2px'>Courrier envoyé<b/>";
+                                                    }
+                                                    else{
+                                                        echo "<b style='background-color: #ff9801; color: white;border-radius: 2px'>Courrier reçu<b/>";
+                                                    }
+                                                    ; ?></td>
                                                 <td class="mailbox-date pull-right white-space-nowrap">
-                                                    <a data-placement="left" onclick="getRecord('<?php echo $value->id; ?>')" class="btn btn-default btn-xs" data-target="#receviedetails" data-toggle="modal" data-original-title="<?php echo $this->lang->line('view')?>">
+                                                    <!--<a data-placement="left" onclick="getRecord('<?php echo $value->id; ?>')" class="btn btn-default btn-xs" data-target="#receviedetails" data-toggle="modal" data-original-title="<?php echo $this->lang->line('view')?>">
                                                         <i class="fa fa-reorder"></i>
-                                                    </a>
+                                                    </a>-->
                                                     <?php if ($value->image !== "") { ?>
                                                         <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/download/<?php echo $value->image; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('download') ?>">
                                                             <i class="fa fa-download"></i>

@@ -138,10 +138,21 @@ class Generalcall extends Admin_Controller {
                 }else{
                     $row[]="" ;
                 }
-                $row[]     = $value->call_type;
+
+                $row[]     = $value->note;
+
+                if ($value->call_type=="Incoming") {
+                    $row[]     =  "<b style='background-color: #66aa18;color: white; border-radius: 2px'>Appel entrant<b/>";
+                }
+                else{
+                    $row[]     = "<b style='background-color: #ff9801;color: white; border-radius: 2px'>Appel sortant<b/>";
+                }
+
+                //$row[]     = $value->call_type;
 
                
-                $row[]     = $viewbtn.' '.$editbtn . ' ' . $deletebtn;
+                //$row[]     = $viewbtn.' '.$editbtn . ' ' . $deletebtn;
+                $row[]     = $editbtn . ' ' . $deletebtn;
                 $dt_data[] = $row;
             }
         }

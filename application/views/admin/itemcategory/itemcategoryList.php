@@ -11,7 +11,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            <i class="fa fa-object-group"></i> <?php echo $this->lang->line('inventory'); ?></h1>
+            <i class="fa fa-object-group"></i> Catégorie de produit</h1>
     </section>
     <!-- Main content -->
     <section class="content">
@@ -21,7 +21,7 @@
                     <!-- Horizontal Form -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title"><?php echo $this->lang->line('add_item_category'); ?></h3>
+                            <h3 class="box-title">Catégorie de produit</h3>
                         </div><!-- /.box-header -->
                         <!-- form start -->
                         <form  action="<?php echo site_url('admin/itemcategory/create') ?>"  id="employeeform" name="employeeform" method="post" accept-charset="utf-8">
@@ -31,11 +31,11 @@
                                 <?php } ?>
                                 <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('item_category'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1">Nom</label><small class="req"> *</small>
                                     <input autofocus="" id="itemcategory" name="itemcategory" placeholder="" type="text" class="form-control"  value="<?php echo set_value('itemcategory'); ?>" />
                                     <span class="text-danger"><?php echo form_error('itemcategory'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
@@ -59,16 +59,16 @@
                 <!-- general form elements -->
                 <div class="box box-primary" id="exphead">
                     <div class="box-header ptbnull">
-                        <h3 class="box-title titlefix"><?php echo $this->lang->line('item_category_list'); ?></h3>
+                        <h3 class="box-title titlefix">Liste des catégories</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body  ">
                         <div class="mailbox-messages">
-                            <div class="download_label"><?php echo $this->lang->line('item_category_list'); ?></div>
+                            <div class="download_label">Liste des catégories</div>
                             <div class="table-responsive">  
                                 <table class="table table-striped table-bordered table-hover example">
                                     <thead>
                                         <tr>
-                                            <th><?php echo $this->lang->line('item_category'); ?></th>
+                                            <th>Nom</th>
                                             <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
                                         </tr>
                                     </thead>

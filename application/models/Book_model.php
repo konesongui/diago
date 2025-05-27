@@ -16,7 +16,8 @@ class Book_model extends MY_Model {
      * @param int $id
      * @return mixed
      */
-    public function get($id = null) {
+    public function get($id) {
+        $this->db->where('books.deleted', 1);
         $this->db->select()->from('books');
         if ($id != null) {
             $this->db->where('books.id', $id);
@@ -38,6 +39,7 @@ class Book_model extends MY_Model {
             ->searchable('book_title,description,book_no,isbn_no,publish,author,adresse,dept,quali,email,respo,subject,contact,rack_no,qty," ",perunitcost,postdate')
             ->orderable('book_title,description,book_no,isbn_no,publish,author,adresse,dept,email,quali,subject,respo,contact,rack_no,qty," ",perunitcost,postdate')
             ->join(" (SELECT COUNT(*) as `total_issue`, book_id from book_issues  where is_returned= 0  GROUP by book_id) as `book_count`","books.id=book_count.book_id","left")
+
             ->from('books');
             return $this->datatables->generate('json');
     }
@@ -62,8 +64,10 @@ class Book_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('books');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('books');
+
         $this->db->where('book_id', $id);
         $this->db->delete('book_issues');
         $message = DELETE_RECORD_CONSTANT . " On books id " . $id;
@@ -137,6 +141,7 @@ class Book_model extends MY_Model {
     public function listbook() {
         $this->db->select()->from('books');
         $this->db->order_by("id", "desc");
+
         $listbook = $this->db->get();
         return $listbook->result_array();
     }

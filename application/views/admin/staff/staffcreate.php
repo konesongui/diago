@@ -10,17 +10,17 @@
 
                     <form id="form1" action="<?php echo site_url('admin/staff/create') ?>"  id="employeeform" name="employeeform" method="post" accept-charset="utf-8" enctype="multipart/form-data">
                         <div class="box-body">
-                            <div class="alert alert-info">
+                            <div class="alert alert-info" hidden>
                                 Staff email is their login username, password is generated automatically and send to staff email. Superadmin can change staff password on their staff profile page.
 
                             </div>
                             <div class="tshadow mb25 bozero">    
-                                <div class="box-tools pull-right pt3">
+                               <!-- <div class="box-tools pull-right pt3">
                                     <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>admin/staff/import" autocomplete="off"><i class="fa fa-plus"></i> <?php echo $this->lang->line('import') . " " . $this->lang->line('staff') ?></a>
                                     <a href="<?php echo base_url() ?>admin/staff" type="button" class="btn btn-primary btn-xs" style="width: 99px;height: 23px">
                                         <i class="fa fa-arrow-left"></i> </a>
 
-                                </div>
+                                </div>-->
                                 <h4 class="pagetitleh2"><?php echo $this->lang->line('basic_information'); ?> </h4>
 
                                
@@ -96,25 +96,7 @@
                                                 </div>
                                             </div>
                                         <?php } ?>
-                                        <div class="col-md-3">
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Catégorie salariale</label>
-                                                <select id="categorie_salaire" name="categorie_salaire" placeholder="" type="text" class="form-control" >
-                                                    <option value="select"><?php echo $this->lang->line('select') ?></option>
-                                                    <?php foreach ($categorie as $key => $value) {
-                                                        ?>
-                                                        <option value="<?php echo $value["salaire"] ?>" <?php
-                                                        if ($staff["categorie_listes"] == $value["salaire"]) {
-                                                            echo "selected";
-                                                        }
-                                                        ?>><?php echo $value["categorie"] ?></option>
-                                                    <?php }
-                                                    ?>
 
-                                                </select>
-                                                <span class="text-danger"><?php echo form_error('categorie_salaire'); ?></span>
-                                            </div>
-                                        </div>
 
 
                                         <div class="col-md-3">
@@ -137,8 +119,8 @@
                                         <?php if ($sch_setting->staff_last_name) { ?>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('last_name'); ?></label>
-                                                    <input id="surname" name="surname" placeholder="" type="text" class="form-control"  value="<?php echo set_value('surname') ?>" />
+                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('last_name'); ?></label><small class="req"> *</small>
+                                                    <input id="surname" name="surname" placeholder="" type="text" class="form-control" required value="<?php echo set_value('surname') ?>" />
                                                     <span class="text-danger"><?php echo form_error('surname'); ?></span>
                                                 </div>
                                             </div>
@@ -207,24 +189,24 @@
                                         <?php if ($sch_setting->staff_phone) { ?>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('phone'); ?></label>
-                                                    <input id="mobileno" name="contactno" placeholder="" type="text" class="form-control"  value="<?php echo set_value('contactno') ?>" />
+                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('phone'); ?></label><small class="req"> *</small>
+                                                    <input id="mobileno" name="contactno" placeholder="" type="text" class="form-control" required  value="<?php echo set_value('contactno') ?>" />
                                                     <span class="text-danger"><?php echo form_error('contactno'); ?></span>
                                                 </div>
                                             </div> 
                                         <?php } if ($sch_setting->staff_emergency_contact) { ?>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('emergency_contact_number'); ?></label>
-                                                    <input id="mobileno" name="emergency_no" placeholder="" type="text" class="form-control"  value="<?php echo set_value('emergency_no') ?>" />
+                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('emergency_contact_number'); ?></label><small class="req"> *</small>
+                                                    <input id="mobileno" name="emergency_no" placeholder="" type="text" class="form-control" required  value="<?php echo set_value('emergency_no') ?>" />
                                                     <span class="text-danger"><?php echo form_error('emergency_no'); ?></span>
                                                 </div>
                                             </div>
                                         <?php } if ($sch_setting->staff_marital_status) { ?>
                                             <div class="col-md-3">
                                                 <div class="form-group">
-                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('marital_status'); ?></label>
-                                                    <select class="form-control" name="marital_status">
+                                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('marital_status'); ?></label><small class="req"> *</small>
+                                                    <select class="form-control" name="marital_status" required>
                                                         <option value=""><?php echo $this->lang->line('select'); ?></option>
                                                         <?php foreach ($marital_status as $makey => $mavalue) {
                                                             ?>
@@ -318,13 +300,15 @@
 
                                             <div class="row around10">
                                                 <?php if ($sch_setting->staff_epf_no) { ?>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4" hidden>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('epf_no'); ?></label>
                                                             <input id="epf_no" name="epf_no" placeholder="" type="text" class="form-control"  value="<?php echo set_value('epf_no') ?>"  />
                                                             <span class="text-danger"><?php echo form_error('epf_no'); ?></span>
                                                         </div>
                                                     </div>
+
+
                                                 <?php } if ($sch_setting->staff_basic_salary) { ?>
                                                     <div class="col-md-4" hidden>
                                                         <div class="form-group">
@@ -333,6 +317,25 @@
                                                         </div>
                                                     </div>
                                                 <?php } if ($sch_setting->staff_contract_type) { ?>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <label for="exampleInputEmail1">Catégorie salariale</label>
+                                                            <select id="categorie_salaire" name="categorie_salaire" placeholder="" type="text" class="form-control" >
+                                                                <option value="select"><?php echo $this->lang->line('select') ?></option>
+                                                                <?php foreach ($categorie as $key => $value) {
+                                                                    ?>
+                                                                    <option value="<?php echo $value["salaire"] ?>" <?php
+                                                                    if ($staff["categorie_listes"] == $value["salaire"]) {
+                                                                        echo "selected";
+                                                                    }
+                                                                    ?>><?php echo $value["categorie"] ?></option>
+                                                                <?php }
+                                                                ?>
+
+                                                            </select>
+                                                            <span class="text-danger"><?php echo form_error('categorie_salaire'); ?></span>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-md-4">
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('contract_type'); ?></label>
@@ -349,7 +352,7 @@
                                                         </div>
                                                     </div>
                                                 <?php } if ($sch_setting->staff_work_shift) { ?>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4" hidden>
                                                         <div class="form-group">
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('work_shift'); ?></label>
                                                             <input id="shift" name="shift" placeholder="" type="text" class="form-control"  value="<?php echo set_value('shift') ?>" />
@@ -357,7 +360,7 @@
                                                         </div>
                                                     </div>
                                                 <?php } if ($sch_setting->staff_work_location) { ?>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-4" hidden>
                                                         <div class="form-group">
 
                                                             <label for="exampleInputEmail1"><?php echo $this->lang->line('work_location'); ?></label>

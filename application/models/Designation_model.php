@@ -11,7 +11,7 @@ class Designation_model extends MY_model {
             $query = $this->db->where("id", $id)->get("staff_designation");
             return $query->row_array();
         } else {
-            $query = $this->db->where("is_active", "yes")->get("staff_designation");
+            $query = $this->db->where("deleted", 1)->get("staff_designation");
 
             return $query->result_array();
         }
@@ -92,7 +92,10 @@ class Designation_model extends MY_model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where("id", $id)->delete("staff_designation");
+        $this->db->where("id", $id)
+            ->set('deleted', '0');
+        $this->db->update('staff_designation');
+
         $message = DELETE_RECORD_CONSTANT . " On staff designation id " . $id;
         $action = "Delete";
         $record_id = $id;

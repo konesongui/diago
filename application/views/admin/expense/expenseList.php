@@ -143,6 +143,8 @@
                                 <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense_list'); ?>">
                                     <thead>
                                         <tr>
+                                            <th><?php echo $this->lang->line('expense_head'); ?>
+                                            </th>
                                             <th><?php echo $this->lang->line('name'); ?>
                                             </th>
                                              <!--<th><?php echo $this->lang->line('description'); ?>
@@ -151,8 +153,7 @@
                                             </th>-->
                                             <th><?php echo $this->lang->line('date'); ?>
                                             </th>
-                                            <th><?php echo $this->lang->line('expense_head'); ?>
-                                            </th>
+
                                             <th>Caisse impactée
                                             </th>
                                             <th><?php echo $this->lang->line('amount'); ?>
@@ -162,6 +163,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
+
 
                                     </tbody>
                                 </table><!-- /.table -->

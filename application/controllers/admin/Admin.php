@@ -12,6 +12,7 @@ class Admin extends Admin_Controller
         parent::__construct();
         $this->load->model("classteacher_model");
         $this->load->model("Staff_model");
+        $this->load->model("notification_model");
         $this->load->library('Enc_lib');
         $this->sch_setting_detail = $this->setting_model->getSetting();
 

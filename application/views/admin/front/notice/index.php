@@ -43,7 +43,7 @@
                                     <thead>
                                         <tr>
                                             <th><?php echo $this->lang->line('title'); ?></th>
-                                            <th><?php echo $this->lang->line('url'); ?></th>
+                                            <!--<th><?php echo $this->lang->line('url'); ?></th>-->
                                             <th class="text-right no-print">
                                                 <?php echo $this->lang->line('action'); ?>
                                             </th>
@@ -65,7 +65,7 @@
 
 
                                                     </td>
-                                                    <td class="mailbox-name"> <a href="<?php echo base_url() . $page['url'] ?>" target="_blank"><?php echo base_url() . $page['url'] ?></a></td>
+                                                   <!-- <td class="mailbox-name"> <a href="<?php echo base_url() . $page['url'] ?>" target="_blank"><?php echo base_url() . $page['url'] ?></a></td>-->
 
                                                     <td class="mailbox-date pull-right no-print">
                                                         <?php

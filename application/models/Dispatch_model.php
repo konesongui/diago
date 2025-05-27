@@ -52,7 +52,8 @@ class Dispatch_model extends MY_Model {
 
     public function dispatch_list() {
         $this->db->select('*');
-        $this->db->where('type', 'dispatch');
+        //$this->db->where('type', 'dispatch');
+        $this->db->where('dispatch_receive.deleted', 1);
         $this->db->from('dispatch_receive');
         $this->db->order_by('id', 'desc');
         $query = $this->db->get();
@@ -62,6 +63,7 @@ class Dispatch_model extends MY_Model {
     public function receive_list() {
         $this->db->select('*');
         $this->db->where('type', 'receive');
+        $this->db->where('dispatch_receive.deleted', 1);
         $this->db->order_by('id', 'desc');
         $this->db->from('dispatch_receive');
         $query = $this->db->get();
@@ -71,7 +73,7 @@ class Dispatch_model extends MY_Model {
     public function dis_rec_data($id, $type) {
         $this->db->select('*');
         $this->db->where('id', $id);
-        $this->db->where('type', $type);
+        //$this->db->where('type', $type);
         $this->db->from('dispatch_receive');
         $query = $this->db->get();
         return $query->row_array();
@@ -81,15 +83,15 @@ class Dispatch_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        if ($data['type'] == 'dispatch') {
+        /*if ($data['type'] == '') {
             $title = "Postal Dispatch";
         } else {
             $title = "Postal Receive";
-        }
+        }*/
         $this->db->where('id', $id);
-        $this->db->where('type', $type);
+        //$this->db->where('type', $type);
         $this->db->update($table, $data);
-        $message = UPDATE_RECORD_CONSTANT . " On Admission Enquiry $title  id " . $id;
+        $message = UPDATE_RECORD_CONSTANT . " On Admission Enquiry   id " . $id;
         $action = "Update";
         $record_id = $id;
         $this->log($message, $record_id, $action);
@@ -127,8 +129,10 @@ class Dispatch_model extends MY_Model {
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('dispatch_receive');
+        $this->db->where('id', $id)
+        ->set('deleted', '0');
+        $this->db->update('dispatch_receive');
+
         $message = DELETE_RECORD_CONSTANT . " On Postal Dispatch id " . $id;
         $action = "Delete";
         $record_id = $id;

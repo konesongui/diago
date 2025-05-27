@@ -21,15 +21,11 @@
 
                                 <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">  <?php echo $this->lang->line('name'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1"> Client</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="name" type="text" class="form-control"  value="<?php echo set_value('itemsupplier', $itemsupplier['item_supplier']); ?>" />
                                     <span class="text-danger"><?php echo form_error('itemsupplier'); ?></span>
                                 </div>
-                                <div class="form-group">
-                                    <label for="exampleInputEmail1"> Prénom</label><small class="req"> *</small>
-                                    <input autofocus="" id="lastname" name="lastname" placeholder="" type="text" class="form-control"  value="<?php echo set_value('lastname', $itemsupplier['lastname']); ?>" />
-                                    <span class="text-danger"><?php echo form_error('lastname'); ?></span>
-                                </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"> <?php echo $this->lang->line('phone'); ?></label>
                                     <input id="phone" name="phone" placeholder="" type="text" class="form-control"  value="<?php echo set_value('phone', $itemsupplier['phone']); ?>" />
@@ -61,7 +57,7 @@
                                     <span class="text-danger"><?php echo form_error('contact_person_email'); ?></span>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1">Détails</label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description', $itemsupplier['description']); ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
@@ -94,7 +90,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nom</th>
-                                        <th>Prénom</th>
+
                                         <th>Téléphone</th>
                                         <th>Email</th>
                                         <th><?php echo $this->lang->line('address'); ?></th>
@@ -114,7 +110,7 @@
                                             ?>
                                             <tr>
                                                 <td class="mailbox-name"><?php echo $supplier['item_supplier'] ?></td>
-                                                <td class="mailbox-name"><?php echo $supplier['lastname'] ?></td>
+
                                                 <td class="mailbox-name"><?php echo $supplier['phone'] ?></td>
                                                 <td class="mailbox-name"><?php echo $supplier['email'] ?></td>
                                                 <td class="mailbox-name"><?php echo $supplier['address'] ?></td>

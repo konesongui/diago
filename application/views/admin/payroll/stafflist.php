@@ -313,11 +313,11 @@ if (isset($resultlist)) {
                             <span class="text-danger"><?php echo form_error('payment_mode'); ?></span>
                         </div>
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <label for="exampleInputEmail1">Date de</label>
+                            <label for="exampleInputEmail1">Date de</label><small class="req"> *</small>
                             <input type="text" name="date_from" readonly class="form-control date" id="date_from">
                         </div>
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <label for="exampleInputEmail1">Date A</label>
+                            <label for="exampleInputEmail1">Date A</label><small class="req"> *</small>
                             <input type="text" name="date_to" readonly class="form-control date" id="date_to">
                         </div>
 
@@ -364,7 +364,7 @@ if (isset($resultlist)) {
             dataType: "json",
             success: function (result) {
 
-                $('input[name="amount"]').val(result.result.net_salary);
+                $('input[name="amount"]').val(result.result.categorie_salaire);
                 $('input[name="emp_name"]').val(result.result.name + ' ' + result.result.surname + ' (' + result.result.employee_id + ')');
                 $('input[name="paymentid"]').val(result.result.id);
                 $('input[name="paymentmonth"]').val(month);
