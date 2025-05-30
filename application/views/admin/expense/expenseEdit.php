@@ -33,8 +33,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                 if (isset($error_message)) {
                                     echo "<div class='alert alert-danger'>" . $error_message . "</div>";
                                 }
-                                ?>   
-                                <?php echo $this->customlib->getCSRF(); ?>                       
+                                ?>
+                                <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('expense_head'); ?></label><small class="req"> *</small>
                                     <select autofocus="" id="exp_head_id" name="exp_head_id" class="form-control" >
@@ -47,10 +47,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 echo "selected =selected";
                                             }
                                             ?>><?php echo $exphead['exp_category'] ?></option>
-                                                    <?php
-                                                    $count++;
-                                                }
-                                                ?>
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
                                     </select>
                                     <span class="text-danger"><?php echo form_error('exp_head_id'); ?></span>
                                 </div>
@@ -116,23 +116,23 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             <div class="download_label"><?php echo $this->lang->line('expense_list'); ?></div>
                             <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense_list'); ?>">
                                 <thead>
-                                    <tr>
-                                        <th><?php echo $this->lang->line('name'); ?>
-                                        </th>
-                                        <th><?php echo $this->lang->line('date'); ?>
-                                        </th>
-                                        <th><?php echo $this->lang->line('expense_head'); ?>
-                                        </th>
-                                          <th>Caisse impactée
-                                            </th>
-                                        <!--<th><?php echo $this->lang->line('invoice_no'); ?>
+                                <tr>
+                                    <th><?php echo $this->lang->line('name'); ?>
+                                    </th>
+                                    <th><?php echo $this->lang->line('date'); ?>
+                                    </th>
+                                    <th><?php echo $this->lang->line('expense_head'); ?>
+                                    </th>
+                                    <th>Caisse impactée
+                                    </th>
+                                    <!--<th><?php echo $this->lang->line('invoice_no'); ?>
                                         </th>-->
 
 
-                                        <th><?php echo $this->lang->line('amount'); ?>
-                                        </th>
-                                        <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
-                                    </tr>
+                                    <th><?php echo $this->lang->line('amount'); ?>
+                                    </th>
+                                    <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -159,9 +159,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 </script>
 <script>
     ( function ( $ ) {
-    'use strict';
-    $(document).ready(function () {
-        initDatatable('expense-list','admin/expense/getexpenselist',[],[],100);
-    });
-} ( jQuery ) )
+        'use strict';
+        $(document).ready(function () {
+            initDatatable('expense-list','admin/expense/getexpenselist',[],[],100);
+        });
+    } ( jQuery ) )
 </script>n

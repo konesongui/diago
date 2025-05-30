@@ -1,5 +1,5 @@
 
-<div class="content-wrapper" style="min-height: 348px;">  
+<div class="content-wrapper" style="min-height: 348px;">
     <section class="content-header">
         <h1>
             <i class="fa fa-ioxhost"></i> <?php echo $this->lang->line('front_office'); ?></h1>
@@ -18,7 +18,7 @@
                         <form id="form1" action="<?php echo site_url('admin/dispatch/editdispatch/' . $Dispatch_data['id']) ?>"   method="post" accept-charset="utf-8" enctype="multipart/form-data" >
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="pwd"><?php echo $this->lang->line('to_title'); ?></label>  <small class="req"> *</small>  
+                                    <label for="pwd"><?php echo $this->lang->line('to_title'); ?></label>  <small class="req"> *</small>
                                     <input type="text" class="form-control" value="<?php echo set_value('to_title', $Dispatch_data['to_title']); ?>" name="to_title">
                                     <span class="text-danger"><?php echo form_error('to_title'); ?></span>
                                 </div>
@@ -34,15 +34,15 @@
 
                                 </div>
                                 <div class="form-group">
-                                    <label for="email"><?php echo $this->lang->line('note'); ?></label> 
+                                    <label for="email"><?php echo $this->lang->line('note'); ?></label>
                                     <textarea class="form-control" id="description" name="note" name="note" rows="3"><?php echo set_value('note', $Dispatch_data['note']); ?></textarea>
                                 </div>
-                                <div class="form-group">
+                                <!--<div class="form-group">
                                     <div class="form-group">
                                         <label for="pwd"><?php echo $this->lang->line('from_title'); ?></label>     <input type="text" class="form-control" value="<?php echo set_value('from', $Dispatch_data['from_title']); ?>"  name="from">
                                         <span class="text-danger"><?php echo form_error('from'); ?></span>
                                     </div>
-                                </div>
+                                </div>-->
                                 <div class="form-group">
                                     <label for="pwd"><?php echo $this->lang->line('date'); ?></label>
                                     <input id="date" name="date" placeholder="" type="text" class="form-control date"  value="<?php echo set_value('date', date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($Dispatch_data['date']))); ?>" readonly="readonly" />
@@ -52,8 +52,17 @@
                                     <label for="exampleInputFile"><?php echo $this->lang->line('attach_document'); ?></label>
                                     <div><input class="filestyle form-control" type='file' name='file'  />
                                     </div>
-                                    <span class="text-danger"><?php echo form_error('file'); ?></span></div>
+                                    <span class="text-danger"><?php echo form_error('file'); ?></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Statut</label>
+
+                                    <input type="text" class="form-control" value="<?php echo set_value('type', $Dispatch_data['type']); ?>" name="type">
+                                    <span class="text-danger"><?php echo form_error('type'); ?></span>
+                                </div>
+
                             </div><!-- /.box-body -->
+
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
                                 <a href="<?php echo base_url() ?>admin/income" type="button" class="btn btn-primary btn-xs" style="width: 99px;height: 23px">
@@ -84,53 +93,55 @@
                         <div class="mailbox-messages table-responsive">
                             <table class="table table-hover table-striped table-bordered example">
                                 <thead>
-                                    <tr>
-                                        <th><?php echo $this->lang->line('to_title'); ?></th>
-                                        <th><?php echo $this->lang->line('reference_no'); ?></th>
-                                        <th><?php echo $this->lang->line('from_title'); ?></th>
-                                        <th><?php echo $this->lang->line('date'); ?></th>
-                                        <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
-                                    </tr>
+                                <tr>
+                                    <th><?php echo $this->lang->line('to_title'); ?></th>
+                                    <th><?php echo $this->lang->line('reference_no'); ?></th>
+                                    <!--<th><?php echo $this->lang->line('from_title'); ?></th>-->
+                                    <th><?php echo $this->lang->line('date'); ?></th>
+                                    <th>Statut</th>
+                                    <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                    if (empty($DispatchList)) {
-                                        ?>
-
-                                        <?php
-                                    } else {
-                                        foreach ($DispatchList as $key => $value) {                               
-                                            ?>
-                                            <tr>
-                                                <td class="mailbox-name"><?php echo $value->to_title; ?></td>
-                                                <td class="mailbox-name"><?php echo $value->reference_no; ?></td>
-                                                <td class="mailbox-name"> <?php echo $value->from_title; ?></td>
-                                                <td class="mailbox-name"> <?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date)); ?></td>
-                                                <td class="mailbox-date pull-right white-space-nowrap">
-                                                    <a data-placement="left" onclick="getRecord(<?php echo $value->id; ?>)" class="btn btn-default btn-xs" data-target="#receviedetails" data-toggle="modal"  title="<?php echo $this->lang->line('view')?>"><i class="fa fa-reorder"></i></a>
-                                                    <?php if ($value->image !== "") { ?>
-                                                        <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/download/<?php echo $value->image; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('download'); ?>">
-                                                            <i class="fa fa-download"></i>
-                                                        </a>                                                     <?php } ?>
-
-                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/editdispatch/<?php echo $value->id; ?>"  class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('edit'); ?>">
-                                                        <i class="fa fa-pencil"></i>
-                                                    </a>
-                                                    <?php if ($value->image !== "") { ?>
-                                                        <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/imagedelete/<?php echo $value->id; ?>/<?php echo $value->image; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
-                                                            <i class="fa fa-remove"></i>
-                                                        </a>
-                                                    <?php } else { ?>  
-                                                        <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/delete/<?php echo $value->id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
-                                                            <i class="fa fa-remove"></i>
-                                                        </a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                        }
-                                    }
+                                <?php
+                                if (empty($DispatchList)) {
                                     ?>
+
+                                    <?php
+                                } else {
+                                    foreach ($DispatchList as $key => $value) {
+                                        ?>
+                                        <tr>
+                                            <td class="mailbox-name"><?php echo $value->to_title; ?></td>
+                                            <td class="mailbox-name"><?php echo $value->reference_no; ?></td>
+                                            <!--<td class="mailbox-name"> <?php echo $value->from_title; ?></td>-->
+                                            <td class="mailbox-name"> <?php echo date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date)); ?></td>
+                                            <td class="mailbox-name"><?php echo $value->type; ?></td>
+                                            <td class="mailbox-date pull-right white-space-nowrap">
+                                                <!-- <a data-placement="left" onclick="getRecord(<?php echo $value->id; ?>)" class="btn btn-default btn-xs" data-target="#receviedetails" data-toggle="modal"  title="<?php echo $this->lang->line('view')?>"><i class="fa fa-reorder"></i></a>-->
+                                                <?php if ($value->image !== "") { ?>
+                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/download/<?php echo $value->image; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('download'); ?>">
+                                                        <i class="fa fa-download"></i>
+                                                    </a>                                                     <?php } ?>
+
+                                                <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/editdispatch/<?php echo $value->id; ?>"  class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="<?php echo $this->lang->line('edit'); ?>">
+                                                    <i class="fa fa-pencil"></i>
+                                                </a>
+                                                <?php if ($value->image !== "") { ?>
+                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/imagedelete/<?php echo $value->id; ?>/<?php echo $value->image; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
+                                                        <i class="fa fa-remove"></i>
+                                                    </a>
+                                                <?php } else { ?>
+                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/dispatch/delete/<?php echo $value->id; ?>" class="btn btn-default btn-xs" data-toggle="tooltip" title="" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');" data-original-title="<?php echo $this->lang->line('delete'); ?>">
+                                                        <i class="fa fa-remove"></i>
+                                                    </a>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
                                 </tbody>
                             </table><!-- /.table -->
                         </div><!-- /.mail-box-messages -->
@@ -161,10 +172,10 @@
 </div>
 </div><!-- /.content-wrapper -->
 <script type="text/javascript">
-    function getRecord(id) {       
+    function getRecord(id) {
         $.ajax({
             url: '<?php echo base_url(); ?>admin/dispatch/details/' + id + '/dispatch',
-            success: function (result) {               
+            success: function (result) {
                 $('#getdetails').html(result);
             }
         });

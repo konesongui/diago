@@ -1,7 +1,7 @@
 <?php
 $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 ?>
-<div class="content-wrapper" style="min-height: 946px;">   
+<div class="content-wrapper" style="min-height: 946px;">
     <section class="content-header">
         <h1><i class="fa fa-sitemap"></i> <?php echo $this->lang->line('human_resource'); ?></h1>
     </section>
@@ -43,15 +43,15 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     $role_selected = '';
                                                 }
                                                 ?>
-                                                <option value="<?php echo $class["type"] ?>" 
-                                                <?php
-                                                if ($class["type"] == $role_selected) {
-                                                    echo "selected";
-                                                }
-                                                ?> ><?php print_r($class["type"]) ?></option>
-                                                        <?php
+                                                <option value="<?php echo $class["type"] ?>"
+                                                    <?php
+                                                    if ($class["type"] == $role_selected) {
+                                                        echo "selected";
                                                     }
-                                                    ?>
+                                                    ?> ><?php print_r($class["type"]) ?></option>
+                                                <?php
+                                            }
+                                            ?>
                                         </select>
                                         <span class="text-danger"><?php echo form_error('role'); ?></span>
                                     </div>
@@ -77,10 +77,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     echo "selected =selected";
                                                 }
                                                 ?>><?php echo $month_value; ?></option>
-                                                        <?php
-                                                        $count++;
-                                                    }
-                                                    ?>    
+                                                <?php
+                                                $count++;
+                                            }
+                                            ?>
 
                                         </select>
                                         <span class="text-danger"><?php echo form_error('month'); ?></span>
@@ -107,11 +107,11 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     </div>
                                 </div>
 
-                                <div class="col-md-12">        
+                                <div class="col-md-12">
                                     <div class="form-group">
                                         <button type="submit" name="search" value="search" class="btn btn-primary btn-sm pull-right checkbox-toggle"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
                                     </div>
-                                </div>   
+                                </div>
                             </div>
 
 
@@ -120,130 +120,130 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
                     </form>
 
-<?php
-if (isset($resultlist)) {
-    ?>
-                        <div class="box-header ptbnull"></div> 
+                    <?php
+                    if (isset($resultlist)) {
+                    ?>
+                    <div class="box-header ptbnull"></div>
 
-                        <div class="box-header ptbnull">
-                            <h3 class="box-title titlefix"><i class="fa fa-users"></i> <?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('list'); ?>
-                                </i></h3>
-                            <div class="box-tools pull-right">
-                            </div>
-                        </div>
-                        <div class="box-body table-responsive">
-
-                            <div class="download_label"><?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('list'); ?></div>
-                            <table class="table table-striped table-bordered table-hover example">
-                                <thead>
-
-                                    <tr>
-                                        <th><?php echo $this->lang->line('staff_id'); ?></th>
-                                        <th><?php echo $this->lang->line('name'); ?></th>
-                                        <th><?php echo $this->lang->line('role'); ?></th>
-                                        <?php if ($sch_setting->staff_department) { ?>
-                                            <th><?php echo $this->lang->line('department'); ?></th>
-                                        <?php } if ($sch_setting->staff_designation) { ?>
-                                            <th><?php echo $this->lang->line('designation'); ?></th>
-    <?php } if ($sch_setting->staff_phone) { ?>
-                                            <th><?php echo $this->lang->line('phone'); ?></th>
-    <?php } ?>
-                                        <th><?php echo $this->lang->line('status'); ?></th>
-                                        <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
-
-                                    </tr>
-                                </thead>            
-                                <tbody>    
-                                    <?php
-                                    $count = 1;
-                                    foreach ($resultlist as $staff) {
-                                        $status = $staff["status"];
-
-                                        if ($staff["status"] == "paid") {
-                                            $label = "class='label label-success'";
-                                            $wstatus = $payroll_status[$staff["status"]];
-                                        } else if ($staff["status"] == "generated") {
-                                            $label = "class='label label-warning'";
-                                            $wstatus = $payroll_status[$staff["status"]];
-                                        } else {
-                                            $label = "class='label label-default'";
-                                            $wstatus = $payroll_status["not_generate"];
-                                        }
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $staff['employee_id']; ?></td>
-                                            <td><?php echo $staff['name'] . " " . $staff['surname']; ?></td>
-                                            <td><?php echo $staff['user_type']; ?></td>
-                                            <?php if ($sch_setting->staff_department) { ?>
-                                                <td><?php echo $staff['department']; ?></td>
-                                            <?php } if ($sch_setting->staff_designation) { ?>
-                                                <td><?php echo $staff['designation']; ?></td>
-                                            <?php } if ($sch_setting->staff_phone) { ?>
-                                                <td><?php echo $staff['contact_no']; ?></td>
-                                                <?php } ?>
-                                            <td><small <?php echo $label; ?>><?php echo $wstatus; ?></small></td>
-                                                <?php if ($status == "paid") { ?>
-
-                                                <td class="pull-right no-print">
-                                                        <?php
-                                                        if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
-                                                            ?>
-                                                        <a class="btn btn-default btn-xs" onclick="return confirm('<?php echo $this->lang->line("are_you_sure_you_want_to_revert_this_record")?>')" href="<?php echo base_url() . "admin/payroll/revertpayroll/" . $staff["payslip_id"] . "/" . $month_selected . "/" . date("Y") . "/" . $role_selected ?>" title="Revert">
-                                                            <i class="fa fa-undo"> </i>
-                                                        </a>
-                                                    <?php } ?>
-                                                    <a href="javascript:void" onclick="getPayslip('<?php echo $staff["payslip_id"]; ?>')"  role="button" class="btn btn-primary btn-xs checkbox-toggle edit_setting" data-toggle="tooltip" title="<?php echo $this->lang->line('Payslip View'); ?>" ><?php echo $this->lang->line('view'); ?> <?php echo $this->lang->line('payslip'); ?></a>
-
-
-                                                <?php } ?></td>
-                                                <?php if ($status == "generated") { ?>
-
-                                                <td class="pull-right no-print">
-            <?php
-            if ($this->rbac->hasPrivilege('staff_payroll', 'can_delete')) {
-                ?>
-                                                        <a href="<?php echo base_url() ?>admin/payroll/deletepayroll/<?php echo $staff["payslip_id"] . "/" . $month_selected . "/" . date("Y") . "/" . $role_selected ?>" class="btn btn-default btn-xs" onclick="return confirm('<?php echo $this->lang->line("are_you_sure_you_want_to_revert_this_record")?>')" title="Revert">
-                                                            <i class="fa fa-undo"> </i>
-                                                        </a>
-                <?php
-            }
-            if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
-                ?>
-                                                        <a href="#" onclick="getRecord('<?php echo $staff["id"] ?>', '<?php echo $year ?>')" role="button" class="btn btn-primary btn-xs checkbox-toggle edit_setting" data-toggle="tooltip" title="<?php echo $this->lang->line('Proceed to payment'); ?>" ><?php echo $this->lang->line('proceed_to_pay'); ?></a>
-
-                                                    <?php
-                                                }
-                                            }
-                                            ?></td>
-
-                                                <?php if ($staff["payslip_id"] == 0) { ?>
-
-                                                <td class="pull-right no-print">
-                                                    <?php
-                                                    if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
-                                                        ?>
-                                                        <a class="btn btn-primary btn-xs checkbox-toggle edit_setting" role="button" href="<?php echo base_url() . "admin/payroll/create/" . $month_selected . "/" . $year . "/" . $staff["id"] ?>"><?php echo $this->lang->line('generate'); ?> <?php echo $this->lang->line('payroll'); ?></a>
-                                            <?php } ?>
-                                                </td>
-                                        <?php } ?>
-                                        </tr>
-        <?php
-    }
-    $count++;
-    ?>
-                                </tbody></table>
+                    <div class="box-header ptbnull">
+                        <h3 class="box-title titlefix"><i class="fa fa-users"></i> <?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('list'); ?>
+                            </i></h3>
+                        <div class="box-tools pull-right">
                         </div>
                     </div>
-    <?php
-}
-?>
+                    <div class="box-body table-responsive">
+
+                        <div class="download_label"><?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('list'); ?></div>
+                        <table class="table table-striped table-bordered table-hover example">
+                            <thead>
+
+                            <tr>
+                                <th><?php echo $this->lang->line('staff_id'); ?></th>
+                                <th><?php echo $this->lang->line('name'); ?></th>
+                                <th><?php echo $this->lang->line('role'); ?></th>
+                                <?php if ($sch_setting->staff_department) { ?>
+                                    <th><?php echo $this->lang->line('department'); ?></th>
+                                <?php } if ($sch_setting->staff_designation) { ?>
+                                    <th><?php echo $this->lang->line('designation'); ?></th>
+                                <?php } if ($sch_setting->staff_phone) { ?>
+                                    <th><?php echo $this->lang->line('phone'); ?></th>
+                                <?php } ?>
+                                <th><?php echo $this->lang->line('status'); ?></th>
+                                <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $count = 1;
+                            foreach ($resultlist as $staff) {
+                                $status = $staff["status"];
+
+                                if ($staff["status"] == "paid") {
+                                    $label = "class='label label-success'";
+                                    $wstatus = $payroll_status[$staff["status"]];
+                                } else if ($staff["status"] == "generated") {
+                                    $label = "class='label label-warning'";
+                                    $wstatus = $payroll_status[$staff["status"]];
+                                } else {
+                                    $label = "class='label label-default'";
+                                    $wstatus = $payroll_status["not_generate"];
+                                }
+                                ?>
+                                <tr>
+                                    <td><?php echo $staff['employee_id']; ?></td>
+                                    <td><?php echo $staff['name'] . " " . $staff['surname']; ?></td>
+                                    <td><?php echo $staff['user_type']; ?></td>
+                                    <?php if ($sch_setting->staff_department) { ?>
+                                        <td><?php echo $staff['department']; ?></td>
+                                    <?php } if ($sch_setting->staff_designation) { ?>
+                                        <td><?php echo $staff['designation']; ?></td>
+                                    <?php } if ($sch_setting->staff_phone) { ?>
+                                        <td><?php echo $staff['contact_no']; ?></td>
+                                    <?php } ?>
+                                    <td><small <?php echo $label; ?>><?php echo $wstatus; ?></small></td>
+                                    <?php if ($status == "paid") { ?>
+
+                                    <td class="pull-right no-print">
+                                        <?php
+                                        if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
+                                            ?>
+                                            <a class="btn btn-default btn-xs" onclick="return confirm('<?php echo $this->lang->line("are_you_sure_you_want_to_revert_this_record")?>')" href="<?php echo base_url() . "admin/payroll/revertpayroll/" . $staff["payslip_id"] . "/" . $month_selected . "/" . date("Y") . "/" . $role_selected ?>" title="Revert">
+                                                <i class="fa fa-undo"> </i>
+                                            </a>
+                                        <?php } ?>
+                                        <a href="javascript:void" onclick="getPayslip('<?php echo $staff["payslip_id"]; ?>')"  role="button" class="btn btn-primary btn-xs checkbox-toggle edit_setting" data-toggle="tooltip" title="<?php echo $this->lang->line('Payslip View'); ?>" ><?php echo $this->lang->line('view'); ?> <?php echo $this->lang->line('payslip'); ?></a>
+
+
+                                        <?php } ?></td>
+                                    <?php if ($status == "generated") { ?>
+
+                                    <td class="pull-right no-print">
+                                        <?php
+                                        if ($this->rbac->hasPrivilege('staff_payroll', 'can_delete')) {
+                                            ?>
+                                            <a href="<?php echo base_url() ?>admin/payroll/deletepayroll/<?php echo $staff["payslip_id"] . "/" . $month_selected . "/" . date("Y") . "/" . $role_selected ?>" class="btn btn-default btn-xs" onclick="return confirm('<?php echo $this->lang->line("are_you_sure_you_want_to_revert_this_record")?>')" title="Revert">
+                                                <i class="fa fa-undo"> </i>
+                                            </a>
+                                            <?php
+                                        }
+                                        if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
+                                            ?>
+                                            <a href="#" onclick="getRecord('<?php echo $staff["id"] ?>', '<?php echo $year ?>')" role="button" class="btn btn-primary btn-xs checkbox-toggle edit_setting" data-toggle="tooltip" title="<?php echo $this->lang->line('Proceed to payment'); ?>" ><?php echo $this->lang->line('proceed_to_pay'); ?></a>
+
+                                            <?php
+                                        }
+                                        }
+                                        ?></td>
+
+                                    <?php if ($staff["payslip_id"] == 0) { ?>
+
+                                        <td class="pull-right no-print">
+                                            <?php
+                                            if ($this->rbac->hasPrivilege('staff_payroll', 'can_add')) {
+                                                ?>
+                                                <a class="btn btn-primary btn-xs checkbox-toggle edit_setting" role="button" href="<?php echo base_url() . "admin/payroll/create/" . $month_selected . "/" . $year . "/" . $staff["id"] ?>"><?php echo $this->lang->line('generate'); ?> <?php echo $this->lang->line('payroll'); ?></a>
+                                            <?php } ?>
+                                        </td>
+                                    <?php } ?>
+                                </tr>
+                                <?php
+                            }
+                            $count++;
+                            ?>
+                            </tbody></table>
+                    </div>
+                </div>
+                <?php
+                }
+                ?>
             </div>
             <form action="<?php echo base_url('admin/payroll/create') ?>" method="post" id="formsubmit">
                 <input type="hidden" name="month" id="month">
                 <input type="hidden" name="year" id="year">
                 <input type="hidden" name="staffid" id="staffid">
             </form>
-        </div> 
+        </div>
 
     </section>
 </div>
@@ -279,14 +279,14 @@ if (isset($resultlist)) {
 
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <label for="exampleInputEmail1">
-<?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('Name'); ?></label>
+                                <?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('Name'); ?></label>
                             <input type="text" name="emp_name" readonly class="form-control" id="emp_name">
 
                         </div>
-                            <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                                <label for="exampleInputEmail1"><?php echo $this->lang->line('payment'); ?> <?php echo $this->lang->line('amount'); ?></label>
-                                <input type="text" name="amount" readonly class="form-control" id="amount">
-                            </div>
+                        <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                            <label for="exampleInputEmail1"><?php echo $this->lang->line('payment'); ?> <?php echo $this->lang->line('amount'); ?></label>
+                            <input type="text" name="amount" readonly class="form-control" id="amount">
+                        </div>
 
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <label for="exampleInputEmail1">
@@ -305,19 +305,19 @@ if (isset($resultlist)) {
                                 foreach ($payment_mode as $pkey => $pvalue) {
                                     ?>
                                     <option value="<?php echo $pkey ?>"><?php echo $pvalue ?></option>
-    <?php
-}
-?>
+                                    <?php
+                                }
+                                ?>
 
                             </select>
                             <span class="text-danger"><?php echo form_error('payment_mode'); ?></span>
                         </div>
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <label for="exampleInputEmail1">Date de</label>
+                            <label for="exampleInputEmail1">Date de</label><small class="req"> *</small>
                             <input type="text" name="date_from" readonly class="form-control date" id="date_from">
                         </div>
                         <div class="form-group  col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <label for="exampleInputEmail1">Date A</label>
+                            <label for="exampleInputEmail1">Date A</label><small class="req"> *</small>
                             <input type="text" name="date_to" readonly class="form-control date" id="date_to">
                         </div>
 
@@ -341,7 +341,7 @@ if (isset($resultlist)) {
                         </div>
 
 
-                    </form>                  
+                    </form>
                 </div>
             </div>
         </div>
@@ -355,7 +355,7 @@ if (isset($resultlist)) {
         $('input[name="paymentmonth"]').val('');
         $('input[name="paymentyear"]').val('');
         $('#monthid').val('');
-        var month = '<?php echo $month_selected ?>';       
+        var month = '<?php echo $month_selected ?>';
         var base_url = '<?php echo base_url() ?>';
         $.ajax({
             url: base_url + 'admin/payroll/paymentRecord',
@@ -364,7 +364,7 @@ if (isset($resultlist)) {
             dataType: "json",
             success: function (result) {
 
-                $('input[name="amount"]').val(result.result.net_salary);
+                $('input[name="amount"]').val(result.result.categorie_salaire);
                 $('input[name="emp_name"]').val(result.result.name + ' ' + result.result.surname + ' (' + result.result.employee_id + ')');
                 $('input[name="paymentid"]').val(result.result.id);
                 $('input[name="paymentmonth"]').val(month);
@@ -373,7 +373,7 @@ if (isset($resultlist)) {
             }
         });
 
-    
+
         $('#proceedtopay').modal({
             show: true,
             backdrop: 'static',
@@ -427,7 +427,7 @@ if (isset($resultlist)) {
         $.ajax({
             url: base_url + 'admin/payroll/payslipView',
             type: 'POST',
-            data: {payslipid: id},           
+            data: {payslipid: id},
             success: function (result) {
                 $("#print1").html("<a href='#'  class='pull-right modal-title moprintblack'  onclick='printData(" + id + ")'  title='Print' ><i class='fa fa-print'></i></a>");
                 $("#testdata").html(result);
@@ -477,15 +477,15 @@ if (isset($resultlist)) {
 
     function create(id) {
         var month = '<?php
-if (isset($_POST["month"])) {
-    echo $_POST["month"];
-}
-?>';
+            if (isset($_POST["month"])) {
+                echo $_POST["month"];
+            }
+            ?>';
         var year = '<?php
-if (isset($_POST["year"])) {
-    echo $_POST["year"];
-}
-?>';
+            if (isset($_POST["year"])) {
+                echo $_POST["year"];
+            }
+            ?>';
 
         $("#month").val(month);
         $("#year").val(year);

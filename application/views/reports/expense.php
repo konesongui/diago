@@ -1,6 +1,7 @@
 <?php
-$conn = new mysqli("localhost","root","","diago_test");
-$sql = "SELECT SUM(amount) AS total_amount  FROM expenses Where amount >0 ";
+$conn = new mysqli("localhost","root","","diao");
+$sql = "SELECT SUM(amount) AS total_amount  FROM expenses Where deleted =1 ";
+
 
 $result = $conn->query($sql);
 
@@ -116,7 +117,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 echo "selected";
                                             }
                                             ?>><?php echo $search ?></option>
-                                                <?php } ?>
+                                        <?php } ?>
                                     </select>
                                     <span class="text-danger" id="error_search_type"></span>
                                 </div>
@@ -143,25 +144,36 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             <?php endwhile; ?>
                         </div>
                         <div class="box-body table-responsive">
-                            <div class="download_label"><?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
-                                                $this->customlib->get_postmessage();
-                                                ?></div>
-                            
-                                <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
-                                                $this->customlib->get_postmessage();   ?>">
+                            <div class="download_label">
+                                <div class="col-md-4 col-xs-2 col-sm-6">
+                                    <img style="width: 150px; height: 70px !important;" src="<?= base_url() . "/uploads/school_content/admin_logo/" . $sch_setting->admin_logo ?>" alt="Image banniere" />
+
+                                </div>
+
+
+                                <?php echo $this->lang->line('expense') . " " . $this->lang->line('report');
+                                $this->customlib->get_postmessage();
+                                ?></div>
+
+
+
+
+                            <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo  $this->lang->line('expense') . " " . $this->lang->line('report');
+                            $this->customlib->get_postmessage();   ?>">
                                 <thead>
-                                    <tr>
-                                        <th>Référence</th>
-                                        <th><?php echo $this->lang->line('date'); ?></th>
-                                        <th>Designations</th>
+                                <tr>
+                                    <th>Référence</th>
+                                    <th><?php echo $this->lang->line('date'); ?></th>
+                                    <th>Designations</th>
 
 
-                                        <th>Users</th>
-                                        <th><?php echo $this->lang->line('expense_head'); ?></th>
+
+                                    <th>Users</th>
+                                    <!-- <th><?php echo $this->lang->line('expense_head'); ?></th>-->
 
 
-                                        <th class="text text-right"><?php echo $this->lang->line('amount'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                    </tr>
+                                    <th class="text text-right"><?php echo $this->lang->line('amount'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -170,77 +182,77 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     </div>
                 </div>
             </div>
-        </div>   
-</div>  
+        </div>
+</div>
 </section>
 </div>
 
 
 <script>
-<?php
-if ($search_type == 'period') {
+    <?php
+    if ($search_type == 'period') {
     ?>
 
-        $(document).ready(function () {
-            showdate('period');
-        });
+    $(document).ready(function () {
+        showdate('period');
+    });
 
     <?php
-}
-?>
+    }
+    ?>
 
 </script>
 <script>
-$(document).ready(function() {
-     emptyDatatable('expense-list','data');
-});
-</script>  
+    $(document).ready(function() {
+        emptyDatatable('expense-list','data');
+    });
+</script>
 <script>
-$(document).ready(function() {
-    initDatatable('expense-list','report/getexpenselistbydt');
+    $(document).ready(function() {
+        initDatatable('expense-list','report/getexpenselistbydt');
 
-});
+    });
 </script>
 
 <script type="text/javascript">
-$(document).ready(function(){ 
-$(document).on('submit','#reportform',function(e){
-    e.preventDefault(); // avoid to execute the actual submit of the form.
-    var $this = $(this).find("button[type=submit]:focus");  
-    var form = $(this);
-    var url = form.attr('action');
-    var form_data = form.serializeArray();
-    $.ajax({
-           url: url,
-           type: "POST",
-           dataType:'JSON',
-           data: form_data, // serializes the form's elements.
-              beforeSend: function () {
-                $('[id^=error]').html("");
-                $this.button('loading');
-                
-               },
-              success: function(response) { // your success handler
-                
-                if(!response.status){
-                    $.each(response.error, function(key, value) {
-                    $('#error_' + key).html(value);
-                    });
-                }else{
-                 
-                   initDatatable('expense-list','report/getexpenselistbydt',response.params);
-                }
-              },
-             error: function() { // your error handler
-                 $this.button('reset');
-             },
-             complete: function() {
-             $this.button('reset');
-             }
-         });
+    $(document).ready(function(){
+        $(document).on('submit','#reportform',function(e){
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+            var $this = $(this).find("button[type=submit]:focus");
+            var form = $(this);
+            var url = form.attr('action');
+            var form_data = form.serializeArray();
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType:'JSON',
+                data: form_data, // serializes the form's elements.
+                beforeSend: function () {
+                    $('[id^=error]').html("");
+                    $this.button('loading');
 
-});
+                },
+                success: function(response) { // your success handler
+
+                    if(!response.status){
+                        $.each(response.error, function(key, value) {
+                            $('#error_' + key).html(value);
+                        });
+                    }else{
+
+                        initDatatable('expense-list','report/getexpenselistbydt',response.params);
+                    }
+                },
+                error: function() { // your error handler
+                    $this.button('reset');
+                },
+                complete: function() {
+                    $this.button('reset');
+                }
+            });
+
+        });
 
     });
-    
+
 </script>

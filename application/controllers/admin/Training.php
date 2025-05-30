@@ -65,7 +65,7 @@ class Training extends Admin_Controller
             $data = array(
                 'book_title'  => $this->input->post('book_title'),
                 'book_no'     => $this->input->post('book_no'),
-                 'isbn_no'     => $this->input->post('isbn_no'),
+                'isbn_no'     => $this->input->post('isbn_no'),
                 'subject'     => $this->input->post('subject'),
                 'rack_no'     => $this->input->post('rack_no'),
                 'publish'     => $this->input->post('publish'),
@@ -371,14 +371,6 @@ class Training extends Admin_Controller
                 $row[]     = $value->rack_no;
                 $row[]     = $value->respo;
                 $row[]     = $value->contact;
-                /*$row[]     = $value->adresse;
-                $row[]     = $value->email;
-                $row[] = $value->description;*/
-
-
-                /*$row[]     = $value->qty - $value->total_issue;
-                $row[]     = $currency_symbol . $value->perunitcost;
-                $row[]     = $this->customlib->dateformat($value->postdate);*/
                 $row[]     = $editbtn . ' ' . $deletebtn;
                 $dt_data[] = $row;
             }

@@ -15,16 +15,16 @@
         <?php $this->load->view('layout/top_sidemenu');?>
         <ul class="sidebar-menu verttop">
             <?php
-if ($this->module_lib->hasActive('receptioniste')) {
-    if ((
+            if ($this->module_lib->hasActive('receptioniste')) {
+                if ((
 
-        $this->rbac->hasPrivilege('visiteurs', 'can_view') ||
-        $this->rbac->hasPrivilege('journal_appels', 'can_view') ||
-        $this->rbac->hasPrivilege('courier_envoyer', 'can_view') ||
-        $this->rbac->hasPrivilege('courier_reçu', 'can_view') ||
-        $this->rbac->hasPrivilege('reclamation', 'can_view') ||
-        $this->rbac->hasPrivilege('parametre', 'can_view'))) {
-        ?>
+                    $this->rbac->hasPrivilege('visiteurs', 'can_view') ||
+                    $this->rbac->hasPrivilege('journal_appels', 'can_view') ||
+                    $this->rbac->hasPrivilege('courier_envoyer', 'can_view') ||
+                    $this->rbac->hasPrivilege('courier_reçu', 'can_view') ||
+                    $this->rbac->hasPrivilege('reclamation', 'can_view') ||
+                    $this->rbac->hasPrivilege('parametre', 'can_view'))) {
+                    ?>
 
                     <li class="treeview <?php echo set_Topmenu('receptioniste'); ?>">
                         <a href="#">
@@ -33,52 +33,52 @@ if ($this->module_lib->hasActive('receptioniste')) {
                         <ul class="treeview-menu">
                             <?php if ($this->rbac->hasPrivilege('admission_enquiry', 'can_view')) {?>
 
-                               <!-- <li class="<?php echo set_Submenu('admin/enquiry'); ?>"><a href="<?php echo base_url(); ?>admin/enquiry"><i class="fa fa-angle-double-right"></i> Demande de requêtes </a></li>-->
+                                <!-- <li class="<?php echo set_Submenu('admin/enquiry'); ?>"><a href="<?php echo base_url(); ?>admin/enquiry"><i class="fa fa-angle-double-right"></i> Demande de requêtes </a></li>-->
 
                                 <?php
-}
-        if ($this->rbac->hasPrivilege('visiteurs', 'can_view')) {
-            ?>
+                            }
+                            if ($this->rbac->hasPrivilege('visiteurs', 'can_view')) {
+                                ?>
                                 <li class="<?php echo set_Submenu('admin/visitors'); ?>"><a href="<?php echo base_url(); ?>admin/visitors"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('visitor_book'); ?></a></li>
 
                                 <?php
-}
-                        /*    if ($this->rbac->hasPrivilege('visitor_bok', 'can_view')) {
-                                ?>
-                                <li class="<?php echo set_Submenu('admin/files'); ?>"><a href="<?php echo base_url(); ?>admin/files"><i class="fa fa-angle-double-right"></i> Files</a></li>
+                            }
+                            /*    if ($this->rbac->hasPrivilege('visitor_bok', 'can_view')) {
+                                    ?>
+                                    <li class="<?php echo set_Submenu('admin/files'); ?>"><a href="<?php echo base_url(); ?>admin/files"><i class="fa fa-angle-double-right"></i> Files</a></li>
 
-                                <?php
-                            }*/
-        if ($this->rbac->hasPrivilege('journal_appels', 'can_view')) {
-            ?>
+                                    <?php
+                                }*/
+                            if ($this->rbac->hasPrivilege('journal_appels', 'can_view')) {
+                                ?>
 
                                 <li class="<?php echo set_Submenu('admin/generalcall'); ?>"><a href="<?php echo base_url(); ?>admin/generalcall"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('phone_call_log'); ?></a></li>
 
                                 <?php
-}
-        if ($this->rbac->hasPrivilege('courier_envoyer', 'can_view')) {
-            ?>
+                            }
+                            if ($this->rbac->hasPrivilege('courier_envoyer', 'can_view')) {
+                                ?>
 
                                 <li class="<?php echo set_Submenu('admin/dispatch'); ?>"><a href="<?php echo base_url(); ?>admin/dispatch"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('postal_dispatch'); ?></a></li>
 
                                 <?php
-}
-        if ($this->rbac->hasPrivilege('courier_reçu', 'can_view')) {
-            ?>
+                            }
+                            /*if ($this->rbac->hasPrivilege('courier_reçu', 'can_view')) {
+                                ?>
 
-                                <li class="<?php echo set_Submenu('admin/receive'); ?>"><a href="<?php echo base_url(); ?>admin/receive"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('postal_receive'); ?></a></li>
+                                                    <!--<li class="<?php echo set_Submenu('admin/receive'); ?>"><a href="<?php echo base_url(); ?>admin/receive"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('postal_receive'); ?></a></li>-->
 
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('reclamation', 'can_view')) {
-            ?>
+                                                    <?php
+                    }*/
+                            if ($this->rbac->hasPrivilege('reclamation', 'can_view')) {
+                                ?>
 
                                 <li class="<?php echo set_Submenu('admin/complaint'); ?>"><a href="<?php echo base_url(); ?>admin/complaint"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('complain'); ?></a></li>
 
                                 <?php
-}
-        if ($this->rbac->hasPrivilege('parametre', 'can_view')) {
-            ?>
+                            }
+                            if ($this->rbac->hasPrivilege('parametre', 'can_view')) {
+                                ?>
 
                                 <li class="<?php echo set_Submenu('admin/visitorspurpose'); ?>"><a href="<?php echo base_url(); ?>admin/visitorspurpose"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('setup_front_office'); ?></a></li>
 
@@ -86,7 +86,7 @@ if ($this->module_lib->hasActive('receptioniste')) {
                         </ul>
                     </li>
                     <?php
-}
+                }
 }
 
 /*if ($this->module_lib->hasActive('student_information')) {
@@ -247,11 +247,11 @@ if ($this->module_lib->hasActive('fees_collection')) {
                     <?php
 }
 }
-if ($this->module_lib->hasActive('caisse')) {
-    if (($this->rbac->hasPrivilege('caisse', 'can_view') ||
-        $this->rbac->hasPrivilege('recherche_caisse', 'can_view') ||
-        $this->rbac->hasPrivilege('categorie_caisse', 'can_view'))) {
-        ?>
+            if ($this->module_lib->hasActive('caisse')) {
+                if (($this->rbac->hasPrivilege('caisse', 'can_view') ||
+                    $this->rbac->hasPrivilege('recherche_caisse', 'can_view') ||
+                    $this->rbac->hasPrivilege('categorie_caisse', 'can_view'))) {
+                    ?>
 
                     <li class="treeview <?php echo set_Topmenu('Caisse'); ?>">
                         <a href="#">
@@ -262,33 +262,33 @@ if ($this->module_lib->hasActive('caisse')) {
                             <?php if ($this->rbac->hasPrivilege('caisse', 'can_view')) {?>
                                 <li class="<?php echo set_Submenu('income/index'); ?>"><a href="<?php echo base_url(); ?>admin/income"><i class="fa fa-angle-double-right"></i><?php echo $this->lang->line('add_income'); ?></a></li>
                                 <?php
-}
-       /* if ($this->rbac->hasPrivilege('search_income', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('income/incomesearch'); ?>"><a href="<?php echo base_url(); ?>admin/income/incomesearch"><i class="fa fa-angle-double-right"></i><?php echo $this->lang->line('search_income'); ?></a></li>
-                                <?php
-}*/
-        if ($this->rbac->hasPrivilege('categorie_caisse', 'can_view')) {
-            ?>
+                            }
+                            /* if ($this->rbac->hasPrivilege('search_income', 'can_view')) {
+                                 ?>
+                                                     <li class="<?php echo set_Submenu('income/incomesearch'); ?>"><a href="<?php echo base_url(); ?>admin/income/incomesearch"><i class="fa fa-angle-double-right"></i><?php echo $this->lang->line('search_income'); ?></a></li>
+                                                     <?php
+                     }*/
+                            if ($this->rbac->hasPrivilege('categorie_caisse', 'can_view')) {
+                                ?>
                                 <li class="<?php echo set_Submenu('incomeshead/index'); ?>"><a href="<?php echo base_url(); ?>admin/incomehead"><i class="fa fa-angle-double-right"></i><?php echo $this->lang->line('income_head'); ?></a></li>
                             <?php }?>
                             <a href="#">
-                                <i style="background-color: white;margin-left: 10px" class="fa fa-credit-card ftlayer"></i> <span style="color: white;margin: 13px"><?php echo $this->lang->line('expenses'); ?></span> <i class="fa fa-angle-right pull-right"></i>
+                                <i style="background-color: white;margin-left: 10px" class="ftlayer"></i> <span style="color: white;margin: 13px">Gérer les dépenses</span> <i class="fa fa-angle-right pull-right"></i>
                             </a>
 
                             <ul class="treeview-menu">
-                                    <li class="<?php echo set_Submenu('expense/index'); ?>"><a href="<?php echo base_url(); ?>admin/expense"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('add_expense'); ?></a></li>
+                                <li class="<?php echo set_Submenu('expense/index'); ?>"><a href="<?php echo base_url(); ?>admin/expense"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('add_expense'); ?></a></li>
 
-                                   <!-- <li class="<?php echo set_Submenu('expense/expensesearch'); ?>"><a href="<?php echo base_url(); ?>admin/expense/expensesearch"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('search_expense'); ?></a></li>-->
+                                <!--<li class="<?php echo set_Submenu('expense/expensesearch'); ?>"><a href="<?php echo base_url(); ?>admin/expense/expensesearch"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('search_expense'); ?></a></li>-->
 
-                                    <li class="<?php echo set_Submenu('expenseshead/index'); ?>"><a href="<?php echo base_url(); ?>admin/expensehead"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('expense_head'); ?></a></li>
+                                <li class="<?php echo set_Submenu('expenseshead/index'); ?>"><a href="<?php echo base_url(); ?>admin/expensehead"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('expense_head'); ?></a></li>
 
                             </ul>
                         </ul>
 
                     </li>
                     <?php
-}
+                }
 }
 /*if ($this->module_lib->hasActive('depense')) {
     if (($this->rbac->hasPrivilege('depense', 'can_view') ||
@@ -1012,19 +1012,22 @@ if ($this->module_lib->hasActive('inventory')) {
                         </a>
                         <ul class="treeview-menu">
                             <?php if ($this->rbac->hasPrivilege('issue_item', 'can_view')) {?>
-                                <li class="<?php echo set_Submenu('issueitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/issueitem"><i class="fa fa-angle-double-right"></i>Ventes</a></li>
-                                <li class="<?php echo set_Submenu('issueitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/issueitem"><i class="fa fa-angle-double-right"></i>Devis</a></li>
-                                <li class="<?php echo set_Submenu('delivery/index'); ?>"><a href="<?php echo base_url(); ?>admin/delivery"><i class="fa fa-angle-double-right"></i>Bon de livraison</a></li>
+                                <li class="<?php echo set_Submenu('Invoiceitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/invoiceitem"><i class="fa fa-angle-double-right"></i>Factures</a></li>
+                                <li class="<?php echo set_Submenu('Deliveryitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/deliveryitem"><i class="fa fa-angle-double-right"></i>Bons de livraisons</a></li>
+                                <li class="<?php echo set_Submenu('Orderformitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/orderformitem"><i class="fa fa-angle-double-right"></i>Bons de commandes</a></li>
+                                <li class="<?php echo set_Submenu('Quoteitem/index'); ?>"><a href="<?php echo base_url(); ?>admin/quoteitem"><i class="fa fa-angle-double-right"></i>Devis</a></li>
                                 <?php
 }
         if ($this->rbac->hasPrivilege('item_stock', 'can_view')) {
             ?>
-                                <li class="<?php echo set_Submenu('Itemstock/index'); ?>"><a href="<?php echo base_url(); ?>admin/itemstock"><i class="fa fa-angle-double-right"></i>Achats</a></li>
+                                <li class="<?php echo set_Submenu('Itemstock/index'); ?>"><a href="<?php echo base_url(); ?>admin/itemstock"><i class="fa fa-angle-double-right"></i>Etat de Stock</a></li>
+                                <li class="<?php echo set_Submenu('Stockentry/index'); ?>"><a href="<?php echo base_url(); ?>admin/stockentry"><i class="fa fa-angle-double-right"></i>Entrées de Stock</a></li>
+                                <li class="<?php echo set_Submenu('Stockremoval/index'); ?>"><a href="<?php echo base_url(); ?>admin/stockremoval"><i class="fa fa-angle-double-right"></i>Sortie de Stock</a></li>
                                 <?php
 }
         if ($this->rbac->hasPrivilege('item', 'can_view')) {
             ?>
-                                <li class="<?php echo set_Submenu('Item/index'); ?>"><a href="<?php echo base_url(); ?>admin/item"><i class="fa fa-angle-double-right"></i>Liste des produits</a></li>
+                                <li class="<?php echo set_Submenu('Item/index'); ?>"><a href="<?php echo base_url(); ?>admin/item"><i class="fa fa-angle-double-right"></i>Articles</a></li>
                                 <?php
 }
         if ($this->rbac->hasPrivilege('item_category', 'can_view')) {
@@ -1177,48 +1180,48 @@ if ($this->module_lib->hasActive('front_cms')) {
         $this->rbac->hasPrivilege('menus', 'can_view') ||
         $this->rbac->hasPrivilege('banner_images', 'can_view'))) {
         ?>
-                    <li class="treeview <?php echo set_Topmenu('Front CMS'); ?>">
-                        <a href="#">
-                            <i class="fa fa-empire ftlayer"></i> <span><?php echo $this->lang->line('front_cms'); ?></span> <i class="fa fa-angle-left pull-right"></i>
-                        </a>
-                        <ul class="treeview-menu">
-                            <?php if ($this->rbac->hasPrivilege('event', 'can_view')) {?>
-                                <li class="<?php echo set_Submenu('admin/front/events'); ?>"><a href="<?php echo base_url(); ?>admin/front/events"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('event'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('gallery', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/gallery'); ?>"><a href="<?php echo base_url(); ?>admin/front/gallery"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('gallery'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('notice', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/notice'); ?>"><a href="<?php echo base_url(); ?>admin/front/notice"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('notice'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('media_manager', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/media'); ?>"><a href="<?php echo base_url(); ?>admin/front/media"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('media_manager'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('pages', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/page'); ?>"><a href="<?php echo base_url(); ?>admin/front/page"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('page'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('menus', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/menus'); ?>"><a href="<?php echo base_url(); ?>admin/front/menus"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('menus'); ?></a></li>
-                                <?php
-}
-        if ($this->rbac->hasPrivilege('banner_images', 'can_view')) {
-            ?>
-                                <li class="<?php echo set_Submenu('admin/front/banner'); ?>"><a href="<?php echo base_url(); ?>admin/front/banner"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('banner_images'); ?></a></li>
-                    <?php }?>
-                        </ul>
-                    </li>
+        <li class="treeview <?php echo set_Topmenu('Front CMS'); ?>">
+            <a href="#">
+                <i class="fa fa-empire ftlayer"></i> <span><?php echo $this->lang->line('front_cms'); ?></span> <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <?php if ($this->rbac->hasPrivilege('event', 'can_view')) {?>
+                    <!--  <li class="<?php echo set_Submenu('admin/front/events'); ?>"><a href="<?php echo base_url(); ?>admin/front/events"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('event'); ?></a></li>-->
                     <?php
-}
+                }
+                if ($this->rbac->hasPrivilege('gallery', 'can_view')) {
+                    ?>
+                    <!-- <li class="<?php echo set_Submenu('admin/front/gallery'); ?>"><a href="<?php echo base_url(); ?>admin/front/gallery"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('gallery'); ?></a></li>-->
+                    <?php
+                }
+                if ($this->rbac->hasPrivilege('notice', 'can_view')) {
+                    ?>
+                    <li class="<?php echo set_Submenu('admin/front/notice'); ?>"><a href="<?php echo base_url(); ?>admin/front/notice"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('notice'); ?></a></li>
+                    <?php
+                }
+                if ($this->rbac->hasPrivilege('media_manager', 'can_view')) {
+                    ?>
+                    <!-- <li class="<?php echo set_Submenu('admin/front/media'); ?>"><a href="<?php echo base_url(); ?>admin/front/media"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('media_manager'); ?></a></li>-->
+                    <?php
+                }
+                if ($this->rbac->hasPrivilege('pages', 'can_view')) {
+                    ?>
+                    <!-- <li class="<?php echo set_Submenu('admin/front/page'); ?>"><a href="<?php echo base_url(); ?>admin/front/page"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('page'); ?></a></li>-->
+                    <?php
+                }
+                if ($this->rbac->hasPrivilege('menus', 'can_view')) {
+                    ?>
+                    <!--  <li class="<?php echo set_Submenu('admin/front/menus'); ?>"><a href="<?php echo base_url(); ?>admin/front/menus"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('menus'); ?></a></li>-->
+                    <?php
+                }
+                if ($this->rbac->hasPrivilege('banner_images', 'can_view')) {
+                    ?>
+                    <!-- <li class="<?php echo set_Submenu('admin/front/banner'); ?>"><a href="<?php echo base_url(); ?>admin/front/banner"><i class="fa fa-angle-double-right"></i> <?php echo $this->lang->line('banner_images'); ?></a></li>-->
+                <?php }?>
+            </ul>
+        </li>
+        <?php
+    }
 }
 ?>
 <?php

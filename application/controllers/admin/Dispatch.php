@@ -10,6 +10,7 @@ class Dispatch extends Admin_Controller {
         $this->load->library('form_validation');
 
         $this->load->model("Dispatch_model");
+        $this->load->model("general_call_model");
     }
 
     public function index() {
@@ -33,9 +34,10 @@ class Dispatch extends Admin_Controller {
                 'to_title' => $this->input->post('to_title'),
                 'address' => $this->input->post('address'),
                 'note' => $this->input->post('note'),
+                'type' => $this->input->post('type'),
                 'from_title' => $this->input->post('from'),
                 'date' => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('date'))),
-                'type' => 'dispatch'
+                // 'type' => 'dispatch'
             );
 
             $dispatch_id = $this->Dispatch_model->insert('dispatch_receive', $dispatch);
@@ -60,7 +62,7 @@ class Dispatch extends Admin_Controller {
         $this->form_validation->set_rules('file', $this->lang->line('file'), 'callback_handle_upload[file]');
         if ($this->form_validation->run() == FALSE) {
             $data['DispatchList'] = $this->Dispatch_model->dispatch_list();
-            $data['Dispatch_data'] = $this->Dispatch_model->dis_rec_data($id, 'dispatch');
+            $data['Dispatch_data'] = $this->Dispatch_model->dis_rec_data($id, 'reçu');
             $this->load->view('layout/header');
             $this->load->view('admin/frontoffice/dispatchedit', $data);
             $this->load->view('layout/footer');
@@ -72,9 +74,10 @@ class Dispatch extends Admin_Controller {
                 'to_title' => $this->input->post('to_title'),
                 'address' => $this->input->post('address'),
                 'note' => $this->input->post('note'),
+                'type' => $this->input->post('type'),
                 'from_title' => $this->input->post('from'),
                 'date' => date('Y-m-d', $this->customlib->datetostrtotime($this->input->post('date'))),
-                'type' => 'dispatch'
+                // 'type' => 'dispatch'
             );
 
 

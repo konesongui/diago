@@ -21,14 +21,14 @@
 
                                 <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">  <?php echo $this->lang->line('name'); ?></label><small class="req"> *</small>
+                                    <label for="exampleInputEmail1"> Fournisseur</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="name" type="text" class="form-control"  value="<?php echo set_value('itemsupplier', $itemsupplier['item_supplier']); ?>" />
                                     <span class="text-danger"><?php echo form_error('itemsupplier'); ?></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">  Prénom</label><small class="req"> *</small>
-                                    <input autofocus="" id="lastname" name="lastname" placeholder="lastname" type="text" class="form-control"  value="<?php echo set_value('lastname', $itemsupplier['lastname']); ?>" />
+                                    <label for="exampleInputEmail1">Compte contribuable/CNI</label><small class="req"> *</small>
+                                    <input autofocus="" id="lastname" name="lastname" placeholder="" type="text" class="form-control"  value="<?php echo set_value('lastname', $itemsupplier['lastname']); ?>" />
                                     <span class="text-danger"><?php echo form_error('lastname'); ?></span>
                                 </div>
 
@@ -69,7 +69,7 @@
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1">Statut</label><small class="req"> *</small>
 
                                     <select  id="status" name="status" class="form-control" value="<?php echo set_value('status', $itemsupplier['status']); ?>">
@@ -84,6 +84,8 @@
                             <div class="box-footer">
 
                                 <button type="submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
+                                <a href="<?php echo base_url() ?>admin/itemsupplier" type="button" class="btn btn-primary btn-xs" style="width: 99px;height: 23px">
+                                    <i class="fa fa-arrow-left"></i> </a>
                             </div>
                         </form>
                     </div>
@@ -106,98 +108,91 @@
                             <div class="download_label"><?php echo $this->lang->line('item_supplier_list'); ?></div>
                             <table class="table table-striped table-bordered table-hover example">
                                 <thead>
-                                    <tr>
-                                        <th>Nom</th>
-                                        <th>Prénom</th>
+                                <tr>
+                                    <th>Fournisseur</th>
+                                    <th>Compte contribuable/CNI</th>
 
-                                        <th>Téléphone</th>
-                                        <th>Email</th>
+                                    <th>Téléphone</th>
+                                    <th>Email</th>
 
 
-                                        <th><?php echo $this->lang->line('address'); ?></th>
-                                        <th>Statut</th>
-                                        <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
-                                    </tr>
+                                    <th><?php echo $this->lang->line('address'); ?></th>
+
+                                    <th class="text-right no-print"><?php echo $this->lang->line('action'); ?></th>
+                                </tr>
                                 </thead>
                                 <tbody>
-                                    <?php if (empty($itemsupplierlist)) {
-                                        ?>
-
-                                        <?php
-                                    } else {
-                                        $count = 1;
-                                        foreach ($itemsupplierlist as $supplier) {
-                                            ?>
-                                            <tr>   
-
-
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['item_supplier'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['lastname'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['phone'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['email'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['address'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-                                                <td class="mailbox-name">
-
-                                                    <a href="#" data-toggle="popover" class="detail_popover" >
-                                                        <?php echo $supplier['status'] ?>
-                                                        <br>
-                                                    </a>
-
-                                                </td>
-
-                                                <td class="mailbox-date pull-right no-print">
-                                                    <?php if ($this->rbac->hasPrivilege('supplier', 'can_edit')) { ?>
-                                                        <a data-placement="left" href="<?php echo base_url(); ?>admin/itemsupplier/edit/<?php echo $supplier['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </a>
-                                                    <?php } if ($this->rbac->hasPrivilege('supplier', 'can_delete')) { ?>
-                                                        <a data-placement="left" href="<?php echo base_url(); ?>admin/itemsupplier/delete/<?php echo $supplier['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
-                                                            <i class="fa fa-remove"></i>
-                                                        </a>
-                                                    <?php } ?>
-                                                </td>
-                                            </tr>
-                                            <?php
-                                        }
-                                        $count++;
-                                    }
+                                <?php if (empty($itemsupplierlist)) {
                                     ?>
+
+                                    <?php
+                                } else {
+                                    $count = 1;
+                                    foreach ($itemsupplierlist as $supplier) {
+                                        ?>
+                                        <tr>
+
+
+                                            <td class="mailbox-name">
+
+                                                <a href="#" data-toggle="popover" class="detail_popover" >
+                                                    <?php echo $supplier['item_supplier'] ?>
+                                                    <br>
+                                                </a>
+
+                                            </td>
+
+                                            <td class="mailbox-name">
+
+                                                <a href="#" data-toggle="popover" class="detail_popover" >
+                                                    <?php echo $supplier['lastname'] ?>
+                                                    <br>
+                                                </a>
+
+                                            </td>
+                                            <td class="mailbox-name">
+
+                                                <a href="#" data-toggle="popover" class="detail_popover" >
+                                                    <?php echo $supplier['phone'] ?>
+                                                    <br>
+                                                </a>
+
+                                            </td>
+                                            <td class="mailbox-name">
+
+                                                <a href="#" data-toggle="popover" class="detail_popover" >
+                                                    <?php echo $supplier['email'] ?>
+                                                    <br>
+                                                </a>
+
+                                            </td>
+                                            <td class="mailbox-name">
+
+                                                <a href="#" data-toggle="popover" class="detail_popover" >
+                                                    <?php echo $supplier['address'] ?>
+                                                    <br>
+                                                </a>
+
+                                            </td>
+
+
+                                            <td class="mailbox-date pull-right no-print">
+                                                <?php if ($this->rbac->hasPrivilege('supplier', 'can_edit')) { ?>
+                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/itemsupplier/edit/<?php echo $supplier['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">
+                                                        <i class="fa fa-pencil"></i>
+                                                    </a>
+                                                <?php } if ($this->rbac->hasPrivilege('supplier', 'can_delete')) { ?>
+                                                    <a data-placement="left" href="<?php echo base_url(); ?>admin/itemsupplier/delete/<?php echo $supplier['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('delete'); ?>" onclick="return confirm('<?php echo $this->lang->line('delete_confirm') ?>');">
+                                                        <i class="fa fa-remove"></i>
+                                                    </a>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                        <?php
+                                    }
+                                    $count++;
+                                }
+                                ?>
 
                                 </tbody>
                             </table><!-- /.table -->

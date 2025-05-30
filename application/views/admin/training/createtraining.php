@@ -19,10 +19,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                         <h3 class="box-title">Ajouter une formation</h3>
                         <!--<div class="box-tools pull-right">
                             <?php if ($this->rbac->hasPrivilege('import_book', 'can_view')) {
-                                ?>
+                            ?>
                                 <a class="btn btn-sm btn-primary" href="<?php echo base_url(); ?>admin/book/import" autocomplete="off"><i class="fa fa-plus"></i> <?php echo $this->lang->line('import') . " " . $this->lang->line('book'); ?></a> 
                             <?php }
-                            ?>
+                        ?>
 
 
                         </div>-->
@@ -38,8 +38,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             if (isset($error_message)) {
                                 echo "<div class='alert alert-danger'>" . $error_message . "</div>";
                             }
-                            ?>      
-                            <?php echo $this->customlib->getCSRF(); ?>                     
+                            ?>
+                            <?php echo $this->customlib->getCSRF(); ?>
                             <div class="form-group col-md-6">
                                 <label for="exampleInputEmail1">Nom de la formation</label><small class="req"> *</small>
                                 <input autofocus=""  id="book_title" name="book_title" placeholder="" type="text" class="form-control"  value="<?php echo set_value('book_title'); ?>" />

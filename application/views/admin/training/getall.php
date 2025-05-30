@@ -39,26 +39,24 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                         <div class="mailbox-messages table-responsive">
                             <table class="table table-striped table-bordered table-hover book-list" data-export-title="<?php echo $this->lang->line('book_list'); ?>">
                                 <thead>
-                                    <tr>
-                                        <th>Nom de la formation</th>
-                                        <th>Type</th>
-                                        <th>Date début</th>
-                                        <th>Date de fin</th>
-                                        <th>Nb de candidat
-                                        </th>
-                                        <th>Liste des candidats
-                                        </th>
-                                        <th>Département
-                                        </th>
-                                        <th>Entreprise</th>
-                                        <th>Nom du formateur</th>
-                                        <th>Téléphone</th>
-                                        <!--<th>Adresse</th>
-                                        <th>Email</th>
-                                        <th>Détails</th>-->
+                                <tr>
+                                    <th>Nom de la formation</th>
+                                    <th>Type</th>
+                                    <th>Date début</th>
+                                    <th>Date de fin</th>
+                                    <th>Nb de candidat
+                                    </th>
+                                    <th>Liste des candidats
+                                    </th>
+                                    <th>Département
+                                    </th>
+                                    <th>Entreprise</th>
+                                    <th>Nom du formateur</th>
+                                    <th>Téléphone</th>
 
-                                        <th class="no-print text text-right noExport "><?php echo $this->lang->line('action'); ?></th>
-                                    </tr>
+
+                                    <th class="no-print text text-right noExport "><?php echo $this->lang->line('action'); ?></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -137,17 +135,17 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
     });
 
 
-   
+
 </script>
 <script>
-$(document).ready(function() {
-     emptyDatatable('book-list','data');
-});
+    $(document).ready(function() {
+        emptyDatatable('book-list','data');
+    });
 
     ( function ( $ ) {
-    'use strict';
-    $(document).ready(function () {
-        initDatatable('book-list','admin/training/getbooklist',[],[],100);
-    });
-} ( jQuery ) )
+        'use strict';
+        $(document).ready(function () {
+            initDatatable('book-list','admin/training/getbooklist',[],[],100);
+        });
+    } ( jQuery ) )
 </script>

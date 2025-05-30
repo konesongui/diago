@@ -29,8 +29,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                             if (isset($error_message)) {
                                 echo "<div class='alert alert-danger'>" . $error_message . "</div>";
                             }
-                            ?>   
-                            <?php echo $this->customlib->getCSRF(); ?>                         
+                            ?>
+                            <?php echo $this->customlib->getCSRF(); ?>
                             <input  type="hidden" name="id" value="<?php echo set_value('id', $editbook['id']); ?>" >
                             <div class="form-group col-md-6">
                                 <label for="exampleInputEmail1">Nom de la formation <small class="req"> *</small></label>

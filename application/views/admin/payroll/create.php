@@ -1,7 +1,9 @@
 <?php
 $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 ?>
-<div class="content-wrapper" style="min-height: 393px;">   
+
+
+<div class="content-wrapper" style="min-height: 393px;">
     <section class="content-header">
         <h1><i class="fa fa-sitemap"></i> <?php echo $this->lang->line('human_resource'); ?></h1>
     </section>
@@ -15,19 +17,19 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                         <div class="row">
                             <div class="col-md-4">
                                 <h3 class="box-title"><?php echo $this->lang->line('staff'); ?> <?php echo $this->lang->line('details'); ?></h3>
-                            </div>  
+                            </div>
                             <div class="col-md-8 ">
                                 <div class="btn-group pull-right">
                                     <a href="<?php echo base_url() ?>admin/payroll" type="button" class="btn btn-primary btn-xs">
                                         <i class="fa fa-arrow-left"></i> </a>
                                 </div>
                             </div>
-                        </div>  
-                    </div><!--./box-header-->    
+                        </div>
+                    </div><!--./box-header-->
                     <div class="box-body" style="padding-top:0;">
                         <div class="row">
                             <div class="col-md-8 col-sm-12">
-                                <div class="sfborder">  
+                                <div class="sfborder">
                                     <div class="col-md-2">
                                         <div class="row">
                                             <?php
@@ -42,50 +44,50 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             ?>
                                             <img width="115" height="115" class="round5" src="<?php echo base_url() . "uploads/staff_images/" . $file ?>" alt="No Image">
                                         </div>
-                                    </div>  
+                                    </div>
 
                                     <div class="col-md-10">
                                         <div class="row">
                                             <table class="table mb0 font13">
                                                 <tbody>
-                                                    <tr>
-                                                        <th class="bozero"><?php echo $this->lang->line("name"); ?></th>
-                                                        <td class="bozero"><?php echo $result["name"] . " " . $result["surname"] ?></td>												
-                                                        <th class="bozero"><?php echo $this->lang->line('staff_id'); ?></th>
-                                                        <td class="bozero"><?php echo $result["employee_id"] ?></td>												
-                                                    </tr>
-                                                    <tr>
-                                                        <?php if ($sch_setting->staff_phone) { ?>
-                                                            <th><?php echo $this->lang->line('phone'); ?></th>
-                                                        <?php } ?>
-                                                        <td><?php echo $result["contact_no"] ?></td>
-                                                        <th><?php echo $this->lang->line('email'); ?></th>
-                                                        <td><?php echo $result["email"] ?>                                   </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <?php if ($sch_setting->staff_epf_no) { ?>
-                                                            <th><?php echo $this->lang->line('epf_no'); ?></th>
-                                                            <td><?php echo $result["epf_no"] ?></td>
-                                                        <?php } ?>
-                                                        <th><?php echo $this->lang->line('role'); ?></th>
-                                                        <td><?php echo $result["user_type"] ?></td>                                  
-                                                    </tr>
-                                                    <tr>
-                                                        <?php if ($sch_setting->staff_department) { ?>
-                                                            <th><?php echo $this->lang->line('department'); ?></th>
-                                                            <td><?php echo $result["department"] ?></td>
-                                                        <?php } if ($sch_setting->staff_designation) { ?>
-                                                            <th><?php echo $this->lang->line('designation'); ?></th>
-                                                            <td><?php echo $result["designation"] ?>   </td>
-                                                        <?php } ?>
-                                                    </tr>
+                                                <tr>
+                                                    <th class="bozero"><?php echo $this->lang->line("name"); ?></th>
+                                                    <td class="bozero"><?php echo $result["name"] . " " . $result["surname"] ?></td>
+                                                    <th class="bozero"><?php echo $this->lang->line('staff_id'); ?></th>
+                                                    <td class="bozero"><?php echo $result["employee_id"] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <?php if ($sch_setting->staff_phone) { ?>
+                                                        <th><?php echo $this->lang->line('phone'); ?></th>
+                                                    <?php } ?>
+                                                    <td><?php echo $result["contact_no"] ?></td>
+                                                    <th><?php echo $this->lang->line('email'); ?></th>
+                                                    <td><?php echo $result["email"] ?>                                   </td>
+                                                </tr>
+                                                <tr>
+                                                    <?php if ($sch_setting->staff_epf_no) { ?>
+                                                        <th><?php echo $this->lang->line('epf_no'); ?></th>
+                                                        <td><?php echo $result["epf_no"] ?></td>
+                                                    <?php } ?>
+                                                    <th><?php echo $this->lang->line('role'); ?></th>
+                                                    <td><?php echo $result["user_type"] ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <?php if ($sch_setting->staff_department) { ?>
+                                                        <th><?php echo $this->lang->line('department'); ?></th>
+                                                        <td><?php echo $result["department"] ?></td>
+                                                    <?php } if ($sch_setting->staff_designation) { ?>
+                                                        <th><?php echo $this->lang->line('designation'); ?></th>
+                                                        <td><?php echo $result["designation"] ?>   </td>
+                                                    <?php } ?>
+                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
 
                                 </div></div><!--./col-md-8-->
-                           <div class="col-md-4 col-sm-12">
+                            <div class="col-md-4 col-sm-12">
 
                                 <div class="sfborder relative overvisible">
                                     <div class="letest">
@@ -98,24 +100,24 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 <?php foreach ($attendanceType as $key => $value) { ?>
                                                     <th class="bozero"><span data-toggle="tooltip" title="<?php echo $value["type"]; ?>"><?php echo strip_tags($value["key_value"]); ?></span></th>
                                                 <?php }
-                           ?>
+                                                ?>
 
                                                 <th class="bozero"><span data-toggle="tooltip" title="<?php echo $this->lang->line('approved'); ?> <?php echo $this->lang->line('leave'); ?>">V</span></th>
                                             </tr>
                                             <?php
-                           foreach ($monthAttendance as $attendence_key => $attendence_value) {
-                               ?><tr>
-                                                    <td><?php echo date("F", strtotime($attendence_key)); ?></td>
-                                                    <td><?php echo $attendence_value['présent'] ?></td>
-                                                    <td><?php echo $attendence_value['en retard']; ?></td>
-                                                    <td><?php echo $attendence_value['absent']; ?></td>
-                                                    <td><?php echo $attendence_value['demi-journée']; ?></td>
-                                                    <td><?php echo $attendence_value['congé']; ?></td>
-                                                    <td><?php echo $monthLeaves[date("m", strtotime($attendence_key))]; ?></td>
+                                            foreach ($monthAttendance as $attendence_key => $attendence_value) {
+                                                ?><tr>
+                                                <td><?php echo date("F", strtotime($attendence_key)); ?></td>
+                                                <td><?php echo $attendence_value['présent'] ?></td>
+                                                <td><?php echo $attendence_value['en retard']; ?></td>
+                                                <td><?php echo $attendence_value['absent']; ?></td>
+                                                <td><?php echo $attendence_value['demi-journée']; ?></td>
+                                                <td><?php echo $attendence_value['congé']; ?></td>
+                                                <td><?php echo $monthLeaves[date("m", strtotime($attendence_key))]; ?></td>
                                                 </tr>
                                                 <?php
-                           }
-                           ?>
+                                            }
+                                            ?>
                                             <tr>
 
 
@@ -137,7 +139,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     <form class="form-horizontal" action="<?php echo site_url('admin/payroll/payslip') ?>" method="post"  id="employeeform">
                         <div class="box-header">
                             <div class="row display-flex">
-                                <div class="col-md-4 col-sm-4">
+                                <!-- <div class="col-md-4 col-sm-4">
                                     <h3 class="box-title"><?php echo $this->lang->line('earning'); ?></h3>
                                     <button type="button" onclick="add_more()" class="plusign"><i class="fa fa-plus"></i></button>
                                     <div class="sameheight">
@@ -149,10 +151,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
                                                 </tr>
                                             </table>
-                                        </div>  
+                                        </div>
                                     </div>
-                                </div><!--./col-md-4-->
-                                <div class="col-md-4 col-sm-4">
+                                </div>--><!--./col-md-4-->
+                                <!-- <div class="col-md-4 col-sm-4">
 
                                     <h3 class="box-title"><?php echo $this->lang->line('deduction'); ?></h3>
                                     <button type="button" onclick="add_more_deduction()" class="plusign"><i class="fa fa-plus"></i></button>
@@ -167,17 +169,19 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
                                             </table>
                                         </div>
-                                    </div>  
-                                </div><!--./col-md-4--> 
+                                    </div>
+                                </div>--><!--./col-md-4-->
                                 <div class="col-md-4 col-sm-4">
 
                                     <h3 class="box-title"><?php echo $this->lang->line('payroll'); ?> <?php echo $this->lang->line('summary'); ?>(<?php echo $currency_symbol ?>)</h3>
+                                    <!--<button onclick="calculerImpot()">Calculer</button>-->
                                     <button type="button" onclick="add_allowance()" class="plusign"><i class="fa fa-calculator"></i> <?php echo $this->lang->line('calculate'); ?></button>
+
                                     <div class="sameheight">
                                         <div class="payrollbox feebox">
-                                            <div class="form-group">
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label"><?php echo $this->lang->line('basic_salary'); ?></label>
-                                                <div class="col-sm-8">
+                                                <div class="col-sm-8" hidden>
                                                     <input class="form-control" name="basic" value="<?php
                                                     if (!empty($result["basic_salary"])) {
                                                         echo $result["basic_salary"];
@@ -188,9 +192,22 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 </div>
                                             </div>
                                             <div class="form-group">
+                                                <label class="col-sm-4 control-label">Catégorie salariale</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="categorie_salaire"  value="<?php
+                                                    if (!empty($result["categorie_salaire"])) {
+                                                        echo $result["categorie_salaire"];
+                                                    } else {
+                                                        echo "0";
+                                                    }
+                                                    ?>" id="salaire"  type="text" />
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label">Sursalaire</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="sursalaire" value="<?php
+                                                    <input class="form-control" name="sursalaire"  value="<?php
                                                     if (!empty($result["sursalaire"])) {
                                                         echo $result["sursalaire"];
                                                     } else {
@@ -199,10 +216,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="sursalaire"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Prime ancien</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Ancien</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="prime_anc" value="<?php
+                                                    <input class="form-control" name="prime_anc"  value="<?php
                                                     if (!empty($result["prime_anc"])) {
                                                         echo $result["prime_anc"];
                                                     } else {
@@ -211,10 +228,34 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_anc"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Prime transport</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Imdémités</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="prime_trans" value="<?php
+                                                    <input class="form-control" name="taxes"  value="<?php
+                                                    if (!empty($result["taxes"])) {
+                                                        echo $result["taxes"];
+                                                    } else {
+                                                        echo "0";
+                                                    }
+                                                    ?>" id="taxes"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label"><?php echo $this->lang->line('earning'); ?></label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control"  value="<?php
+                                                    if (!empty($result["total_allowance"])) {
+                                                        echo $result["total_allowance"];
+                                                    } else {
+                                                        echo "0";
+                                                    }
+                                                    ?>" name="total_allowance" id="total_allowance"  type="text" />
+                                                </div>
+                                            </div><!--./form-group-->
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Transport</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="prime_trans"  value="<?php
                                                     if (!empty($result["prime_trans"])) {
                                                         echo $result["prime_trans"];
                                                     } else {
@@ -223,10 +264,12 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_trans"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">forfait_hs</label>
+
+
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Forfait Hs</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="forfait_hs" value="<?php
+                                                    <input class="form-control" name="forfait_hs"  value="<?php
                                                     if (!empty($result["forfait_hs"])) {
                                                         echo $result["forfait_hs"];
                                                     } else {
@@ -235,10 +278,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="forfait_hs"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">prime_resp</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Resp</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="prime_resp" value="<?php
+                                                    <input class="form-control" name="prime_resp"  value="<?php
                                                     if (!empty($result["prime_resp"])) {
                                                         echo $result["prime_resp"];
                                                     } else {
@@ -247,10 +290,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_resp"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">prime_rend</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Rend</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="prime_rend" value="<?php
+                                                    <input class="form-control" name="prime_rend"  value="<?php
                                                     if (!empty($result["prime_rend"])) {
                                                         echo $result["prime_rend"];
                                                     } else {
@@ -259,10 +302,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_rend"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">prime_risque</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Risque</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="prime_risque" value="<?php
+                                                    <input class="form-control" name="prime_risque"  value="<?php
                                                     if (!empty($result["prime_risque"])) {
                                                         echo $result["prime_risque"];
                                                     } else {
@@ -271,8 +314,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_risque"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">prime_assi</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Assi</label>
                                                 <div class="col-sm-8">
                                                     <input class="form-control" name="prime_assi" value="<?php
                                                     if (!empty($result["prime_assi"])) {
@@ -283,8 +326,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_assi"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">prime_grati</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Prime Grati</label>
                                                 <div class="col-sm-8">
                                                     <input class="form-control" name="prime_grati" value="<?php
                                                     if (!empty($result["prime_grati"])) {
@@ -295,130 +338,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="prime_grati"  type="text" />
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">imp_sal</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="imp_sal" value="<?php
-                                                    if (!empty($result["imp_sal"])) {
-                                                        echo $result["imp_sal"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="imp_sal"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">contra_nat</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="contra_nat" value="<?php
-                                                    if (!empty($result["contra_nat"])) {
-                                                        echo $result["contra_nat"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="contra_nat"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">imp_revenu</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="imp_revenu" value="<?php
-                                                    if (!empty($result["imp_revenu"])) {
-                                                        echo $result["imp_revenu"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="imp_revenu"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">crns</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="crns" value="<?php
-                                                    if (!empty($result["crns"])) {
-                                                        echo $result["crns"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="crns"  type="text" />
-                                                </div>
-                                            </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">cmu</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="cmu" value="<?php
-                                                    if (!empty($result["cmu"])) {
-                                                        echo $result["cmu"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="cmu"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">cnps_regim</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="cnps_regim" value="<?php
-                                                    if (!empty($result["cnps_regim"])) {
-                                                        echo $result["cnps_regim"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="cnps_regim"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">cnps_tra</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="cnps_tra" value="<?php
-                                                    if (!empty($result["cnps_tra"])) {
-                                                        echo $result["cnps_tra"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="cnps_tra"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">cnps_pres</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="cnps_pres" value="<?php
-                                                    if (!empty($result["cnps_pres"])) {
-                                                        echo $result["cnps_pres"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="cnps_pres"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">fdfp_taxe</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="fdfp_taxe" value="<?php
-                                                    if (!empty($result["fdfp_taxe"])) {
-                                                        echo $result["fdfp_taxe"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="fdfp_taxe"  type="text" />
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">fdfp_form</label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="fdfp_form" value="<?php
-                                                    if (!empty($result["fdfp_form"])) {
-                                                        echo $result["fdfp_form"];
-                                                    } else {
-                                                        echo "0";
-                                                    }
-                                                    ?>" id="fdfp_form"  type="text" />
-                                                </div>
-                                            </div>
-
-
-                                            <div class="form-group">
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label">Congé</label>
                                                 <div class="col-sm-8">
                                                     <input class="form-control" name="conge" value="<?php
@@ -431,20 +352,94 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label">Catégorie salariale</label>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">PRIME T</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="categorie_salaire" value="<?php
-                                                    if (!empty($result["categorie_salaire"])) {
-                                                        echo $result["categorie_salaire"];
+                                                    <input class="form-control" name="primet" value="<?php
+                                                    if (!empty($result["conge"])) {
+                                                        echo $result["conge"];
                                                     } else {
                                                         echo "0";
                                                     }
-                                                    ?>" id="categorie_salaire"  type="text" />
+                                                    ?>" id="prime"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Imp. sur Salaire</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="imp_sal" value="0" id="imp_sal"  type="text" />
                                                 </div>
                                             </div>
 
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Imp. sur Trait. et Sal. (IS) Employé</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="imp_sal" value="0" id="imp_sal"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">contra_nat</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="contra_nat" value="0" id="contra_nat"  type="text" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Cmu</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="cmu" id="cmu_s" value="0" type="text" />
+                                                </div>
+                                            </div><!--./form-group-->
                                             <div class="form-group">
+                                                <label class="col-sm-4 control-label">CNPS, Regime Retraite</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="cnps_regim" value="0" id="regime_s"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">CNPS, Travail</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="cnps_tra" value="0" id="cnps_tra"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">CNPS, Prest Famille</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="cnps_pres" value="0" id="cnps_pres"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">FDFP Tax Apprentissage</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="fdfp_taxe" value="<?php
+                                                    if (!empty($result["fdfp_taxe"])) {
+                                                        echo $result["fdfp_taxe"];
+                                                    } else {
+                                                        echo "0";
+                                                    }
+                                                    ?>" id="fdfp_taxe"  type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">FDFP Form Prof Continue</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="fdfp_form" value="<?php
+                                                    if (!empty($result["fdfp_form"])) {
+                                                        echo $result["fdfp_form"];
+                                                    } else {
+                                                        echo "0";
+                                                    }
+                                                    ?>" id="fdfp_form"  type="text" />
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label">Part IGR</label>
                                                 <div class="col-sm-8">
                                                     <input class="form-control" name="part_igr" value="<?php
@@ -457,10 +452,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label">avan_acom</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="avan_acom" value="<?php
+                                                    <input class="form-control" name="avan_acom" id="avance_acom" value="<?php
                                                     if (!empty($result["avan_acom"])) {
                                                         echo $result["avan_acom"];
                                                     } else {
@@ -470,9 +465,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label">autre_reve</label>
+                                                <label class="col-sm-4 control-label">Autre Revenu</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="autre_reve" value="<?php
+                                                    <input class="form-control" name="autre_reve" id="autre_reve" value="<?php
                                                     if (!empty($result["autre_reve"])) {
                                                         echo $result["autre_reve"];
                                                     } else {
@@ -481,10 +476,18 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     ?>" id="autre_reve"  type="text" />
                                                 </div>
                                             </div>
+
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label">bonus</label>
+                                                <label class="col-sm-4 control-label">ITS</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="bonus" value="<?php
+                                                    <input class="form-control" name="its" id="total_impot" value="0"  type="text" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Bonus</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="bonus" id="bonus" value="<?php
                                                     if (!empty($result["bonus"])) {
                                                         echo $result["bonus"];
                                                     } else {
@@ -496,26 +499,54 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
 
                                             <!--./form-group-->
-                                            <div class="form-group">
-                                                <label class="col-sm-4 control-label"><?php echo $this->lang->line('earning'); ?></label>
-                                                <div class="col-sm-8">
-                                                    <input class="form-control" name="total_allowance" id="total_allowance"  type="text" />
-                                                </div>
-                                            </div><!--./form-group-->
-                                            <div class="form-group">
+
+                                            <!--<div class="form-group">
                                                 <label class="col-sm-4 control-label"><?php echo $this->lang->line('deduction'); ?></label>
                                                 <div class="col-sm-8 deductiondred">
                                                     <input class="form-control" name="total_deduction" id="total_deduction" type="text" style="color:#f50000" />
                                                 </div>
-                                            </div><!--./form-group-->
+                                            </div>--><!--./form-group-->
 
                                             <div class="form-group">
-                                                <label class="col-sm-4 control-label"><?php echo $this->lang->line('gross_salary'); ?></label>
+                                                <label class="col-sm-4 control-label">Total brute</label>
                                                 <div class="col-sm-8">
-                                                    <input class="form-control" name="gross_salary" id="gross_salary" value="0" type="text" />
+                                                    <input class="form-control" name="gross_salary" id="gross_salary"  type="text" />
+                                                </div>
+                                            </div><!--./form-group-->
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Total brute Fiscal</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="gross" id="sj" value="0" type="text" />
                                                 </div>
                                             </div><!--./form-group-->
                                             <div class="form-group">
+                                                <label class="col-sm-4 control-label">Total brute Social</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="gross_social" id="total_social" value="0" type="text" />
+                                                </div>
+                                            </div><!--./form-group-->
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Total revenu</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="total_revenu" id="total_revenu" value="0" type="text" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group" hidden>
+                                                <label class="col-sm-4 control-label">Cnps</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" name="total" id="cnps" value="0" type="text" />
+
+                                                    <p id="result"></p>
+
+                                                </div>
+                                            </div><!--./form-group-->
+                                            <!-- <div class="form-group">
+                                                 <label class="col-sm-4 control-label">Regime</label>
+                                                 <div class="col-sm-8">
+                                                     <input class="form-control" name="regim" id="gross_regime" value="0" type="text" />
+                                                 </div>
+                                             </div>--><!--./form-group-->
+                                            <div class="form-group" hidden>
                                                 <label class="col-sm-4 control-label"><?php echo $this->lang->line('tax'); ?></label>
                                                 <div class="col-sm-8 deductiondred">
                                                     <input class="form-control" name="tax" id="tax" value="0" type="text" />
@@ -523,6 +554,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                             </div><!--./form-group-->
 
                                             <hr/>
+
                                             <div class="form-group">
                                                 <label class="col-sm-4 control-label"><?php echo $this->lang->line('net_salary'); ?></label>
                                                 <div class="col-sm-8 net_green">
@@ -539,36 +571,55 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 </div>
                                             </div><!--./form-group-->
                                         </div>
-                                    </div> 
-                                </div><!--./col-md-4--> 
+                                    </div>
+                                </div><!--./col-md-4-->
                                 <div class="col-md-12 col-sm-12">
 
                                     <button type="submit" id="contact_submit" class="btn btn-info pull-right"><?php echo $this->lang->line('save'); ?></button>
-                                </div><!--./col-md-12--> 
-                                </form>
-                            </div><!--./row-->  
-                        </div><!--./box-header-->  
-                </div>
-            </div>
-            <!--/.col (left) -->
+                                </div><!--./col-md-12-->
+                    </form>
+                </div><!--./row-->
+            </div><!--./box-header-->
         </div>
-    </section>
+</div>
+<!--/.col (left) -->
+</div>
+</section>
 </div>
 
 <script type="text/javascript">
 
+
     function add_allowance() {
 
         var basic_pay = $("#categorie_salaire").val();
+        var sursalaire = $("#sursalaire").val();
+        var prime_anc = $("#prime_anc").val();
+        var allocance = $("#allocance").val();
+        var prime_trans = $("#prime_trans").val();
+        var forfait_hs = $("#forfait_hs").val();
+        var autre_reve = $("#autre_reve").val();
+        var prime_resp = $("#prime_resp").val();
+        var prime_rend = $("#prime_rend").val();
+        var prime_risque = $("#prime_risque").val();
+        var prime_assi = $("#prime_assi").val();
+        var prime_grati = $("#prime_grati").val();
+        var conge = $("#conge").val();
+        var partigr = $("#part_igr").val();
         var allowance_type = document.getElementsByName('allowance_type[]');
         var allowance_amount = document.getElementsByName('allowance_amount[]');
         //var leave_deduction = $("#leave_deduction").val();
         var tax = $("#tax").val();
         if (tax == '') {
-            var tax = 0;
+
         }
 
         var total_allowance = 0;
+        var cmu = 500;
+        var prime= 20000;
+
+
+
 
         var deduction_type = document.getElementsByName('deduction_type[]');
         var deduction_amount = document.getElementsByName('deduction_amount[]');
@@ -590,6 +641,39 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
         }
 
+        var basic_pay = parseFloat(document.getElementById("salaire").value);
+        var impot = 0;
+        var salaire = basic_pay;
+
+        if (basic_pay > 8000000) {
+            impot += (basic_pay - 8000000) * 0.32;
+            salaire = 8000000;
+        }
+
+        if (basic_pay > 2400000) {
+            impot += (basic_pay - 2400000) * 0.28;
+            salaire = 2400000;
+        }
+
+        if (basic_pay > 800000) {
+            impot += (basic_pay - 800000) * 0.24;
+            salaire = 800000;
+        }
+
+        if (basic_pay > 240000) {
+            impot += (basic_pay - 240000) * 0.21;
+            salaire = 240000;
+        }
+
+        if (basic_pay > 75000) {
+            impot += (basic_pay - 75000) * 0.16;
+            salaire = 75000;
+        }
+
+        document.getElementById("result").innerText = "Impôt: " + impot.toFixed(2);
+
+
+
         for (var j = 0; j < deduction_amount.length; j++) {
 
 
@@ -607,17 +691,55 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         }
 
 
+
 //total_deduction += parseInt(leave_deduction) ;
 
-        var gross_salary = parseFloat(basic_pay) + parseFloat(total_allowance) - parseFloat(total_deduction);
+        // var gross_salary = parseFloat(basic_pay) + parseFloat(total_allowance) - parseFloat(total_deduction);
+        var gross_salary = parseFloat(basic_pay) + parseFloat(sursalaire) + parseFloat(prime_anc) + parseFloat(tax)  + parseFloat(prime_trans) + parseFloat(forfait_hs) + parseFloat(prime_resp) + parseFloat(prime_rend) + parseFloat(prime_risque) + parseFloat(prime_assi) + parseFloat(prime_grati);
+        //var gross_social = parseFloat(basic_pay) + parseFloat(sursalaire) + parseFloat(prime_anc) + parseFloat(tax)  + parseFloat(prime_trans - prime) + parseFloat(forfait_hs) + parseFloat(prime_resp) + parseFloat(prime_rend) + parseFloat(prime_risque) + parseFloat(prime_assi) + parseFloat(prime_grati);
+        //var gross_regime = parseFloat(gross_social) * "0.63";
+        // var total_deduction= parseFloat(gross_regime) + parseFloat(autre_reve);
+        var cmu_s = parseFloat(partigr) *  parseFloat(cmu);
+        var tax = parseFloat(tax);
+        var total_impot = parseFloat(impot);
 
-        var net_salary = parseFloat(basic_pay) + parseFloat(total_allowance) - parseFloat(total_deduction) - parseFloat(tax);
+
+        var prime = parseFloat(prime_trans) - parseFloat(prime);
+
+        var total_social = parseFloat(gross_salary) - parseFloat(prime_trans - prime);
+        var cnps = total_social * 0.0630;
+        var cnps_acci = basic_pay * 0.03;
+        var prest_famille = basic_pay * 0.0575;
+        var taxe_apprend = gross_salary * 0.0075;
+        var fdfp_form = gross_salary * 0.012;
+
+
+        var total_revenu = parseFloat(cmu) + parseFloat(cnps) + parseFloat(cnps_acci) + parseFloat(prest_famille) + parseFloat(taxe_apprend) + parseFloat(fdfp_form);
+
+        var regime_s = parseFloat(total_social) * 0.0630;
+        var net_salary = parseFloat(gross_salary) - parseFloat(total_revenu);
 
         $("#total_allowance").val(total_allowance.toFixed(2));
+        $("#cnps_acci").val(cnps_acci.toFixed(2));
+        $("#prest_famille").val(prest_famille.toFixed(2));
+        $("#taxe_apprend").val(taxe_apprend.toFixed(2));
+        $("#fdfp_form").val(fdfp_form.toFixed(2));
         $("#total_deduction").val(total_deduction.toFixed(2));
         $("#total_allow").html(total_allowance.toFixed(2));
-        $("#total_deduc").html(total_deduction.toFixed(2));
+        //$("#total_deduc").html(total_deduction.toFixed(2));
         $("#gross_salary").val(gross_salary.toFixed(2));
+        $("#cnps").val(cnps.toFixed(2));
+        // $("#gross_social").val(gross_social.toFixed(2));
+        // $("#gross_regime").val(gross_regime.toFixed(2));
+
+        $("#cmu_s").val(cmu_s.toFixed(2));
+        $("#total_revenu").val(total_revenu.toFixed(2));
+        $("#tax").val(tax.toFixed(2));
+        $("#prime").val(prime.toFixed(2));
+        $("#regime_s").val(regime_s.toFixed(2));
+        $("#total_impot").val(total_impot.toFixed(2));
+        $("#total_social").val(total_social.toFixed(2));
+
         $("#net_salary").val(net_salary.toFixed(2));
 
     }
@@ -673,3 +795,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         }
     });
 </script>
+
+
+
+

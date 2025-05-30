@@ -139,34 +139,37 @@
                     <div class="box-body">
                         <div class="mailbox-messages table-responsive">
                             <div class="download_label"><?php echo $this->lang->line('expense_list'); ?></div>
-                            <div class="table-responsive"> 
+                            <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover expense-list" data-export-title="<?php echo $this->lang->line('expense_list'); ?>">
                                     <thead>
-                                        <tr>
-                                            <th><?php echo $this->lang->line('name'); ?>
-                                            </th>
-                                             <!--<th><?php echo $this->lang->line('description'); ?>
+                                    <tr>
+                                        <th><?php echo $this->lang->line('expense_head'); ?>
+                                        </th>
+                                        <th><?php echo $this->lang->line('name'); ?>
+                                        </th>
+                                        <!--<th><?php echo $this->lang->line('description'); ?>
                                             </th>
                                            <th><?php echo $this->lang->line('invoice_no'); ?>
                                             </th>-->
-                                            <th><?php echo $this->lang->line('date'); ?>
-                                            </th>
-                                            <th><?php echo $this->lang->line('expense_head'); ?>
-                                            </th>
-                                            <th>Caisse impactée
-                                            </th>
-                                            <th><?php echo $this->lang->line('amount'); ?>
-                                            </th>
+                                        <th><?php echo $this->lang->line('date'); ?>
+                                        </th>
 
-                                            <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
-                                        </tr>
+                                        <th>Caisse impactée
+                                        </th>
+                                        <th><?php echo $this->lang->line('amount'); ?>
+                                        </th>
+
+                                        <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
+                                    </tr>
                                     </thead>
                                     <tbody>
+
+
 
                                     </tbody>
                                 </table><!-- /.table -->
 
-                            </div>  
+                            </div>
 
                         </div><!-- /.mail-box-messages -->
                     </div><!-- /.box-body -->
@@ -187,9 +190,9 @@
 
 <script>
     ( function ( $ ) {
-    'use strict';
-    $(document).ready(function () {
-        initDatatable('expense-list','admin/expense/getexpenselist',[],[],10);
-    });
-} ( jQuery ) )
+        'use strict';
+        $(document).ready(function () {
+            initDatatable('expense-list','admin/expense/getexpenselist',[],[],10);
+        });
+    } ( jQuery ) )
 </script>

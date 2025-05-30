@@ -94,6 +94,12 @@ if ($language_name != 'en') {
 <script type="text/javascript" src="<?php echo base_url(); ?>backend/dist/datatables/js/ss.custom.js" ></script>
 <!-- <script src="<?php echo base_url(); ?>backend/dist/datatables/js/datetime-moment.js"></script>
 -->
+    <!-- SweetAlert2 Joseph -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
 </body>
 </html>
 <!-- jQuery 3 -->
@@ -343,11 +349,11 @@ if (isset($title)) {
                 //===========
 
                 var __viewModal=$('#viewEventModal');
- var event_start_from = new Date(msg.start_date);
- $('.event_from',__viewModal).data("DateTimePicker").date(event_start_from);
+                var event_start_from = new Date(msg.start_date);
+                $('.event_from',__viewModal).data("DateTimePicker").date(event_start_from);
 
-  var event_end_to = new Date(msg.end_date);
- $('.event_to',__viewModal).data("DateTimePicker").date(event_end_to);
+                var event_end_to = new Date(msg.end_date);
+                $('.event_to',__viewModal).data("DateTimePicker").date(event_end_to);
                 //============
 
                 $("#event_color").val(msg.event_color);
@@ -392,8 +398,6 @@ if (isset($title)) {
                 }
             });
         }));
-
-
     });
 
 
@@ -429,7 +433,6 @@ if (isset($title)) {
                 }
             });
         }));
-
     });
 
     function deleteevent(id, msg) {
@@ -470,6 +473,7 @@ if (isset($title)) {
         }
     });
 
+
     $(document).ready(function () {
         moment.lang('en', {
           week: { dow: start_week }
@@ -494,30 +498,30 @@ if (isset($title)) {
         });
 
         $('body').on('focus',".date_fee", function(){
-        $(this).datepicker({
-            format: date_format,
-            autoclose: true,
-            language: '<?php echo $language_name; ?>',
-            endDate: '+0d',
-              weekStart : start_week,
-            todayHighlight: true
+            $(this).datepicker({
+                format: date_format,
+                autoclose: true,
+                language: '<?php echo $language_name; ?>',
+                endDate: '+0d',
+                weekStart : start_week,
+                todayHighlight: true
+            });
         });
-      });
 
         $('.datetime_twelve_hour').datetimepicker({
                format:  calendar_date_time_format + ' hh:mm a'
         });
 
 
-            $("#event_date").daterangepicker({
+        $("#event_date").daterangepicker({
             timePickerIncrement: 5,
             locale: {
             format: calendar_date_time_format
             }
-           });
+        });
 
 
-///================
+        ///================
 
         $('.event_from').datetimepicker({
                format:  calendar_date_time_format + ' hh:mm a'
@@ -526,7 +530,7 @@ if (isset($title)) {
         $('.event_to').datetimepicker({
                format:  calendar_date_time_format + ' hh:mm a'
         });
-//==============
+        //==============
 
 
     });

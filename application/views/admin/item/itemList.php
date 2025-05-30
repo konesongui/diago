@@ -30,10 +30,11 @@
                                 <?php echo $this->customlib->getCSRF(); ?>
 
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Produit</label><small class="req"> *</small>
+                                    <label for="name">Produit</label><small class="req"> *</small>
                                     <input autofocus="" id="name" name="name" placeholder="" type="text" class="form-control"  value="<?php echo set_value('name'); ?>" />
                                     <span class="text-danger"><?php echo form_error('name'); ?></span>
                                 </div>
+
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Catégorie de produit</label><small class="req"> *</small>
 
@@ -55,14 +56,16 @@
                                     </select>
                                     <span class="text-danger"><?php echo form_error('item_category_id'); ?></span>
                                 </div>
-                                <div class="form-group" hidden>
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('unit') ?></label><small class="req"> *</small>
+
+                                <div class="form-group">
+                                    <label for="unit"><?php echo $this->lang->line('unit') ?></label>
                                     <input autofocus="" id="unit" name="unit" placeholder="" type="text" class="form-control"  value="<?php echo set_value('unit'); ?>" />
                                     <span class="text-danger"><?php echo form_error('unit'); ?></span>
                                 </div>
 
+                                <!-- Name Field -->
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
+                                    <label for="description"><?php echo $this->lang->line('description'); ?></label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"></span>
                                 </div>
@@ -91,13 +94,9 @@
                                     <thead>
                                         <tr>
                                             <th>Produit</th>
-                                            <th><?php echo $this->lang->line('category'); ?> de produit
-                                            </th>
-                                            <!--<th><?php echo $this->lang->line('unit'); ?>
-                                            </th>-->
-                                            <th>Quantité disponible
-                                            </th>
-
+                                            <th><?php echo $this->lang->line('category'); ?> de produit</th>
+                                            <th><?php echo $this->lang->line('unit'); ?></th>
+                                            <th>Description</th>
                                             <th class="text-right"><?php echo $this->lang->line('action'); ?></th>
                                         </tr>
                                     </thead>
@@ -109,6 +108,8 @@
                                             <?php
                                         } else {
                                             foreach ($itemlist as $items) {
+                                                // var_dump($items);
+                                                // exit;
                                                 ?>
                                                 <tr>
                                                     <td class="mailbox-name">
@@ -134,21 +135,14 @@
                                                         <?php echo $items['item_category']; ?>
 
                                                     </td>
-                                                    <!--<td class="mailbox-name">
+                                                    <td class="mailbox-name">
                                                         <?php echo $items['unit']; ?>
 
-                                                    </td>-->
-                                                    <td class="mailbox-name">
-                                                        <?php
-                                                        echo $items['added_stock'] - $items['issued'];
-                                                        ;
-                                                        ?>
-
                                                     </td>
-
-
-
-
+                                                    <td class="mailbox-name">
+                                                        <?php echo $items['description'] ; ?>
+                                                    </td>
+                                                    
                                                     <td class="mailbox-date pull-right">
                                                         <?php if ($this->rbac->hasPrivilege('item', 'can_edit')) { ?> 
                                                             <a data-placement="left" href="<?php echo base_url(); ?>admin/item/edit/<?php echo $items['id'] ?>" class="btn btn-default btn-xs"  data-toggle="tooltip" title="<?php echo $this->lang->line('edit'); ?>">

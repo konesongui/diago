@@ -12,132 +12,132 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
     </section>
     <!-- Main content -->
     <section class="content">
-         <?php $this->load->view('reports/_human_resource');?>
+        <?php $this->load->view('reports/_human_resource');?>
         <div class="row">
             <div class="col-md-12">
                 <div class="box removeboxmius">
                     <div class="box-header ptbnull"></div>
-                      <div class="box-header with-border">
+                    <div class="box-header with-border">
                         <h3 class="box-title"><i class="fa fa-search"></i> <?php echo $this->lang->line('select_criteria'); ?></h3>
                     </div>
-                    <div class="box-body">                      
-                           
-                                <form role="form" action="<?php echo site_url('admin/payroll/payrollreport') ?>" method="post" class="">
-                                    <?php echo $this->customlib->getCSRF(); ?>
-                                    <div class="col-sm-12">
-                                     <div class="row">
-                                        <div class="col-sm-4">
-                                          <div class="form-group">  
+                    <div class="box-body">
+
+                        <form role="form" action="<?php echo site_url('admin/payroll/payrollreport') ?>" method="post" class="">
+                            <?php echo $this->customlib->getCSRF(); ?>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
                                             <label><?php echo $this->lang->line('role'); ?></label>
                                             <select name="role" class="form-control">
                                                 <option value="select"><?php
                                                     echo $this->lang->line(
-                                                            'select')
+                                                        'select')
                                                     ?></option>
                                                 <?php foreach ($role as $rolekey => $rolevalue) { ?>
                                                     <option <?php
-                                                        if ($rolevalue["type"] == $role_select) {
-                                                            echo "selected";
-                                                        }
-                                                        ?> value="<?php echo $rolevalue["type"] ?>"><?php echo $rolevalue["type"]; ?></option>
-<?php } ?>   
+                                                    if ($rolevalue["type"] == $role_select) {
+                                                        echo "selected";
+                                                    }
+                                                    ?> value="<?php echo $rolevalue["type"] ?>"><?php echo $rolevalue["type"]; ?></option>
+                                                <?php } ?>
                                             </select>
                                             <span class="text-danger"><?php echo form_error('role'); ?></span>
-                                           </div> 
                                         </div>
-                                        <div class="col-sm-4">
-                                          <div class="form-group">  
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
                                             <label><?php echo $this->lang->line('month'); ?></label>
                                             <select name="month" class="form-control">
                                                 <option value=""><?php
                                                     echo $this->lang->line(
-                                                            'select')
-?></option>
-                                                    <?php foreach ($monthlist as $monthkey => $monthvalue) { ?>
+                                                        'select')
+                                                    ?></option>
+                                                <?php foreach ($monthlist as $monthkey => $monthvalue) { ?>
                                                     <option <?php
                                                     if ($month == $monthvalue) {
                                                         echo "selected";
                                                     }
                                                     ?> value="<?php echo $monthvalue ?>"><?php echo $monthvalue; ?></option>
-<?php } ?>   
+                                                <?php } ?>
                                             </select>
                                             <span class="text-danger"><?php echo form_error('month'); ?></span>
-                                          </div>
                                         </div>
-                                        <div class="col-sm-4">
-                                          <div class="form-group">   
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
                                             <label><?php echo $this->lang->line('year'); ?><small class="req"> *</small></label>
                                             <select name="year" class="form-control">
                                                 <option value=""><?php
                                                     echo $this->lang->line(
-                                                            'select')
+                                                        'select')
                                                     ?></option>
-<?php foreach ($yearlist as $yearkey => $yearvalue) { ?>
+                                                <?php foreach ($yearlist as $yearkey => $yearvalue) { ?>
                                                     <option <?php
-    if (($year == $yearvalue["year"]) ) {
-        echo "selected";
-    }
-    ?> value="<?php echo $yearvalue["year"]; ?>"><?php echo $yearvalue["year"]; ?></option>
-<?php } ?>   
+                                                    if (($year == $yearvalue["year"]) ) {
+                                                        echo "selected";
+                                                    }
+                                                    ?> value="<?php echo $yearvalue["year"]; ?>"><?php echo $yearvalue["year"]; ?></option>
+                                                <?php } ?>
                                             </select>
                                             <span class="text-danger"><?php echo form_error('year'); ?></span>
-                                          </div>  
                                         </div>
-                                    
-                                   
-                                        <div class="col-sm-12"> 
-                                            <div class="form-group">
+                                    </div>
+
+
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
                                             <button type="submit" name="search" value="search_filter" class="btn btn-primary btn-sm checkbox-toggle pull-right"><i class="fa fa-search"></i> <?php echo $this->lang->line('search'); ?></button>
                                         </div>
                                     </div>
-                                  </div>  
-                                 </div>  
-                                </form>
-                           
-                    </div><!--./box-body--> 
-                
-<?php if (isset($result)) {
-    ?>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div><!--./box-body-->
+
+                    <?php if (isset($result)) {
+                    ?>
                     <div class="">
-                         <div class="box-header ptbnull"></div>
+                        <div class="box-header ptbnull"></div>
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-users"></i> <?php echo $this->lang->line('payroll_report'); ?></h3>
-                        </div>      
-                        <div class="box-body table-responsive">     
+                        </div>
+                        <div class="box-body table-responsive">
                             <div class="tab-content">
                                 <div class="tab-pane active table-responsive" id="tab_parent">
                                     <div class="download_label"><?php echo $this->lang->line('payroll'); ?> <?php echo $this->lang->line('report_for')."<br>"; $this->customlib->get_postmessage(); ?></div>
                                     <table class="table table-striped table-bordered table-hover example table-fixed-header">
                                         <thead class="header">
-                                            <tr>
+                                        <tr>
 
-                                                <th><?php echo $this->lang->line('name'); ?></th>
-                                                <th><?php echo $this->lang->line('role'); ?></th>
-                                                <th><?php echo $this->lang->line('designation'); ?></th>
-                                                <th><?php echo $this->lang->line('month'); ?> - <?php echo $this->lang->line('year') ?></th>
+                                            <th><?php echo $this->lang->line('name'); ?></th>
+                                            <th><?php echo $this->lang->line('role'); ?></th>
+                                            <th><?php echo $this->lang->line('designation'); ?></th>
+                                            <th><?php echo $this->lang->line('month'); ?> - <?php echo $this->lang->line('year') ?></th>
 
-                                                <th><?php echo $this->lang->line('payslip'); ?> #</th>
-                                                <th class="text text-right"><?php echo $this->lang->line('basic_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th><?php echo $this->lang->line('payslip'); ?> #</th>
+                                            <th class="text text-right"><?php echo $this->lang->line('basic_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
 
-                                                <th class="text text-right"><?php echo $this->lang->line('earning'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                                <th class="text text-right"><?php echo $this->lang->line('deduction'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                                <th class="text text-right"><?php echo $this->lang->line('gross_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                                <th class="text text-right"><?php echo $this->lang->line('tax'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                                <th class="text text-right"><?php echo $this->lang->line('net_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
-                                            </tr>
+                                            <th class="text text-right"><?php echo $this->lang->line('earning'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th class="text text-right"><?php echo $this->lang->line('deduction'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th class="text text-right"><?php echo $this->lang->line('gross_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th class="text text-right"><?php echo $this->lang->line('tax'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                            <th class="text text-right"><?php echo $this->lang->line('net_salary'); ?> <span><?php echo "(" . $currency_symbol . ")"; ?></span></th>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                            <?php
-                                            $basic = 0;
-                                            $gross = 0;
-                                            $net = 0;
-                                            $earnings = 0;
-                                            $deduction = 0;
-                                            $tax = 0;
+                                        <?php
+                                        $basic = 0;
+                                        $gross = 0;
+                                        $net = 0;
+                                        $earnings = 0;
+                                        $deduction = 0;
+                                        $tax = 0;
 
-                                            if (empty($result)) {
-                                                ?>
-                                           
+                                        if (empty($result)) {
+                                            ?>
+
                                             <?php
                                         } else {
                                             $count = 1;
@@ -162,16 +162,16 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                         <div class="fee_detail_popover" style="display: none"><?php echo $this->lang->line('staff_id'); ?><?php echo ": " . $value['employee_id']; ?></div>
                                                     </td>
                                                     <td>
-            <?php echo $value['user_type']; ?>
+                                                        <?php echo $value['user_type']; ?>
                                                     </td>
                                                     <td>
                                                         <span  data-original-title="" title=""><?php echo $value['designation'];
-            ;
-            ?></span>
+                                                            ;
+                                                            ?></span>
 
                                                     </td>
                                                     <td>
-            <?php echo $value['month'] . " - " . $value['year']; ?>
+                                                        <?php echo $value['month'] . " - " . $value['year']; ?>
                                                     </td>
                                                     <td>
 
@@ -184,7 +184,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                     </td>
 
                                                     <td class="text text-right">
-            <?php echo (number_format($value['total_allowance'], 2)); ?>
+                                                        <?php echo (number_format($value['total_allowance'], 2)); ?>
                                                     </td>
                                                     <td class="text text-right">
                                                         <?php
@@ -196,22 +196,22 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                         <?php echo number_format($value['basic'] + $value['total_allowance']-$t, 2); ?>
                                                     </td>
                                                     <td class="text text-right">
-            <?php
-            $t = ($value['tax']);
-            echo (number_format($t, 2))
-            ?>
+                                                        <?php
+                                                        $t = ($value['tax']);
+                                                        echo (number_format($t, 2))
+                                                        ?>
                                                     </td>
                                                     <td class="text text-right">
-            <?php
-            $t = ($value['net_salary']);
-            echo (number_format($t, 2))
-            ?>
+                                                        <?php
+                                                        $t = ($value['net_salary']);
+                                                        echo (number_format($t, 2))
+                                                        ?>
                                                     </td>
                                                 </tr>
-            <?php
-            $count++;
-        }
-        ?>
+                                                <?php
+                                                $count++;
+                                            }
+                                            ?>
                                             <tr class="box box-solid total-bg">
 
                                                 <td></td>
@@ -230,21 +230,21 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
 
                                             </tr>
-                    <?php } ?>
+                                        <?php } ?>
                                         </tbody>
                                     </table>
-                                </div>    
+                                </div>
 
 
                             </div>
 
                         </div>
-                    </div><!--./tabs--> 
-                  </div><!--./box box-primary-->  
-    <?php
-}
-?>
-            </div>  
+                    </div><!--./tabs-->
+                </div><!--./box box-primary-->
+                <?php
+                }
+                ?>
+            </div>
         </div>
 
     </section>
@@ -252,7 +252,7 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 
 <script type="text/javascript">
     $(document).ready(function () {
-      
+
         $('.detail_popover').popover({
             placement: 'right',
             title: '',

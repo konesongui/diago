@@ -62,6 +62,7 @@ class Expense extends Admin_Controller
                 );
 
                 $insert_id = $this->expense_model->add($data);
+                $data['expenselist'] = $this->expense_model->getexpenselist();
 
                 // Mise à jour de la ligne dans la base de données
                 $this->income_model->updateP(['id' => $incomeId], [
@@ -313,19 +314,20 @@ class Expense extends Admin_Controller
                          <i class='fa fa-download'></i> </a>" ;
                 }
                 $row       = array();
+                $row[]     = $value->exp_category;
                 $row[]     = $value->name;
 
-               /* if ($value->note == "") {
-                     $row[]     = $this->lang->line('no_description');
-                 }else{
-                     $row[]     = $value->note;
-                }*/
+                /* if ($value->note == "") {
+                      $row[]     = $this->lang->line('no_description');
+                  }else{
+                      $row[]     = $value->note;
+                 }*/
 
-               /* $row[]     = $value->invoice_no; */
+                /* $row[]     = $value->invoice_no; */
                 $row[]     = date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date));
-                $row[]     = $value->exp_category;
+
                 $row[]     = $value->income_name;
-                $row[]     = $currency_symbol . $value->amount;
+                $row[]     = $value->amount .$currency_symbol;
                 /*$row[]     = $value->income_user;*/
                 $row[]     = $documents.' ' .$editbtn . ' ' . $deletebtn;
                 $dt_data[] = $row;
@@ -373,8 +375,8 @@ class Expense extends Admin_Controller
 
             $search_type = $this->input->post('search_type');
             if($search_type=='period'){
-            $date_from= $this->input->post('date_from');
-            $date_to= $this->input->post('date_to');
+                $date_from= $this->input->post('date_from');
+                $date_to= $this->input->post('date_to');
             }
 
             $params      = array('button_type' => $button_type, 'search_type'=>$search_type, 'search_text' => $search_text,'date_from' => $date_from, 'date_to' => $date_to);

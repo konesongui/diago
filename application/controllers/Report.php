@@ -475,7 +475,7 @@ class Report extends Admin_Controller
         $this->session->set_userdata('subsub_menu', 'Reports/library/bookduereport');
         $data['searchlist']  = $this->customlib->get_searchtype();
         $data['sch_setting'] = $this->sch_setting_detail;
-		$data['members']    = array('' => $this->lang->line('all'), 'student' => $this->lang->line('student'), 'teacher' => $this->lang->line('teacher'));
+        $data['members']    = array('' => $this->lang->line('all'), 'student' => $this->lang->line('student'), 'teacher' => $this->lang->line('teacher'));
         $this->load->view('layout/header', $data);
         $this->load->view('reports/bookduereport', $data);
         $this->load->view('layout/footer', $data);
@@ -903,6 +903,47 @@ class Report extends Admin_Controller
         $this->session->set_userdata('top_menu', 'Reports');
         $this->session->set_userdata('sub_menu', 'Reports/finance');
         $this->session->set_userdata('subsub_menu', 'Reports/finance/expense');
+
+        $data['searchlist']  = $this->customlib->get_searchtype();
+        $data['date_type']   = $this->customlib->date_type();
+        $data['date_typeid'] = '';
+
+        $this->form_validation->set_rules('search_type', $this->lang->line('search') . " " . $this->lang->line('type'), 'trim|required|xss_clean');
+
+        if ($this->form_validation->run() == false) {
+            $dates               = $this->customlib->get_betweendate('this_year');
+            $data['search_type'] = '';
+            // var_dump($dates);
+            // exit;
+        } else {
+            $dates               = $this->customlib->get_betweendate($_POST['search_type']);
+            $data['search_type'] = $_POST['search_type'];
+
+            // var_dump($dates);
+            // exit;
+        }
+
+        $start_date = date('Y-m-d', strtotime($dates['from_date']));
+        $end_date   = date('Y-m-d', strtotime($dates['to_date']));
+
+        // var_dump($end_date);
+        // exit;
+
+        $data['label'] = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
+
+        $this->load->view('layout/header', $data);
+        $this->load->view('reports/expense', $data);
+        $this->load->view('layout/footer', $data);
+    }
+
+    public function caisse()
+    {
+        // var_dump($_POST['search_type']);
+        // exit;
+
+        $this->session->set_userdata('top_menu', 'Reports');
+        $this->session->set_userdata('sub_menu', 'Reports/finance');
+        $this->session->set_userdata('subsub_menu', 'Reports/finance/caisse');
         $data['searchlist']  = $this->customlib->get_searchtype();
         $data['date_type']   = $this->customlib->date_type();
         $data['date_typeid'] = '';
@@ -930,7 +971,7 @@ class Report extends Admin_Controller
 
         $data['label'] = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
         $this->load->view('layout/header', $data);
-        $this->load->view('reports/expense', $data);
+        $this->load->view('reports/caisse', $data);
         $this->load->view('layout/footer', $data);
     }
 
@@ -960,6 +1001,7 @@ class Report extends Admin_Controller
 
         $data['label']        = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
         $data['payment_mode'] = $this->payment_mode;
+        $data['sch_setting'] = $this->sch_setting_detail;
 
         $result              = $this->payroll_model->getbetweenpayrollReport($start_date, $end_date);
         $data['payrollList'] = $result;
@@ -2408,9 +2450,10 @@ class Report extends Admin_Controller
         $end_date   = date('Y-m-d', strtotime($dates['to_date']));
 
         $data['label'] = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
-
+        $data['sch_setting'] = $this->sch_setting_detail;
         // Récupérer la liste des revenus avec leurs réapprovisionnements
         $incomeList = $this->income_model->getIncomeWithReappro($start_date, $end_date);
+
 
         $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
         $dt_data         = array();
@@ -2430,11 +2473,11 @@ class Report extends Admin_Controller
                 // Ligne principale pour l'entrée de caisse
                 $row   = array();
 
-                $row[] = "<b>" . mb_strtoupper($income['income']->name) . "</b>";
+                $row[] = $income['income']->name;
                 $row[] = $income['income']->invoice_no;
                 $row[] = $income['income']->income_category;
                 $row[] = date($this->customlib->getSchoolDateFormat(), strtotime($income['income']->date));
-                $row[] = "<b>" . $currency_symbol .' '. $income['income']->amount . "</b>" ;
+                $row[] = $income['income']->amount;
 
                 $dt_data[] = $row;
 
@@ -2453,9 +2496,9 @@ class Report extends Admin_Controller
                         $reappro_row   = array();
                         $reappro_row[] = "" . $reappro->reason; // Indentation pour différencier les réappros
                         $reappro_row[] = $reappro->user ;
-                        $reappro_row[] = "<b style='color: red;font-family: Roboto Sans-Serif Helvetica Neue Helvetica Arial sans-serif;font-size: 15px'>Appro<b/>";
+                        $reappro_row[] = "Appro";
                         $reappro_row[] = date($this->customlib->getSchoolDateFormat(), strtotime($reappro->created_at));
-                        $reappro_row[] = $currency_symbol .' '. $reappro->amount;
+                        $reappro_row[] = $reappro->amount;
 
                         $dt_data[] = $reappro_row;
                     }
@@ -2468,7 +2511,7 @@ class Report extends Admin_Controller
             $footer_row[] = "";
             $footer_row[] = "";
             $footer_row[] = "<b>" . mb_strtoupper($this->lang->line('grand_total')) . "</b>";
-            $footer_row[] = "<b>" . ($currency_symbol .' '. number_format($grand_total, 2, '.', '')) . "</b>";
+            $footer_row[] = "<b>" . (number_format($grand_total, 2, '.', '')) . "</b>";
             $dt_data[]    = $footer_row;
         }
 
@@ -2512,6 +2555,7 @@ class Report extends Admin_Controller
         $end_date   = date('Y-m-d', strtotime($dates['to_date']));
 
         $data['label'] = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
+        $data['sch_setting'] = $this->sch_setting_detail;
         $expenseList   = $this->expense_model->search("", $start_date, $end_date);
         $m             = json_decode($expenseList);
         // $m   = $this->expense_model->search("", $start_date, $end_date);
@@ -2539,17 +2583,17 @@ class Report extends Admin_Controller
 
 
                 $row[]     = $value->user;
-                $row[]     = $value->exp_category;
+                //$row[]     = $value->exp_category;
 
-                $row[]     = $currency_symbol . $value->amount;
+                $row[]     = $value->amount;
                 $dt_data[] = $row;
             }
             $footer_row[] = "";
-            $footer_row[] = "";
+
             $footer_row[] = "";
             $footer_row[] = "";
             $footer_row[] = $this->lang->line('grand_total');
-            $footer_row[] = ($currency_symbol . number_format($grand_total, 2, '.', ''));
+            $footer_row[] = (number_format($grand_total, 2, '.', ''));
             $dt_data[]    = $footer_row;
         }
 
@@ -2561,6 +2605,185 @@ class Report extends Admin_Controller
         );
         echo json_encode($json_data);
     }
+
+
+    public function getcaisselistbydt()
+    {
+        $search_type = $this->input->post('search_type');
+        $date_from   = $this->input->post('date_from');
+        $date_to     = $this->input->post('date_to');
+
+
+        // var_dump($search_type);
+        // exit;
+
+        if ($search_type == "") {
+            $dates               = $this->customlib->get_betweendate('this_year');
+            $data['search_type'] = '';
+
+        } else {
+            $dates               = $this->customlib->get_betweendate($_POST['search_type']);
+            $data['search_type'] = $_POST['search_type'];
+        }
+
+        // var_dump($dates);
+        // var_dump($data['search_type']);
+        // exit;
+
+        $start_date = date('Y-m-d', strtotime($dates['from_date']));
+        $end_date   = date('Y-m-d', strtotime($dates['to_date']));
+
+        $data['label'] = date($this->customlib->getSchoolDateFormat(), strtotime($start_date)) . " " . $this->lang->line('to') . " " . date($this->customlib->getSchoolDateFormat(), strtotime($end_date));
+
+        $expenseList   = $this->expense_model->search("", $start_date, $end_date);
+        $data['sch_setting'] = $this->sch_setting_detail;
+        $m             = json_decode($expenseList);
+        $incomeList = $this->income_model->getIncomeWithReappro($start_date, $end_date);
+
+
+        // $m   = $this->expense_model->search("", $start_date, $end_date);
+        // var_dump($start_date);
+        // var_dump($end_date);
+        // var_dump($data['label']);
+        // var_dump($m);
+        // exit;
+
+
+        $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
+        $dt_data1         = array();
+        $grand_tota     = 0;
+        $grand_total     = 0;
+        $grand_totae     = 0;
+
+        foreach ($incomeList as $income) {
+
+            $grand_tota +=  $income['income']->amount;
+
+            // var_dump($income);
+            // var_dump($income['income']->name);
+            // exit;
+
+            // Ligne principale pour l'entrée de caisse
+            $row1   = array();
+
+            $row1[] = $income['income']->name;
+            $row1[] = date($this->customlib->getSchoolDateFormat(), strtotime($income['income']->date));
+            $row1[] = $income['income']->name;
+            $row1[] = $income['income']->amount;
+            $row1[] = "";
+
+
+
+            $dt_data[] = $row1;
+
+            // Ajouter les réapprovisionnements pour cette entrée
+            if (!empty($income['income_processing'])) {
+                // var_dump($income);
+                // var_dump($income['income_processing']);
+                // exit;
+
+                foreach ($income['income_processing'] as $reappro) {
+
+                    $grand_totae += $reappro->amount+$grand_tota;
+                    // var_dump($reappro);
+                    // exit;
+
+                    $reappro_row2   = array();
+                    $reappro_row2[] = "" . $reappro->reason; // Indentation pour différencier les réappros
+                    $reappro_row2[] = date($this->customlib->getSchoolDateFormat(), strtotime($reappro->created_at));
+
+
+                    $reappro_row2[] = "Appro";
+                    $reappro_row2[] = $reappro->amount;
+                    $reappro_row2[] = "";
+
+                    $dt_data[] = $reappro_row2;
+                }
+            }
+        }
+        if (!empty($m->data)) {
+            foreach ($m->data as $key => $value) {
+                $grand_total += $value->amount;
+                $grand_tota += $value->income_amount_re;
+
+                $row3       = array();
+                $row3[]     = $value->income_name;
+                $row3[]     = date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date));
+
+                $row3[]     = $value->name;
+
+                $row3[]     = "";
+                $row3[]     = $value->amount;
+
+
+                $dt_data[] = $row3;
+
+
+
+            }
+
+            $footer_row4[] = "";
+            $footer_row4[] = "";
+            $footer_row4[] = "<b style='color: black;font-family: Roboto Sans-Serif Helvetica Neue Helvetica Arial sans-serif bold;font-size: 15px'>Total des recettes</b>";
+
+            $footer_row4[] = (number_format("", 2, '.', '')); $footer_row4[] = (number_format($grand_totae, 2, '.', '')); $footer_row[] = (number_format($grand_total, 2, '.', ''));
+
+            $footer_row4[] = "";
+
+
+
+            $dt_data[]    = $footer_row4;
+
+            //TOTAL DEPENSES
+
+            $footer_row5[] = "";
+            $footer_row5[] = "";
+
+            $footer_row5[] = "<b style='color: black;font-family: Roboto Sans-Serif Helvetica Neue Helvetica Arial sans-serif bold;font-size: 15px'>Total des dépenses</b>";
+
+            $footer_row5[] = (number_format("", 2, '.', '')); $footer_row5[] = (number_format($grand_total, 2, '.', '')); $footer_row[] = (number_format($grand_total, 2, '.', ''));
+
+            $footer_row5[] = "";
+
+
+            $dt_data[]    = $footer_row5;
+
+            //SOLDE
+
+            //TOTAL DEPENSES
+
+            $footer_row6[] = "";
+            $footer_row6[] = "";
+            $footer_row6[] = "<b style='color: black;font-family: Roboto Sans-Serif Helvetica Neue Helvetica Arial sans-serif bold;font-size: 15px'>Solde Total</b> ($currency_symbol)";
+
+            $footer_row6[] = (number_format("", 2, '.', '')); $footer_row6[] = (number_format($grand_totae - $grand_total, 2, '.', '')); $footer_row[] = (number_format($grand_total, 2, '.', ''));
+
+            $footer_row6[] = "";
+
+
+            $dt_data[]    = $footer_row6;
+
+
+
+
+
+
+
+        }
+
+        $json_data = array(
+            "draw"            => intval($m->draw),
+            "recordsTotal"    => intval($m->recordsTotal),
+            "recordsFiltered" => intval($m->recordsFiltered),
+
+            "data"            => $dt_data,
+
+
+
+        );
+        echo json_encode($json_data);
+    }
+
 
     /* this function is used to get and return income group report parameter without applying any validation */
     public function getgroupreportparam()

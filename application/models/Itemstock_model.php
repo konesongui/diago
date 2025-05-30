@@ -129,4 +129,36 @@ class Itemstock_model extends MY_Model {
         return $this->datatables->generate('json');   
     }
 
+    /**
+     * Récupère les données de stock pour l'affichage DataTables
+     * 
+     * @return string Format JSON pour DataTables
+     */
+    public function getListData() 
+    {
+        $this->datatables
+            ->select('
+                stock.id,
+                stock.item_id,
+                item.name as item_name,
+                stock.store_id,
+                item_store.item_store as store_name,
+                stock.initial_quantity,
+                stock.current_quantity,
+                stock.weighted_avg_price,
+                stock.status,
+                stock.created_at,
+                stock.updated_at
+            ')
+            ->from('stock')
+            ->join('item', 'item.id = stock.item_id')
+            ->join('item_store', 'item_store.id = stock.store_id', 'left')
+            ->where('stock.status', 1)
+            ->searchable('item.name, item_store.item_store, stock.current_quantity, stock.weighted_avg_price')
+            ->orderable('item.name, item_store.item_store, stock.current_quantity, stock.weighted_avg_price, stock.created_at')
+            ->sort('stock.created_at', 'desc');
+
+        return $this->datatables->generate('json');
+    }
+
 }

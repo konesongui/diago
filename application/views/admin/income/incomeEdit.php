@@ -33,8 +33,8 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                 if (isset($error_message)) {
                                     echo "<div class='alert alert-danger'>" . $error_message . "</div>";
                                 }
-                                ?>   
-                                <?php echo $this->customlib->getCSRF(); ?>                       
+                                ?>
+                                <?php echo $this->customlib->getCSRF(); ?>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('income_head'); ?></label>
                                     <select autofocus="" id="inc_head_id" name="inc_head_id" class="form-control" >
@@ -47,10 +47,10 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                                 echo "selected =selected";
                                             }
                                             ?>><?php echo $inchead['income_category'] ?></option>
-                                                    <?php
-                                                    $count++;
-                                                }
-                                                ?>
+                                            <?php
+                                            $count++;
+                                        }
+                                        ?>
                                     </select>
                                     <span class="text-danger"><?php echo form_error('inc_head_id'); ?></span>
                                 </div>
@@ -75,25 +75,27 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                                     <span class="text-danger"><?php echo form_error('amount'); ?></span>
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Solde restant<small class="req"> *</small></label>
+                                    <input id="amount_re" name="amount_re" placeholder="" type="number" class="form-control"  value="<?php echo set_value('amount_re', $income['amount_re']); ?>" />
+                                    <span class="text-danger"><?php echo form_error('amount_re'); ?></span>
+                                </div>
+
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('attach_document'); ?></label>
                                     <input id="documents" name="documents" placeholder="" type="file" class="filestyle form-control"  value="<?php echo set_value('documents'); ?>" />
                                     <span class="text-danger"><?php echo form_error('documents'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?><?php echo set_value('description', $income['note']) ?></textarea>
                                     <span class="text-danger"><?php echo form_error('description'); ?></span>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Status</label>
-                                    <select autofocus="" id="status" name="status" class="form-control" >
-                                        <option value=""><?php echo $this->lang->line('select'); ?></option>
-                                        <option value="Ouvert">Ouvert</option>
-                                        <option value="Fermer">Fermer</option>
-
-                                    </select>
+                                    <label for="exampleInputEmail1">Statut<small class="req"> *</small></label>
+                                    <input id="status" name="status" placeholder="" type="text" class="form-control"  value="<?php echo set_value('status', $income['status']); ?>" />
                                     <span class="text-danger"><?php echo form_error('status'); ?></span>
                                 </div>
+
                             </div><!-- /.box-body -->
 
 
@@ -124,23 +126,22 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="table-responsive mailbox-messages">
-                           <table class="table table-striped table-bordered table-hover income-list" data-export-title="<?php echo $this->lang->line('income_list'); ?>">
+                            <table class="table table-striped table-bordered table-hover income-list" data-export-title="<?php echo $this->lang->line('income_list'); ?>">
                                 <thead>
-                                    <tr>
-                                        <th><?php echo $this->lang->line('name'); ?>
-                                        </th>
-                                        <th><?php echo $this->lang->line('description'); ?>
-                                        </th>
-                                        <!--<th><?php echo $this->lang->line('invoice_no'); ?>
-                                        </th>-->
-                                        <th><?php echo $this->lang->line('date'); ?>
-                                        </th>
-                                        <th><?php echo $this->lang->line('income_head'); ?>
-                                        </th>
-                                        <th><?php echo $this->lang->line('amount'); ?>
-                                        </th>
-                                        <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
-                                    </tr>
+                                <tr>
+                                    <th><?php echo $this->lang->line('name'); ?>
+                                    </th>
+                                    <th><?php echo $this->lang->line('date'); ?>
+                                    </th>
+
+                                    <th><?php echo $this->lang->line('income_head'); ?>
+                                    </th>
+                                    <th><?php echo $this->lang->line('amount'); ?>
+                                    </th>
+                                    <th>Solde restant
+                                    </th>
+                                    <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
@@ -165,9 +166,9 @@ $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 </script>
 <script>
     ( function ( $ ) {
-    'use strict';
-    $(document).ready(function () {
-        initDatatable('income-list','admin/income/getincomelist',[],[],100);
-    });
-} ( jQuery ) )
+        'use strict';
+        $(document).ready(function () {
+            initDatatable('income-list','admin/income/getincomelist',[],[],100);
+        });
+    } ( jQuery ) )
 </script>

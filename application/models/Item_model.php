@@ -15,7 +15,7 @@ class Item_model extends MY_Model
 
     public function getItemByCategory($item_category_id)
     {
-        $this->db->select('item.id,item.name,item.item_category_id,item_category.item_category,item_category.id as `item_category_id`');
+        $this->db->select('item.id,item.name,item.unit,item.unit_price,item.item_category_id,item_category.item_category,item_category.id as `item_category_id`');
         $this->db->from('item');
         $this->db->join('item_category', 'item_category.id = item.item_category_id');
         $this->db->where('item.item_category_id', $item_category_id);

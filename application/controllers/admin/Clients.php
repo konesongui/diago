@@ -45,7 +45,7 @@ class Clients extends Admin_Controller {
         $this->form_validation->set_rules('name', $this->lang->line('name'), 'trim|required|xss_clean');
         $this->form_validation->set_rules('phone', $this->lang->line('phone'), 'trim|numeric|xss_clean');
         $this->form_validation->set_rules('email', $this->lang->line('email'), 'trim|xss_clean|valid_email');
-        $this->form_validation->set_rules('contact_person_phone', $this->lang->line('phone'), 'trim|numeric|xss_clean');
+       // $this->form_validation->set_rules('contact_person_phone', $this->lang->line('phone'), 'trim|xss_clean');
         $this->form_validation->set_rules('contact_person_email', $this->lang->line('email'), 'trim|xss_clean|valid_email');
 
 

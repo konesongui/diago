@@ -119,7 +119,7 @@ class Generalcall extends Admin_Controller {
                 $editbtn   = '';
                 $deletebtn = '';
                 $viewbtn = '' ;
-                
+
                 $viewbtn = "<a data-placement='left' onclick='getRecord(".$value->id.")' class='btn btn-default btn-xs' data-target='#calldetails' data-toggle='modal'  title='".$this->lang->line('view')."'><i class='fa fa-reorder'></i></a>";
 
                 if($this->rbac->hasPrivilege('phone_call_log', 'can_edit')) {
@@ -131,17 +131,28 @@ class Generalcall extends Admin_Controller {
                 }
                 $row       = array();
                 $row[]     = $value->name;
-                $row[]     = $value->contact; 
+                $row[]     = $value->contact;
                 $row[]     = date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date));
-                 if($value->follow_up_date!='' && $value->follow_up_date!='0000-00-00'){
+                if($value->follow_up_date!='' && $value->follow_up_date!='0000-00-00'){
                     $row[]= date($this->customlib->getSchoolDateFormat(), $this->customlib->dateyyyymmddTodateformat($value->date));
                 }else{
                     $row[]="" ;
                 }
-                $row[]     = $value->call_type;
 
-               
-                $row[]     = $viewbtn.' '.$editbtn . ' ' . $deletebtn;
+                $row[]     = $value->note;
+
+                if ($value->call_type=="Incoming") {
+                    $row[]     =  "<h6><span class='label label-warning' style='background-color: #ff9801 !important; border-radius: 2px'>Appel entrant<span/></h6>";
+                }
+                else{
+                    $row[]     = "<h6><span class='label label-warning' style='background-color: #66aa18 !important; border-radius: 2px'>Appel sortant<span/></h6>";
+                }
+
+                //$row[]     = $value->call_type;
+
+
+                //$row[]     = $viewbtn.' '.$editbtn . ' ' . $deletebtn;
+                $row[]     = $editbtn . ' ' . $deletebtn;
                 $dt_data[] = $row;
             }
         }

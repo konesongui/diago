@@ -60,7 +60,6 @@ class Itemsupplier extends Admin_Controller {
                 'phone' => $this->input->post('phone'),
                 'contact_person_phone' => $this->input->post('contact_person_phone'),
                 'item_supplier' => $this->input->post('name'),
-                'lastname' => $this->input->post('lastname'),
                 'email' => $this->input->post('email'),
                 'address' => $this->input->post('address'),
                 'contact_person_name' => $this->input->post('contact_person_name'),

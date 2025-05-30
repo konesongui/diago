@@ -32,6 +32,7 @@ class Income_model extends My_Model
         return $result;
     }
 
+
     /**
      * This funtion takes id as a parameter and will fetch the record.
      * If id is not provided, then it will fetch all the records form the table.
@@ -46,8 +47,8 @@ class Income_model extends My_Model
 
             $this->datatables
                 ->select('income.id,income.date,income.name,income.user,income.invoice_no,income.amount,income.amount_re,income.documents,income.note,income_head.income_category,income.status,income.inc_head_id')
-                ->searchable('income.name,income.user,income.status,income.invoice_no,income.date,income_head.income_category,income.amount,income.amount_re')
-                ->orderable('income.name,income.invoice_no,income.status,income.date,income_head.income_category,income.amount')
+                ->searchable('income.name,income.status,income.invoice_no,income.date,income_head.income_category,income.amount,income.amount_re')
+                ->orderable('income.name,income.invoice_no,income.status,income.date,income.amount_re,income_head.income_category,income.amount')
                 ->join("income_head", "income.inc_head_id = income_head.id")
                 ->like('income.name', $text)
                 ->from('income');
@@ -56,7 +57,7 @@ class Income_model extends My_Model
 
             $this->datatables
                 ->select('income.id,income.date,income.name,income.status,income.user,income.invoice_no,income.amount,income.amount_re,income.documents,income.note,income_head.income_category,income.inc_head_id')
-                ->searchable('income.name,income.user,income.status,income.invoice_no,income.date,income_head.income_category,income.amount,income.amount_re')
+                ->searchable('income.name,income.status,income.invoice_no,income.date,income_head.income_category,income.amount,income.amount_re')
                 ->orderable('income.name,income.user,income.status,income.invoice_no,income.date,income_head.income_category,income.amount,income.amount_re')
                 ->join("income_head", "income.inc_head_id = income_head.id")
                 ->where('income.date <=', $end_date)
@@ -84,7 +85,7 @@ class Income_model extends My_Model
     {
 
         $this->datatables
-            ->select('GROUP_CONCAT(income.id,"@",income.name,"@",income.invoice_no,"@",income.date,"@",income.amount,income.user,income.status,income.amount_re) as income, income_head.income_category,sum(income.amount) as total_amount')
+            ->select('GROUP_CONCAT(income.id,"@",income.name,"@",income.invoice_no,"@",income.date,"@",income.amount,income.amount_re,income.user,income.status,income.amount_re) as income, income_head.income_category,sum(income.amount) as total_amount')
             ->searchable('income_head.income_category,income.id,income.name,income.user,income.date,income.invoice_no,income.status,income.amount,income.amount_re')
             ->orderable('income_head.income_category,income.id,income.name,income.user,income.date,income.invoice_no,income.status,income.amount_re')
             ->join('income_head', 'income.inc_head_id = income_head.id')
@@ -122,9 +123,33 @@ class Income_model extends My_Model
         return $r;
     }
 
+
+
     public function get($id = null)
     {
-        $this->db->select('income.id,income.date,income.name,income.user,income.invoice_no,income.status,income.amount,income.amount_re,income.documents,income.note,income_head.income_category,income.inc_head_id')->from('income');
+        $this->db->select('income.id,income.date,income.name,income.user,income.invoice_no,income.status,income.amount,income.amount_re,income.documents,income.note,income_head.income_category,income.inc_head_id');
+        $this->db->where('income.status', 'Ouvert')
+            ->from('income');
+        $this->db->join('income_head', 'income.inc_head_id = income_head.id');
+        if ($id != null) {
+            $this->db->where('income.id', $id);
+        } else {
+            $this->db->order_by('income.id', 'DESC');
+        }
+
+        $query = $this->db->get();
+        if ($id != null) {
+            return $query->row_array();
+        } else {
+            return $query->result_array();
+        }
+    }
+
+    public function got($id = null)
+    {
+        $this->db->select('income.id,income.date,income.name,income.user,income.invoice_no,income.status,income.amount,income.amount_re,income.documents,income.note,income_head.income_category,income.inc_head_id')
+
+            ->from('income');
         $this->db->join('income_head', 'income.inc_head_id = income_head.id');
         if ($id != null) {
             $this->db->where('income.id', $id);
@@ -168,7 +193,9 @@ class Income_model extends My_Model
             ->searchable('income.name,income,income.user,income.invoice_no,income.status,income.date,income_head.income_category,income.amount,income.amount_re,income.note')
             ->orderable('income.name,income.user,income.note,income.invoice_no,income.status,income.date,income_head.income_category,income.amount,income.amount_re')
             ->join("income_head", "income.inc_head_id = income_head.id")
-            ->sort('income.id', 'desc')
+            ->sort('income.id', 'desc');
+
+        $this->db->where('income.deleted', 1)
             ->from('income');
         return $this->datatables->generate('json');
     }
@@ -208,8 +235,9 @@ class Income_model extends My_Model
         $this->db->trans_start(); # Starting Transaction
         $this->db->trans_strict(false); # See Note 01. If you wish can remove as well
         //=======================Code Start===========================
-        $this->db->where('id', $id);
-        $this->db->delete('income');
+        $this->db->where('id', $id)
+            ->set('deleted', '0');
+        $this->db->update('income');
 
         $message   = DELETE_RECORD_CONSTANT . " On  Income   id " . $id;
         $action    = "Delete";
@@ -292,7 +320,7 @@ class Income_model extends My_Model
 
     public function getTypeByFeecategory($type, $class_id)
     {
-        $this->db->select('income.id,income.session_id,income.amount,income.invoice_no,income.documents,income.note,income_head.class,feetype.type')->from('income');
+        $this->db->select('income.id,income.session_id,income.amount,income.invoice_no,income.amount_re,income.documents,income.note,income_head.class,feetype.type')->from('income');
         $this->db->join('income_head', 'income.class_id = income_head.id');
         $this->db->join('feetype', 'income.feetype_id = feetype.id');
         $this->db->where('income.class_id', $class_id);
@@ -327,6 +355,7 @@ class Income_model extends My_Model
     public function getIncomeWithReappro($start_date, $end_date)
     {
         $this->db->select('income.*, income_head.income_category');
+        $this->db->where('income.deleted', 1);
         $this->db->from('income');
         $this->db->join('income_head', 'income.inc_head_id = income_head.id');
         $this->db->where('income.date >=', $start_date);

@@ -28,34 +28,34 @@ $formSubmitBTN = 'Enregistrer';
 <div class="modal-body">
     <form method="post" id="increaseFormID">
 
-      <!--Set all the hidden form-data -->
-      <input type="hidden" name="rowId" id="rowId" value="<?= $rowID ;?>" />
-      <!--Form main content -->
-      <div class="row form-group">
-          <div class="col-sm-6" hidden>
-              <label for="reason"><strong>User <span class="text-danger">*</span></strong></label>
-              <input type="text" placeholder="User" class="form-control text-capitalize" name="user" id="user" value="<?php echo $this->customlib->getAdminSessionUserName(); ?>" required="required" autofocus="autofocus" />
-          </div>
-          <div class="col-sm-6">
-              <label for="reason"><strong>Nom <span class="text-danger">*</span></strong></label>
-              <input type="text" placeholder="" class="form-control text-capitalize" name="reason" id="reason" value="" required="required" autofocus="autofocus" />
-          </div>
-          <div class="col-md-6" >
-          <label for="reason"><strong>Montant <span class="text-danger">*</span></strong></label>
-          <input id="amount" name="amount" placeholder="" type="number" class="form-control" required="required" autofocus="autofocus" value="" />
-          </div>
+        <!--Set all the hidden form-data -->
+        <input type="hidden" name="rowId" id="rowId" value="<?= $rowID ;?>" />
+        <!--Form main content -->
+        <div class="row form-group">
+            <div class="col-sm-6" hidden>
+                <label for="reason"><strong>User <span class="text-danger">*</span></strong></label>
+                <input type="text" placeholder="User" class="form-control text-capitalize" name="user" id="user" value="<?php echo $this->customlib->getAdminSessionUserName(); ?>" required="required" autofocus="autofocus" />
+            </div>
+            <div class="col-sm-6">
+                <label for="reason"><strong>Nom <span class="text-danger">*</span></strong></label>
+                <input type="text" placeholder="" class="form-control text-capitalize" name="reason" id="reason" value="" required="required" autofocus="autofocus" />
+            </div>
+            <div class="col-md-6" >
+                <label for="reason"><strong>Montant <span class="text-danger">*</span></strong></label>
+                <input id="amount" name="amount" placeholder="" type="number" class="form-control" required="required" autofocus="autofocus" value="" />
+            </div>
 
-          <div class="col-md-6" >
-              <label for="reason"><strong>Motif <span class="text-danger">*</span></strong></label>
-              <input id="raison" name="raison" placeholder="" type="text" class="form-control"  autofocus="autofocus" value="" />
-          </div>
+            <div class="col-md-6" >
+                <label for="reason"><strong>Motif <span class="text-danger">*</span></strong></label>
+                <input id="raison" name="raison" placeholder="" type="text" class="form-control"  autofocus="autofocus" value="" />
+            </div>
 
-          <div class="col-md-6" >
-              <label for="reason"><strong>Date <span class="text-danger">*</span></strong></label>
-              <input id="amount" name="date" placeholder="" type="date" class="form-control" required="required" autofocus="autofocus" value="" />
-          </div>
-      </div>
-       
+            <div class="col-md-6" >
+                <label for="reason"><strong>Date <span class="text-danger">*</span></strong></label>
+                <input id="amount" name="date" placeholder="" type="date" class="form-control" required="required" autofocus="autofocus" value="" />
+            </div>
+        </div>
+
     </form>
 </div>
 

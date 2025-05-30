@@ -1,12 +1,20 @@
 <?php
-$conn = new mysqli("localhost","root","","diago_test");
-$sql = "SELECT SUM(amount) AS total_amount  FROM income_processing Where amount >0 ";
+$conn = new mysqli("localhost","root","","diao");
+$sql = "SELECT SUM(amount) AS total_amount  FROM income_processing Where amount > 0 ";
 
 $result = $conn->query($sql);
 
 
 ?>
 
+<?php
+$conn = new mysqli("localhost","root","","diao");
+$sql1 = "SELECT SUM(amount) AS total_amount  FROM income Where deleted = 1 ";
+
+$result1 = $conn->query($sql1);
+
+
+?>
 <?php
 $currency_symbol = $this->customlib->getSchoolCurrencyFormat();
 $language = $this->customlib->getLanguage();
@@ -102,12 +110,12 @@ $language_name = $language["short_code"];
                                     <input id="amount" name="amount" placeholder="" type="text" class="form-control"  value="<?php echo set_value('amount'); ?>" />
                                     <span class="text-danger"><?php echo form_error('amount'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('attach_document'); ?></label>
                                     <input id="documents" name="documents" placeholder="" type="file" class="filestyle form-control" data-height="40"  value="<?php echo set_value('documents'); ?>" />
                                     <span class="text-danger"><?php echo form_error('documents'); ?></span>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" hidden>
                                     <label for="exampleInputEmail1"><?php echo $this->lang->line('description'); ?></label>
                                     <textarea class="form-control" id="description" name="description" placeholder="" rows="3" placeholder="Enter ..."><?php echo set_value('description'); ?></textarea>
                                     <span class="text-danger"></span>
@@ -146,15 +154,26 @@ $language_name = $language["short_code"];
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header ptbnull">
+                        <h3 class="box-title"><?php echo $this->lang->line('income_list'); ?></h3>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+
+                    <!--<div class="box-header ptbnull">
+
+                        <?php while ($row1 = $result1->fetch_object()): ?>
+                            <h3 class="box-title titlefix"> <?php echo $this->lang->line(''); ?>  <b>Caisse Géneral : <?php echo $row1->total_amount ?>  FCFA </b></h3>
+                        <?php endwhile; ?>
                         <h3 class="box-title titlefix"> <?php echo $this->lang->line(''); ?>  <b> CAISSE GENERALE : <?= number_format(floatval($incomeTotal->amount??0), 0, ',', ' ') ;?>  FCFA </b></h3>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php while ($row = $result->fetch_object()): ?>
-                        <h3 class="box-title titlefix"> <?php echo $this->lang->line(''); ?>  <b> REAPPRO TOTAL : <?php echo $row->total_amount ?>  FCFA </b></h3>
+                        <h3 class="box-title titlefix"> <?php echo $this->lang->line(''); ?>  <b> Total Réappro : <?php echo $row->total_amount ?>  FCFA </b></h3>
                         <?php endwhile; ?>
                         <div class="box-tools pull-right">
-                        </div><!-- /.box-tools -->
-                    </div><!-- /.box-header -->
+                        </div>
+                    </div>--><!-- /.box-header -->
                     <div class="box-body">
+
 
                         <div class="table-responsive mailbox-messages">
                             <table class="table table-striped table-bordered table-hover income-list" data-export-title="<?php echo $this->lang->line('income_list'); ?>">
@@ -162,10 +181,7 @@ $language_name = $language["short_code"];
                                 <tr>
                                     <th><?php echo $this->lang->line('name'); ?>
                                     </th>
-                                    <!--<th><?php echo $this->lang->line('description'); ?>
-                                    </th>-->
-                                    <!--<th><?php echo $this->lang->line('invoice_no'); ?>
-                                        </th>-->
+
                                     <th><?php echo $this->lang->line('date'); ?>
                                     </th>
                                     <th><?php echo $this->lang->line('income_head'); ?>
@@ -174,8 +190,8 @@ $language_name = $language["short_code"];
                                     </th>
                                     <th>Solde restant
                                     </th>
-                                   <!-- <th>Users
-                                    </th>-->
+                                    <!-- <th>Users
+                                     </th>-->
                                     <th>Status
                                     </th>
                                     <th class="text-right noExport"><?php echo $this->lang->line('action'); ?></th>
@@ -191,14 +207,14 @@ $language_name = $language["short_code"];
                 <!-- increase form modal -->
                 <?php
                 if ($this->rbac->hasPrivilege('caisse', 'can_add')) {
-                ?>
-                <div id="increaseForm" class="modal fade" data-backdrop="false">
-                    <div class="modal-dialog">
-                        <div class="modal-content" id="increaseFormContent">
+                    ?>
+                    <div id="increaseForm" class="modal fade" data-backdrop="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content" id="increaseFormContent">
 
+                            </div>
                         </div>
                     </div>
-                </div>
 
                     <div id="viewIncreaseList" class="modal fade" data-backdrop="false">
                         <div class="modal-dialog">
@@ -226,7 +242,7 @@ $language_name = $language["short_code"];
     ( function ( $ ) {
         'use strict';
         $(document).ready(function () {
-            initDatatable('income-list','admin/income/getincomelist',[],[],100);
+            initDatatable('income-list','admin/income/getincomelist',[],[],50);
         });
     } ( jQuery ) )
 
@@ -367,7 +383,6 @@ $language_name = $language["short_code"];
     }
 
 
-
     // Function to load on (edit or add) button click
     $(document).on('click', `.viewIncrease`, function(e) {
 
@@ -401,5 +416,6 @@ $language_name = $language["short_code"];
         });
 
     });
+
 
 </script>
